@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navbar</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            font-family: "Poppins", sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            height: 100vh;
+            width: 100vw;
+            background-color: gold;
+        }   
+
+        nav{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem;
+            background-color: red;
+            height: 3rem;
+            width: 100vw;
+            color: white;
+        }
+
+        nav ul{
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            padding-right: 10px;
+            justify-content: center;
+        }
+
+        .logo{
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        nav ul li{
+            list-style: none;
+            padding: .63rem 0rem;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="logo">Octavious</div>
+        <ul>
+            <li>Home</li>
+            <li>About</li>
+            <li>Services</li>
+        </ul>
+    </nav>
+    <script>
+        const listItems = document.querySelectorAll("li");
+        const logo = document.querySelector(".logo");
+
+        listItems[0].style.borderBottom = "2px solid white";
+        
+        listItems[1].addEventListener("click", () => {
+            listItems[0].style.border = "none";
+            listItems[1].style.borderBottom = "2px solid white";
+            listItems[2].style.border = "none";
+            document.body.style.backgroundColor = "green";
+        })
+
+        listItems[2].addEventListener("click", () => {
+            listItems[0].style.border = "none";
+            listItems[2].style.borderBottom = "2px solid white";
+            listItems[1].style.border = "none";
+            document.body.style.backgroundColor = "blue";
+        })
+
+        listItems[0].addEventListener("click", () => {
+            listItems[1].style.border = "none";
+            listItems[0].style.borderBottom = "2px solid white";
+            listItems[2].style.border = "none";
+            document.body.style.backgroundColor = "gold";
+        })
+
+        logo.addEventListener("click", () => {
+            listItems[1].style.border = "none";
+            listItems[0].style.borderBottom = "2px solid white";
+            listItems[2].style.border = "none";
+            document.body.style.backgroundColor = "gold";
+        })
+
+
+
+
+    </script>
+</body>
+
+</html>

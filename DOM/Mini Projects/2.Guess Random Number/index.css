@@ -1,0 +1,86 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html,body{
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(29, 28, 28);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container{
+    height: 80vh;
+    width: 40vw;
+    background-color: rgb(61, 57, 57);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.container h1{
+    font-size: 1.2rem;
+    background-color: black;
+    width: 100%;
+    text-align: center;
+}
+
+.container p {
+    margin-top: 1rem;
+    color: rgb(211, 211, 211);
+}
+
+.container :nth-child(3){
+    font-size: .85rem;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#guess{
+    font-size: 2rem;
+}
+
+#guessField, .guessField{
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    padding: .5rem 1rem;
+    outline: none;
+}
+
+#subt{
+    color: white;
+    background-color: black;
+    border: none;
+    padding: .5rem 1rem;
+    border-radius: .5rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.resultParas{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.guesses{
+    background-color: gray;
+    border-radius: .2rem;
+}
+
+.newGame {
+    margin-top: 1.2rem;
+    cursor: pointer;
+}

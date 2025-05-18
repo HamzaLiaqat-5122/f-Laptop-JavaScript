@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Practice 1</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            font-family: "Poppins", sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body,
+        html {
+            height: 100%;
+            width: 100%;
+            display: flex;
+
+            /* only for question 4, start */
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 23px;
+            /* only for question 4, end*/
+        }
+
+        /* 1. Change the text of a <p> element with the ID "myText" to "Hello, World!".*/
+
+        /* 2. When a button is clicked, change the background color of the page to "lightblue".*/
+
+        /* button{
+            margin: 20px;
+            padding: 0.5rem 1rem;
+            background-color: crimson;
+            border: none;
+            outline: none;
+            color: white;
+            border-radius: 0.6rem;
+            cursor: pointer;
+        } */
+
+        /* 3. Show an alert saying "Button clicked!" when a button with ID "showAlert" is clicked.*/
+
+        button{
+            /* margin: 20px;
+            padding: 0.5rem 1rem;
+            background-color: crimson;
+            border: none;
+            outline: none;
+            color: white;
+            border-radius: 0.6rem;
+            cursor: pointer; */
+        }
+
+        /* 4. Toggle the visibility of a <div> with ID "box" when a button is clicked.*/
+
+        /* #box {
+            height: 100px;
+            width: 200px;
+            background-color: blue;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0.4rem;
+        }
+
+        button {
+            margin: 20px;
+            padding: 0.5rem 1rem;
+            background-color: crimson;
+            border: none;
+            outline: none;
+            color: white;
+            border-radius: 0.6rem;
+            cursor: pointer;
+        }
+
+        .visibility {
+            visibility: hidden;
+        } */
+
+        /* 5. When a button is clicked, change the value of an input field with ID "myInput" to "Updated".*/
+/*         
+        #myInput{
+            margin: 20px;
+            height: 2rem;
+            width: 10rem;
+            text-indent: 0.4rem;
+            border-radius: 0.6rem;
+            outline: none;
+            border: 2px solid grey;
+        }
+
+        button {
+            height: 35px;
+            width: 100px;
+            margin: 20px;
+            padding: 0.5rem 1rem;
+            background-color: crimson;
+            border: none;
+            outline: none;
+            color: white;
+            border-radius: 0.6rem;
+            cursor: pointer;
+        } */
+
+        /* 6. Create a counter that increases by 1 every time a button is clicked and display the count inside a <span>.
+            */
+
+        /* .container{
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+            }
+
+            span{
+                height: 50px;
+                width: 50px;
+                background-color: rgb(58, 58, 66);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                border-radius: 0.4rem;
+            }
+
+            button {
+            height: 35px;
+            width: 100px;
+            margin: 20px;
+            padding: 0.5rem 1rem;
+            background-color: crimson;
+            border: none;
+            outline: none;
+            color: white;
+            border-radius: 0.6rem;
+            cursor: pointer;
+        }  */
+
+        /* 7. Add a new <li> with the text "New Item" to a <ul> every time a button is clicked.*/
+
+        /* .container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        ul {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .container ul li {
+            width: 80vw;
+            height: 4vw;
+            background-color: green;
+            border-radius: 0.5rem;
+            color: white;
+            list-style: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        button {
+            height: 35px;
+            width: 200px;
+            margin: 20px;
+            padding: 0.5rem 1rem;
+            background-color: crimson;
+            border: none;
+            outline: none;
+            color: white;
+            border-radius: 0.6rem;
+            cursor: pointer;
+        } */
+
+        /* 8. Change the image source of an <img> tag to a new image URL when a button is clicked.*/
+
+        /* .container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        img {
+            height: 300px;
+            width: 200px;
+            border-radius: 0.5rem;
+        }
+
+        button {
+            height: 35px;
+            width: 200px;
+            margin: 20px;
+            padding: 0.5rem 1rem;
+            background-color: crimson;
+            border: none;
+            outline: none;
+            color: white;
+            border-radius: 0.6rem;
+            cursor: pointer;
+        } */
+
+        /* 9. Add a CSS class named "highlight" to a <p> element when a button is clicked.*/
+
+        /* .container{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .highlight {
+            background-color: yellow;
+            font-weight: bold;
+            padding: 5px;
+        }
+
+
+        button{
+            margin: 20px;
+            padding: 0.5rem 1rem;
+            background-color: crimson;
+            border: none;
+            outline: none;
+            color: white;
+            border-radius: 0.6rem;
+            cursor: pointer;
+        } */
+
+        /* 10. Remove a <div> with the ID "removeMe" from the DOM when a button is clicked. */
+    </style>
+
+</head>
+
+<body>
+    <!-- // 1. Change the text of a <p> element with the ID "myText" to "Hello, World!". -->
+
+    <!-- <p id="myText">This is a paragraph.</p> -->
+
+    <!-- // 2. When a button is clicked, change the background color of the page to "lightblue".-->
+
+    <!-- <button>Change background Color of Page</button> -->
+
+    <!-- // 3. Show an alert saying "Button clicked!" when a button with ID "showAlert" is clicked.-->
+
+    <!-- <button id="showAlert">Show Alert Dialog</button> -->
+
+    <!-- // 4. Toggle the visibility of a <div> with ID "box" when a button is clicked.-->
+
+    <!-- <div id="box"></div>
+
+    <button>Toggle</button> -->
+
+    <!-- // 5. When a button is clicked, change the value of an input field with ID "myInput" to "Updated".-->
+
+    <!-- <input type="text" id="myInput" placeholder="type">
+    <button>Update</button> -->
+
+    <!-- // 6. Create a counter that increases by 1 every time a button is clicked and display the count inside a <span>.-->
+    <!-- <div class="container">
+            <span>0</span>
+            <button>Increment</button>
+        </div> -->
+
+    <!-- // 7. Add a new <li> with the text "New Item" to a <ul> every time a button is clicked.-->
+
+    <!-- <div class="container">
+        <ul>
+        </ul>
+        <button>Add new List Item</button>
+    </div> -->
+
+    <!-- // 8. Change the image source of an <img> tag to a new image URL when a button is clicked.-->
+
+    <!-- <div class="container">
+        <img id="randomImage" src="https://rukminim1.flixcart.com/image/300/300/ky90scw0/poster/r/y/p/medium-redcloud-goku-ultra-instinct-wall-poster-for-room-for-original-imagagedy3vyduks.jpeg" alt="Anime Poster">
+        <button id="changeBtn">Change Image</button>
+      </div> -->
+
+    <!-- // 9. Add a CSS class named "highlight" to a <p> element when a button is clicked.-->
+
+    <!-- <div class="container">
+        <p id="text">This is a sample paragraph.</p>
+        <button>Highlight Text</button>
+    </div> -->
+
+    <!-- // 10. Remove a <div> with the ID "removeMe" from the DOM when a button is clicked.-->
+
+    <div class="container">
+        <div id="removeMe">This div will be removed when you click the button.</div>
+        <button onclick="removeDiv()">Remove Div</button>
+    </div>
+
+    <script>
+
+        // 1. Change the text of a <p> element with the ID "myText" to "Hello, World!".
+
+        // const paragraph = document.querySelector("#myText");
+        // paragraph.textContent = "Hello, World!";
+
+        // 2. When a button is clicked, change the background color of the page to "lightblue".
+
+        // const button = document.querySelector("button");
+        // button.addEventListener("click", () => {
+        //     document.body.style.backgroundColor = "lightblue";
+        // });
+
+        // 3. Show an alert saying "Button clicked!" when a button with ID "showAlert" is clicked.
+
+        // const button = document.querySelector("button");
+        // button.addEventListener("click", () => {
+        //     alert("Button Clicked!");
+        // });
+
+        // 4. Toggle the visibility of a <div> with ID "box" when a button is clicked.
+
+
+        // const box = document.getElementById('box');
+        // const button = document.querySelector('button');
+
+        // button.addEventListener('click', () => {
+        //     box.classList.toggle('visibility');
+        // });
+
+
+        // 5. When a button is clicked, change the value of an input field with ID "myInput" to "Updated".
+
+        // const input = document.querySelector("#myInput");
+        // const button = document.querySelector("button");
+
+        // button.addEventListener("click", () => {
+        //     input.value = "Updated";
+        // });
+
+        // 6. Create a counter that increases by 1 every time a button is clicked and display the count inside a <span>.
+
+        // const counter = document.querySelector("span");
+        // const button = document.querySelector("button");
+
+        // let count = 0
+        // button.addEventListener("click", () => {
+        //     count++
+        //     counter.innerHTML = `${count}`
+        // });
+
+        // 7. Add a new <li> with the text "New Item" to a <ul> every time a button is clicked.
+
+        // const container = document.querySelector(".container");
+        // const button = document.querySelector("button");
+        // const ul = document.querySelector(".container ul");
+
+        // button.addEventListener("click", () => {
+        //     let listItem = document.createElement("li");
+        //     listItem.textContent = "New Item"
+        //     ul.append(listItem);
+        // })
+
+        // 8. Change the image source of an <img> tag to a new image URL when a button is clicked.
+
+        //     const image = document.querySelector("img");
+        //     const button = document.getElementById("changeBtn");
+
+        // button.addEventListener("click", () => {
+        //   const url = `https://picsum.photos/200/300?random=${Math.floor(Math.random() * 1000)}`;
+        //   image.src = url;
+        // });
+
+        // 9. Add a CSS class named "highlight" to a <p> element when a button is clicked.
+
+        // const paragraph = document.querySelector("p")
+        // const button = document.querySelector("button");
+
+        // button.addEventListener("click", () => {
+        //     paragraph.classList.add("highlight");
+        // });
+
+
+        // 10. Remove a <div> with the ID "removeMe" from the DOM when a button is clicked.
+
+        function removeDiv() {
+            const element = document.getElementById("removeMe");
+            if (element) {
+                element.remove(); 
+            }
+        }
+
+    </script>
+</body>
+
+</html>

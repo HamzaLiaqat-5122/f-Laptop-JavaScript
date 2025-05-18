@@ -1,0 +1,84 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  body {
+    height: 100vh;
+    transition: background 0.4s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .neutral-bg {
+    background: linear-gradient(135deg, #e1f5fe, #b3e5fc);
+  }
+  
+  .container {
+    background-color: white;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  h1 {
+    font-size: 2rem;
+    color: #0288d1;
+    margin-bottom: 20px;
+  }
+  
+  .color-display {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    transition: color 0.4s ease;
+  }
+  
+  .change-btn {
+    background-color: #0288d1;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+  }
+  
+  .change-btn:hover {
+    background-color: #0277bd;
+    transform: scale(1.05);
+  }
+  
+  #colorTypeDropdown {
+    appearance: none;
+    background-color: #e1f5fe;
+    color: #0277bd;
+    font-size: 1rem;
+    padding: 10px 16px;
+    border-radius: 8px;
+    border: 2px solid #0288d1;
+    cursor: pointer;
+    transition: border 0.3s ease, box-shadow 0.3s ease;
+    margin-top: 20px;
+  }
+  
+  #colorTypeDropdown:focus {
+    outline: none;
+    border-color: #01579b;
+    box-shadow: 0 0 0 3px rgba(2, 136, 209, 0.2);
+  }
+  
+  #colorTypeDropdown option {
+    background-color: white;
+    color: #333;
+  }
+  

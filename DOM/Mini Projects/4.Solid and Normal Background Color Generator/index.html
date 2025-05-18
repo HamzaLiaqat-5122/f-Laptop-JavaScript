@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Color Changer</title>
+  <link rel="stylesheet" href="index.css" />
+  <script type="module" src="index.js"></script>
+</head>
+<body class="neutral-bg">
+  <div class="container">
+    <h1>Random Background Color</h1>
+    <div class="color-display" id="colorCode">#ffffff</div>
+    <button class="change-btn" id="changeColorBtn">Change Color</button>
+    <select id="colorTypeDropdown" style="display: none; margin-top: 10px;">
+      <option value="" disabled selected>Select color type</option>
+      <option value="solid">Solid</option>
+      <option value="gradient">Gradient</option>
+    </select>
+  </div>
+</body>
+
+</html>

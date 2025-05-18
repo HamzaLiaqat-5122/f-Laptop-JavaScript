@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intermediate DOM Practice</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            font-family: "Poppins", sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            height: 100vh;
+            width: 100vw;
+        }
+
+        
+        /* h1 {
+            text-align: center;
+        }
+
+        .todo-section {
+            min-height: 10vh;
+            width: 95vw;
+            display: flex;
+            justify-content: center;
+            margin-left: 2rem;
+        }
+
+        .todo-form {
+            height: 4rem;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: start;
+            margin: 1rem 2rem;
+        }
+
+        .search {
+            text-indent: 5px;
+            width: 70rem;
+            height: 2rem;
+            border-radius: 0.3rem;
+            border: 2px solid grey;
+            margin: auto 1rem;
+        }
+
+        .add {
+            border: none;
+            outline: none;
+            background-color: green;
+            color: white;
+            padding: 0.4rem 0.9rem;
+            border-radius: 0.3rem;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .ul {
+            height: 100%;
+            width: 95%;
+            display: flex;
+            margin: 2rem;
+            flex-direction: column;
+        }
+
+        .list-item {
+            list-style: none;
+            margin: 1rem;
+            padding: 0rem 1.5rem;
+            width: 80rem;
+            background-color: green;
+            height: 3rem;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .delete {
+            border: none;
+            outline: none;
+            background-color: gray;
+            padding: .3rem .5rem;
+            color: white;
+            border-radius: .3rem;
+            cursor: pointer;
+        }  */
+
+
+        /* body.light {
+            background-color: white;
+            color: black;
+        }
+
+        body.dark {
+            background-color: black;
+            color: white;
+        }
+
+        #theme-toggle {
+            outline: none;
+            border: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 0.5rem 0.6rem;
+            border-radius: 0.3rem;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body.light #theme-toggle {
+            background-color: black;
+            color: white;
+        }
+
+        body.dark #theme-toggle {
+            background-color: white;
+            color: black;
+        } */
+
+        /* .char-count {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        textarea {
+            padding: .3rem .4rem
+        } */
+
+
+        /* .accordion{
+            cursor: pointer;
+        }
+
+        .visibility{
+            display: none;
+        } 
+*/
+        /* .box {
+            height: 100px;
+            width: 100px;
+            background-color: darkblue;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            border-radius: 0.6rem;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            cursor: pointer;
+        }  */
+
+
+        .otp-input {
+            width: 40px;
+            height: 40px;
+            font-size: 2rem;
+            text-align: center;
+            margin: 5px;
+        }
+
+        /* main{
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #buttons{
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+            justify-content: center;
+            width: 18rem;
+            height: 18rem;
+        }
+
+        .current-btn{
+            padding: 0.8rem;
+            background-color: #69117b;
+            color: white;
+            border-radius: 0.8rem;
+            border: none;
+            outline: none;
+            font-weight: 500;
+        }
+
+        .change-color{
+            background-color: white;
+            padding: 0.6rem 0.3rem;
+            width: 50%;
+            border-radius: 0.8rem;
+            border: none;
+            outline: none;
+            background-color: #1e14e7;
+            color: white;
+            outline: none;
+            cursor: pointer;
+            font-weight: 600;
+        } */
+
+    </style>
+
+</head>
+
+<body class="light">
+
+    <!-- <h1>Todo list</h1>
+    <section class="todo-section">
+        <form class="todo-form" action="">
+            <input class="search" type="text" name="input" id="input" placeholder="Search">
+            <input class="add" type="submit" value="Add">
+        </form>
+    </section>
+    <ul class="ul">
+    </ul> -->
+
+    <!-- <p class="content">Lorem ipsum dolor sit amet consectetur...</p>
+    <button id="theme-toggle">Toggle Theme</button> -->
+
+    <!-- <div class="char-count">
+        <textarea name="pak" id="pak" placeholder="Type Something" cols="70" rows="10"></textarea>
+        <span class="count">Character Count : 0</span>
+    </div> -->
+
+    <!-- <div class="container">
+        <div class="accordion accor1">
+            <h3 class="h3">Accordion 1</h3>
+            <p class="visibility">Text 1</p>
+        </div>
+        <div class="accordion accor2">
+            <h3 class="h3">Accordion 2</h3>
+            <p class="visibility">Text 2</p>
+        </div>
+        <div class="accordion accor3">
+            <h3 class="h3">Accordion 3</h3>
+            <p class="visibility">Text 3</p>
+        </div>
+    </div> -->
+
+    <!-- <div>
+        <input id="todo-input" type="text" placeholder="Type something">
+        <button id="todo-btn">Click</button>
+    </div>
+
+    <ul id="todo-list"></ul> -->
+
+    <!-- <div class="box">
+        Box
+    </div> -->
+
+    <!-- <p>Hover over me</p> -->
+
+    <div>
+        <input type="text" maxlength="1" class="otp-input" />
+        <input type="text" maxlength="1" class="otp-input" />
+        <input type="text" maxlength="1" class="otp-input" />
+    </div>
+
+    <!-- <main>
+        <div id="buttons">
+            <button class="current-btn btn">Current Color: <span class="color">rgb(255, 255, 255)</span></button>
+            <button class="change-color btn">Change Color</button>
+        </div>
+    </main> -->
+    <script>
+
+        // 1. Create a To-Do List:
+        // Create an input and a button. On button click, add the input text as a new <li> inside a <ul>.
+        // Clear the input field after adding the item.
+
+        // const searchInput = document.querySelector(".search");
+        // const submitButton = document.querySelector(".add");
+        // const form = document.querySelector(".todo-form");
+        // const ul = document.querySelector(".ul");
+        // const liItem = document.querySelector(".list-item");
+        // const deleteButton = document.querySelector(".delete");
+
+        // form.addEventListener("submit", (e) => {
+        //     e.preventDefault();
+        //     if (searchInput.value.length > 0) {
+        //         ul.innerHTML += `
+        //                 <li class="list-item">${searchInput.value}
+        //         <button class="delete">Delete</button>
+        //     </li>
+        //         `
+        //         searchInput.value = ""
+        //     }
+        // });
+
+
+        // 2. Delete a List Item:
+        // Next to each <li>, add a "Delete" button. When clicked, remove only that <li> from the list.
+
+        // ul.addEventListener("click", (e) => {
+        //     if (e.target.classList.contains("delete")) {
+        //         e.target.parentElement.remove();
+        //     }
+        // });
+
+        // 3. Toggle Dark Mode:
+        // Create a "Toggle Theme" button. When clicked, add or remove a class (e.g., 'dark') to the <body> to switch between light and dark mode using CSS.
+
+        // const themeButton = document.getElementById("theme-toggle");
+
+        // themeButton.addEventListener("click", () => {
+        //     document.body.classList.toggle("dark");
+        //     document.body.classList.toggle("light");
+        // });
+
+
+        // 4. Live Character Counter:
+        // Create a <textarea> and a <span>. As the user types in the textarea, display the character count in the <span>.
+
+        // const textArea = document.querySelector("textarea");
+        // const span = document.querySelector("span");
+
+        // textArea.addEventListener("input", () => {
+        //     const value = textArea.value;
+        //     let count = 0;
+
+        //     for (let i = 0; i < value.length; i++) {
+        //         if (value[i] !== ' ') {
+        //             count++;
+        //         }
+        //     }
+
+        //     span.innerHTML = `Character Count : ${count}`;
+        // });
+
+
+        // 5. Accordion:
+        // Create multiple <h3> headers each followed by a hidden <p> section.
+        // When an <h3> is clicked, toggle the visibility of its corresponding <p> only.
+
+        // const container = document.querySelector(".container");
+
+        // container.addEventListener("click", (e) => {
+        //     if(e.target.classList.contains("h3")){
+        //         e.target.nextElementSibling.classList.toggle("visibility")
+        //     }
+        //     }
+        // )
+
+        // 6. Disable Button Until Input is Filled:
+        // Create an input and a submit button. The button should be disabled by default.
+        // Enable the button only when the input has at least 1 character.
+
+        // const input = document.getElementById("todo-input");
+        // const button = document.getElementById("todo-btn");
+        // const list = document.getElementById("todo-list");
+
+        // button.disabled = true;
+
+        // input.addEventListener("input", () => {
+        //     button.disabled = input.value.trim().length === 0;
+        // });
+
+        // button.addEventListener("click", () => {
+        //     const li = document.createElement("li");
+        //     li.textContent = input.value;
+        //     list.appendChild(li);
+        //     input.value = "";
+        //     button.disabled = true;
+        // });
+
+
+        // 7. Move Element on Click:
+        // Create a div box. When the box is clicked, it should move 50px to the right each time using inline CSS (e.g., style.left or transform).
+
+
+        // const box = document.querySelector(".box");
+        // let currentMargin = 0;
+
+        // box.addEventListener("click", () => {
+        //     currentMargin += 50;
+        //     box.style.marginLeft = currentMargin + "px";
+        // });
+
+
+        // 8. Change Text on Hover:
+        // Create a paragraph with the text "Hover over me".
+        // When the mouse hovers over it, change the text to "Thanks!" and revert when the mouse leaves.
+
+        // const p = document.querySelector("p");
+
+        // p.addEventListener("mouseover", () => {
+        //     p.textContent = "Thanks!"
+        // })
+        // p.addEventListener("mouseleave", () => {
+        //     p.textContent = "Hover over me"
+        // })
+
+        // 9. Auto Focus Next Input:
+        // Create 3 input boxes for OTP. When a user types in one input (1 character), auto-focus the next input.
+
+        const otpInputs = document.querySelectorAll(".otp-input");
+
+        otpInputs.forEach((input, index) => {
+            input.addEventListener("input", () => {
+                if (input.value.length === 1 && index < otpInputs.length - 1) {
+                    otpInputs[index + 1].focus();
+                }
+            });
+
+            input.addEventListener("keydown", (e) => {
+                if (e.key === "Backspace" && input.value.length === 0 && index > 0) {
+                    otpInputs[index - 1].focus();
+                }
+            });
+        });
+
+        // 10. Random Background Color:
+        // Create a button. When clicked, the background color of the page should change to a random RGB color.
+
+        // const changeColorButton = document.querySelector(".change-color");
+        // const body = document.body;
+        // const colorText = document.querySelector(".color");
+
+        // function randomColorGenerator(){
+        //     let red = Math.floor(Math.random() * 256);
+        //     let green = Math.floor(Math.random() * 256);
+        //     let blue = Math.floor(Math.random() * 256);
+        //     let rgb = `rgb(${red}, ${green}, ${blue})`;
+        //     return rgb;
+        // }
+        
+        // changeColorButton.addEventListener("click", e => {
+        //     const randomColor = randomColorGenerator();
+        //     body.style.backgroundColor = randomColor;
+        //     colorText.textContent = randomColor;    
+        // });
+    </script>
+</body>
+
+</html>

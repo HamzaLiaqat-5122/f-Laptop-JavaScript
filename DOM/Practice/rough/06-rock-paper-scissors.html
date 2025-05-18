@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rock Paper Scissors</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      padding: 0;
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(to right, #667eea, #764ba2);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 30px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .buttons {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    button {
+      padding: 15px 30px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background-color: rgba(255, 255, 255, 0.15);
+      color: white;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    button:hover {
+      background-color: rgba(255, 255, 255, 0.25);
+      transform: scale(1.05);
+    }
+
+    .scoreboard {
+      display: flex;
+      gap: 20px;
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .scoreboard span {
+      background-color: rgba(0, 0, 0, 0.2);
+      padding: 10px 20px;
+      border-radius: 10px;
+    }
+
+    @media (max-width: 500px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      button {
+        width: 100%;
+        font-size: 1rem;
+      }
+
+      .scoreboard {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Rock Paper Scissors</h1>
+
+  <div class="buttons">
+    <button class="rock">Rock</button>
+    <button class="paper">Paper</button>
+    <button class="scissors">Scissors</button>
+    <button class="reset">Reset</button>
+  </div>
+
+  <div class="scoreboard">
+    <span class="win">Win Count: 0</span>
+    <span class="lose">Lose Count: 0</span>
+    <span class="tie">Tie Count: 0</span>
+  </div>
+
+  <script>
+    const buttons = document.querySelectorAll("button:not(.reset)");
+    const winPara = document.querySelector(".win");
+    const losePara = document.querySelector(".lose");
+    const tiePara = document.querySelector(".tie");
+    const resetButton = document.querySelector(".reset");
+
+    const compArray = ["Rock", "Paper", "Scissors"];
+
+    let outcomesCount = JSON.parse(localStorage.getItem('score')) || {winCount: 0, loseCount: 0, tieCount: 0};
+    // if (!outcomesCount) {
+    //   outcomesCount = { winCount: 0, loseCount: 0, tieCount: 0 };
+    // }
+
+    winPara.innerHTML = `Win Count: ${outcomesCount.winCount}`;
+    losePara.innerHTML = `Lose Count: ${outcomesCount.loseCount}`;
+    tiePara.innerHTML = `Tie Count: ${outcomesCount.tieCount}`;
+
+    buttons.forEach(button => {
+      button.addEventListener("click", () => {
+        let humanChoice = button.textContent;
+        const computerChoice = compArray[Math.floor(Math.random() * compArray.length)];
+
+        if (
+          (humanChoice === "Rock" && computerChoice === "Scissors") ||
+          (humanChoice === "Paper" && computerChoice === "Rock") ||
+          (humanChoice === "Scissors" && computerChoice === "Paper")
+        ) {
+          winPara.innerHTML = `Win Count: ${++outcomesCount.winCount}`;
+          alert(`You Win!\nYour choice was ${humanChoice} and computer choice was ${computerChoice}`);
+        } else if (
+          (humanChoice === "Scissors" && computerChoice === "Rock") ||
+          (humanChoice === "Rock" && computerChoice === "Paper") ||
+          (humanChoice === "Paper" && computerChoice === "Scissors")
+        ) {
+          losePara.innerHTML = `Lose Count: ${++outcomesCount.loseCount}`;
+          alert(`You Lose!\nYour choice was ${humanChoice} and computer choice was ${computerChoice}`);
+        } else if (humanChoice === computerChoice) {
+          tiePara.innerHTML = `Tie Count: ${++outcomesCount.tieCount}`;
+          alert(`Tie!\nYour choice was ${humanChoice} and computer choice was ${computerChoice}`);
+        }
+
+        localStorage.setItem('score', JSON.stringify(outcomesCount));
+      });
+    });
+
+    resetButton.addEventListener("click", () => {
+      outcomesCount.winCount = outcomesCount.loseCount = outcomesCount.tieCount = 0;
+      winPara.innerHTML = `Win Count: ${outcomesCount.winCount}`;
+      losePara.innerHTML = `Lose Count: ${outcomesCount.loseCount}`;
+      tiePara.innerHTML = `Tie Count: ${outcomesCount.tieCount}`;
+
+      localStorage.removeItem('score');
+    });
+
+    // const object1 = {
+    //   message: "hello",
+    //   price: 83,
+    // }
+
+    // const {message, price} = object1;
+
+    // const object2 = {
+    //   message,
+    //   price
+    // }
+
+    // console.log(object1)
+    // console.log(object2)
+
+  </script>
+
+</body>
+
+</html>

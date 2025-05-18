@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rock Paper Scissors</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial;
+      color: white;
+      background-color: rgb(25, 25, 25);
+      margin: 8px;
+    }
+
+    h1 {
+      margin-top: 30px;
+      font-size: 30px;
+      font-weight: bold;
+      padding-bottom: 30px;
+    }
+
+    .move-button {
+      width: 120px;
+      height: 120px;
+      border-radius: 60px;
+      border: 3px solid white;
+      background-color: transparent;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+
+    .move-img {
+      height: 50px;
+    }
+
+    .result-para {
+      font-size: 25px;
+      font-weight: bold;
+      margin-top: 50px;
+    }
+
+    .moves-para {
+      margin: 25px 0;
+    }
+
+    .scoreboard {
+      margin: 60px 0px 16px;
+    }
+
+    .reset {
+      background-color: white;
+      border: none;
+      font-size: 15px;
+      padding: 8px 15px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Rock Paper Scissors</h1>
+
+  <div class="buttons">
+    <button class="move-button" data-move="rock"><img src="images/rps/rock-emoji.png" class="move-img" alt="Rock"></button>
+    <button class="move-button" data-move="paper"><img src="images/rps/paper-emoji.png" class="move-img" alt="Paper"></button>
+    <button class="move-button" data-move="scissors"><img src="images/rps/scissors-emoji.png" class="move-img" alt="Scissors"></button>
+  </div>
+
+  <p class="result-para"></p>
+  <p class="moves-para"></p>
+
+  <div class="scoreboard">
+    <span class="win">Wins: 0,</span>
+    <span class="lose">Losses: 0,</span>
+    <span class="tie">Ties: 0</span>
+  </div>
+
+  <button class="reset">Reset Score</button>
+
+  <script>
+    const buttons = document.querySelectorAll(".move-button");
+    const winPara = document.querySelector(".win");
+    const losePara = document.querySelector(".lose");
+    const tiePara = document.querySelector(".tie");
+    const resultPara = document.querySelector('.result-para');
+    const movesPara = document.querySelector(".moves-para");
+    const resetButton = document.querySelector(".reset");
+
+    const choices = ["rock", "paper", "scissors"];
+    const compArray = {
+      rock: "images/rps/rock-emoji.png",
+      paper: "images/rps/paper-emoji.png",
+      scissors: "images/rps/scissors-emoji.png"
+    };
+
+    let outcomesCount = JSON.parse(localStorage.getItem('score')) || { wins: 0, losses: 0, ties: 0 };
+
+    function updateScoreUI() {
+      winPara.innerHTML = `Wins: ${outcomesCount.wins},`;
+      losePara.innerHTML = `Losses: ${outcomesCount.losses},`;
+      tiePara.innerHTML = `Ties: ${outcomesCount.ties}`;
+    }
+
+    updateScoreUI();
+
+    buttons.forEach(button => {
+      button.addEventListener("click", () => {
+        const humanMove = button.getAttribute("data-move");
+        const computerMove = choices[Math.floor(Math.random() * choices.length)];
+
+        let result;
+        if (
+          (humanMove === "rock" && computerMove === "scissors") ||
+          (humanMove === "paper" && computerMove === "rock") ||
+          (humanMove === "scissors" && computerMove === "paper")
+        ) {
+          result = "You win.";
+          outcomesCount.wins++;
+        } else if (humanMove === computerMove) {
+          result = "Tie.";
+          outcomesCount.ties++;
+        } else {
+          result = "You lose.";
+          outcomesCount.losses++;
+        }
+
+        resultPara.innerHTML = result;
+        movesPara.innerHTML = `
+          You <img src="${compArray[humanMove]}" class="move-img" alt="${humanMove}"> 
+          <img src="${compArray[computerMove]}" class="move-img" alt="${computerMove}"> Computer
+        `;
+
+        updateScoreUI();
+        localStorage.setItem("score", JSON.stringify(outcomesCount));
+      });
+    });
+
+    resetButton.addEventListener("click", () => {
+      outcomesCount = { wins: 0, losses: 0, ties: 0 };
+      updateScoreUI();
+      localStorage.setItem("score", JSON.stringify(outcomesCount));
+    });
+  </script>
+
+</body>
+
+</html>

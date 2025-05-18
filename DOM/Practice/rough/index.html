@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>rough</title>
+  <style>
+    /* button{
+      background-color: #F9D84C;
+      border: none;
+      font-size: 20px;
+      padding: 8px 55px;
+      border-radius: 30px;
+    } */
+
+    /* .request {
+      border: none;
+      background-color: black;
+      color: white;
+      border-radius: 6px;
+      padding: 13px 20px;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .schedule-for-later {
+      border: none;
+      background-color: rgb(230, 230, 230);
+      padding: 13px 20px;
+      margin-left: 23px;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: bold;
+    } */
+
+    /* button {
+      border: none;
+      background-color: rgb(230, 230, 230);
+      font-size: 18px;
+      padding: 12px 18px;
+      cursor: pointer;
+      border-radius: 6px;
+    }
+
+    .is-toggled {
+      color: white;
+      background-color: black;
+    } */
+
+    /* .cost-input {
+      font-size: 15px;
+      padding: 10px;
+    }
+
+    .calculate-button {
+      background-color: green;
+      color: white;
+      border: none;
+      font-size: 15px;
+      padding: 12px 15px;
+      cursor: pointer;
+    }
+
+    .red{
+      color: red;
+    } */
+  </style>
+</head>
+
+<body>
+  <!-- <button onclick="
+      console.log(`Cart quantity: ${cartQuantity}`);
+    ">Show Quantity</button>
+
+       <button onclick="
+      if (cartQuantity + 1 > 10) {
+        alert('The cart is full');
+      } else {
+        cartQuantity++;
+        console.log(`Cart quantity: ${cartQuantity}`);
+      }
+    ">Add to Cart</button>
+
+    <button onclick="
+      if (cartQuantity + 2 > 10) {
+        alert('The cart is full');
+      } else {
+        cartQuantity += 2;
+        console.log(`Cart quantity: ${cartQuantity}`);
+      }
+    ">+2</button>
+
+    <button onclick="
+      if (cartQuantity + 3 > 10) {
+        alert('The cart is full');
+      } else {
+        cartQuantity = cartQuantity + 3;
+        console.log(`Cart quantity: ${cartQuantity}`);
+      }
+    ">+3</button>
+
+    <button onclick="
+      if (cartQuantity + 4 > 10) {
+        alert('The cart is full');
+      } else {
+        cartQuantity += 4;
+        console.log(`Cart quantity: ${cartQuantity}`);
+      }
+    ">+4</button>
+
+    <button onclick="
+      if (cartQuantity + 5 > 10) {
+        alert('The cart is full');
+      } else {
+        cartQuantity += 5;
+        console.log(`Cart quantity: ${cartQuantity}`);
+      }
+    ">+5</button>
+
+    <button onclick="
+      if(cartQuantity > 0){
+        cartQuantity--;
+        console.log(`Cart quantity: ${cartQuantity}`)
+      } else {alert('Not enough items in the cart')}
+    ">Remove from cart</button>
+
+    <button onclick="
+      if(cartQuantity - 3 < 0){
+        alert(`Not enough items in the cart`);
+      } else{
+        cartQuantity -= 3;
+        console.log(`Cart quantity: ${cartQuantity}`);
+      }
+    ">-2</button>
+
+    <button onclick="
+      if(cartQuantity - 3 < 0){
+        alert(`Not enough items in the cart`);
+      } else{
+        cartQuantity -= 3;
+        console.log(`Cart quantity: ${cartQuantity}`);
+      }
+    ">-3</button>
+
+      <button onclick="
+      cartQuantity = 0;
+      console.log('Cart was reset.');
+      console.log(`Cart quantity: ${cartQuantity}`);
+    ">Reset Cart</button> -->
+
+  <!-- <p>
+    <button onclick="
+    calculation += 1
+    console.log(calculation)
+    ">1</button>
+    <button onclick="
+    calculation += 2
+    console.log(calculation)
+    ">2</button>
+    <button onclick="
+    calculation += 3
+    console.log(calculation)
+    ">3</button>
+    <button onclick="
+    calculation += '+'
+    console.log(calculation); 
+    ">+</button>
+  </p>
+
+  <p>
+    <button onclick="
+    calculation += 4
+    console.log(calculation)
+    ">4</button>
+    <button onclick="
+    calculation += 5
+    console.log(calculation)
+    ">5</button>
+    <button onclick="
+    calculation += 6
+    console.log(calculation)
+    ">6</button>
+    <button onclick="
+    calculation += '-'
+    console.log(calculation); 
+    ">-</button>
+  </p>
+
+  <p>
+    <button onclick="
+    calculation += 7
+    console.log(calculation)
+    ">7</button>
+    <button onclick="
+    calculation += 8
+    console.log(calculation)
+    ">8</button>
+    <button onclick="
+    calculation += 9
+    console.log(calculation)
+    ">9</button>
+    <button onclick="
+    calculation += '*'
+    console.log(calculation); 
+    ">*</button>
+  </p>
+
+  <p>
+    <button onclick="
+    calculation += 0
+    console.log(calculation)
+    ">0</button>
+    <button onclick="
+    calculation += '.'
+    console.log(calculation)
+    ">.</button>
+    <button onclick="
+    calculation = eval(calculation);
+    console.log(calculation);
+    ">=</button>
+    <button onclick=" 
+    calculation += '/'
+    console.log(calculation); 
+    ">/</button>
+  </p>
+
+  <p>
+    <button onclick="
+        calculation = '';
+        console.log('Cleared.');
+      ">Clear</button>  
+  </p> -->
+
+  <!-- <p>
+      <button onclick="
+      updateCalculation('1');
+      ">1</button>
+
+      <button onclick="
+      updateCalculation('2');
+      ">2</button>
+
+      <button onclick="
+      updateCalculation('3');
+      ">3</button>
+
+      <button onclick="
+      updateCalculation(' + ')
+      ">+</button>
+    </p>
+
+    <p>
+      <button onclick="
+      updateCalculation('4')
+      ">4</button>
+
+      <button onclick="
+      updateCalculation('5');
+      ">5</button>
+
+      <button onclick="
+      updateCalculation('6')
+      ">6</button>
+
+      <button onclick="
+      updateCalculation(' - ')
+      ">-</button>
+    </p>
+
+    <p>
+      <button onclick="
+      updateCalculation('7')
+      ">7</button>
+
+      <button onclick="
+      updateCalculation('8')
+      ">8</button>
+
+      <button onclick="
+      updateCalculation('9')
+      ">9</button>
+
+      <button onclick="
+      updateCalculation(' * ')
+      ">*</button>
+    </p>
+
+    <p>
+      <button onclick="
+      updateCalculation('0')
+      ">0</button>
+
+      <button onclick="
+      updateCalculation('.')
+      ">.</button>
+
+      <button onclick="
+        // Note: eval() takes a string and runs it as code.
+        // Avoid using eval() in real world projects since
+        // it can potentially be given harmful code to run.
+        // Only use eval() for learning purposes.
+        calculation = eval(calculation);
+        console.log(calculation);
+      ">=</button>
+
+      <button onclick="
+      updateCalculation(' / ')
+      ">/</button>
+    </p>
+
+    <p>
+      <button onclick="
+        calculation = '';
+        console.log('Cleared.');
+      ">Clear</button>
+    </p> -->
+
+  <body>
+    <!-- <button onclick="
+      console.log(`Cart quantity: ${cartQuantity}`);
+    ">Show Quantity</button>
+
+    <button onclick="
+    updateCartQuantity(1);
+    ">Add to Cart</button>
+
+    <button onclick="
+    updateCartQuantity(2);
+    ">+2</button>
+
+    <button onclick="
+    updateCartQuantity(3);
+    ">+3</button>
+
+    <button onclick="
+    updateCartQuantity(4);
+    ">+4</button>
+
+    <button onclick="
+    updateCartQuantity(5);
+    ">+5</button>
+
+    <button onclick="
+    updateCartQuantity(-1)
+    ">Remove from cart</button>
+
+    <button onclick="
+    updateCartQuantity(-2);
+    ">-2</button>
+
+    <button onclick="
+    updateCartQuantity(-3)
+    ">-3</button>
+
+    <button onclick="
+      cartQuantity = 0;
+      console.log('Cart was reset.');
+      console.log(`Cart quantity: ${cartQuantity}`);
+    ">Reset Cart</button> -->
+
+    <!-- <p>
+      <button onclick="
+        updateCalculation('1');
+      ">1</button>
+
+      <button onclick="
+        updateCalculation('2');
+      ">2</button>
+
+      <button onclick="
+        updateCalculation('3');
+      ">3</button>
+
+      <button onclick="
+        updateCalculation(' + ');
+      ">+</button>
+    </p>
+
+    <p>
+      <button onclick="
+        updateCalculation('4');
+      ">4</button>
+
+      <button onclick="
+        updateCalculation('5');
+      ">5</button>
+
+      <button onclick="
+        updateCalculation('6');
+      ">6</button>
+
+      <button onclick="
+        updateCalculation(' - ');
+      ">-</button>
+    </p>
+
+    <p>
+      <button onclick="
+        updateCalculation('7');
+      ">7</button>
+
+      <button onclick="
+        updateCalculation('8');
+      ">8</button>
+
+      <button onclick="
+        updateCalculation('9');
+      ">9</button>
+
+      <button onclick="
+        updateCalculation(' * ');
+      ">*</button>
+    </p>
+
+    <p>
+      <button onclick="
+        updateCalculation('0');
+      ">0</button>
+
+      <button onclick="
+        updateCalculation('.');
+      ">.</button>
+
+      <button onclick="
+        // Note: eval() takes a string and runs it as code.
+        // Avoid using eval() in real world projects since
+        // it can potentially be given harmful code to run.
+        // Only use eval() for learning purposes.
+        calculation = eval(calculation);
+        console.log(calculation);
+        localStorage.setItem('calculation', calculation);
+      ">=</button>
+
+      <button onclick="
+        updateCalculation(' / ');
+      ">/</button>
+    </p>
+
+    <p>
+      <button onclick="
+        calculation = '';
+        console.log(calculation);
+        localStorage.setItem('calculation', calculation);
+      ">Clear</button>
+    </p> -->
+
+    <!-- <button onclick="guessGame('heads')">heads</button>
+    <button onclick="guessGame('tails')">tails</button> -->
+
+    <!-- <p>Amazon Shipping Calculator</p>
+    <p>Orders under $40 = +$10 shipping.</p>
+    <p>Order above $40 = free shipping.</p>
+    <input type="text" placeholder="Cost of order" class="discountInput">
+    <button>Calculate</button>
+    <p class="result"></p> -->
+
+    <!-- <button>9a</button>
+    <button class="b9">9b done!</button> -->
+
+    <!-- <button>heads</button>
+    <button>tails</button>
+    <p></p> -->
+
+    <!-- <input type="text" class="nameInput" placeholder="Name">
+    <button>Submit</button>
+    <p class="result"></p> -->
+
+    <!-- <p>YouTube Subscribe Button</p>
+    <button onclick="
+      subscribe();
+    " class="js-subscribe-button">
+      Subscribe
+    </button>
+
+    <p>Amazon Shipping Calculator</p>
+    <input placeholder="Cost of order" class="js-cost-input" onkeydown="
+      handleCostKeydown(event);
+    ">
+    <button onclick="
+      calculateTotal();
+    ">Calculate</button>
+    <p class="js-total-cost"></p> -->
+
+    <!-- <input class="keyInput" type="text" placeholder="Type something">
+    <p></p> -->
+
+    <!-- <button onclick="
+		p.innerHTML = `Cart quantity: ${cartQuantity}`;
+		localStorage.setItem('paragraph', JSON.stringify(cartQuantity));
+    ">Show Quantity</button>
+
+		<button onclick="
+      updateCartQuantity(1);
+    ">Add to Cart</button>
+
+		<button onclick="
+      updateCartQuantity(2);
+    ">+2</button>
+
+		<button onclick="
+      updateCartQuantity(3);
+    ">+3</button>
+
+		<button onclick="
+      updateCartQuantity(4);
+    ">+4</button>
+
+		<button onclick="
+      updateCartQuantity(5);
+    ">+5</button>
+
+		<button onclick="
+      updateCartQuantity(-1);
+    ">Remove from cart</button>
+
+		<button onclick="
+      updateCartQuantity(-2);
+    ">-2</button>
+
+		<button onclick="
+      updateCartQuantity(-3);
+    ">-3</button>
+
+		<button onclick="
+      cartQuantity = 0;
+      console.log('Cart was reset.');
+			p.innerHTML = `Cart quantity: ${cartQuantity}`;
+			localStorage.setItem('paragraph', JSON.stringify(cartQuantity));
+    ">Reset Cart</button> -->
+
+    <!-- <p class="result"></p>
+
+		<p>
+			<button onclick="
+        updateCalculation('1');
+      ">1</button>
+
+			<button onclick="
+        updateCalculation('2');
+      ">2</button>
+
+			<button onclick="
+        updateCalculation('3');
+      ">3</button>
+
+			<button onclick="
+        updateCalculation(' + ');
+      ">+</button>
+		</p>
+
+		<p>
+			<button onclick="
+        updateCalculation('4');
+      ">4</button>
+
+			<button onclick="
+        updateCalculation('5');
+      ">5</button>
+
+			<button onclick="
+        updateCalculation('6');
+      ">6</button>
+
+			<button onclick="
+        updateCalculation(' - ');
+      ">-</button>
+		</p>
+
+		<p>
+			<button onclick="
+        updateCalculation('7');
+      ">7</button>
+
+			<button onclick="
+        updateCalculation('8');
+      ">8</button>
+
+			<button onclick="
+        updateCalculation('9');
+      ">9</button>
+
+			<button onclick="
+        updateCalculation(' * ');
+      ">*</button>
+		</p>
+
+		<p>
+			<button onclick="
+        updateCalculation('0');
+      ">0</button>
+
+			<button onclick="
+        updateCalculation('.');
+      ">.</button>
+
+			<button onclick="
+        // Note: eval() takes a string and runs it as code.
+        // Avoid using eval() in real world projects since
+        // it can potentially be given harmful code to run.
+        // Only use eval() for learning purposes.
+        calculation = eval(calculation);
+				paragraph.innerHTML = calculation;
+
+        // Remember to save the calculation here.
+        localStorage.setItem('calculation', calculation);
+      ">=</button>
+
+			<button onclick="
+        updateCalculation(' / ');
+      ">/</button>
+		</p>
+
+		<p>
+			<button onclick="
+        calculation = '';
+				paragraph.innerHTML = calculation;
+
+        // Remember to save the calculation here.
+        localStorage.setItem('calculation', calculation);
+      ">Clear</button>
+		</p> -->
+
+    <!-- <button>Add to Cart</button> -->
+
+    <!-- <button class="request">Request now</button>
+    <button class="schedule-for-later">Schedule for later</button> -->
+
+    <!-- <button class="js-button">Test</button> -->
+
+    <!-- <button>Gaming</button>
+    <button>Music</button>
+    <button>Tech</button> -->
+
+    <!-- <p>Amazon Shipping Calculator</p>
+    <input placeholder="Cost of order" class="js-cost-input cost-input" onkeydown="
+      handleCostKeydown(event);
+    ">
+    <button onclick="
+      calculateTotal();
+    " class="calculate-button">Calculate</button>
+    <p class="js-total-cost"></p> -->
+
+    <script>
+      // let name = "hamza";
+      // console.log(`My name is ${name}`)
+
+      // let cost = 5 + 3 * 2 + 9;
+      // console.log(`Cost of food: $${cost}`)
+      // const tax = cost * 0.1;
+      // console.log(`Tax (10%): $${tax}`)
+      // const totalCost = cost + tax;
+      // console.log(`Total cost: $${totalCost}`)
+      // let cartQuantity = 0;
+
+      // let calculation = ""
+
+      // const hour = 12;
+      // const name = "Hamza";
+
+      // if(hour >= 6 && hour <= 12){
+      //   console.log(`Good Morning ${name}!`);
+      // } else if (hour >= 12 && hour <= 17){
+      //   console.log(`Good Afternoon ${name}!`);
+      // } else {
+      //   console.log(`Good Night ${name}!`)
+      // }
+
+      // const age = 66;
+      // const isHoliday = true;
+
+      // if((age <= 6 || age >= 65) && !isHoliday ){
+      //   console.log("Discount")
+      // } else {
+      //   console.log("No Discount");
+      // }
+
+      // const randomNumber = Math.random();
+      // let result;
+
+      // if(randomNumber < 0.5){
+      //   result = 'heads';
+      // } else {
+      //   result = 'tails';
+      // }
+
+      // let guess = "tails";
+      // console.log(guess === result ? "You win!" : "You lose!");
+
+      // function greet(name) {
+      //   if (!name) {
+      //     console.log('Hi there!');
+      //   } else {
+      //     console.log(`Hello ${name}!`);
+      //   }
+      // }
+      // greet('Hamza');
+      // greet('Subhan');
+      // greet();
+
+      // function convertToFahrenheit(celsius) {
+      //   return (celsius * 9 / 5) + 32;
+      // }
+
+      // function convertToCelsius(fahrenheit) {
+      //   return (fahrenheit - 32) * 5 / 9;
+      // }
+
+      // function convertTemperature(degrees, unit) {
+      //   if (unit === 'C') {
+      //     const result = convertToFahrenheit(degrees);
+      //     return `${result}F`;
+      //   } else if (unit === 'F') {
+      //     const result = convertToCelsius(degrees);
+      //     return `${result}C`;
+      //   }
+      // }
+
+      // console.log(convertTemperature(25, 'C'));
+      // console.log(convertTemperature(86, 'F'));
+
+      // function convertLength(length, from, to) {
+
+      //   if (from !== 'km' && from !== 'miles' && from !== 'ft') {
+      //     return `Invalid unit: ${from}`;
+      //   } else if (to !== 'km' && to !== 'miles' && to !== 'ft') {
+      //     return `Invalid unit: ${to}`;
+      //   }
+
+      //   if (from === 'km' && to === 'miles') {
+      //     return `${length / 1.6} ${to}`;
+
+      //   } else if (from === 'km' && to === 'ft') {
+      //     return `${length * 3281} ${to}`;
+
+      //   } else if (from === 'miles' && to === 'km') {
+      //     return `${length * 1.6} ${to}`;
+
+      //   } else if (from === 'miles' && to === 'ft') {
+      //     return `${length * 5280} ${to}`;
+
+      //   } else if (from === 'ft' && to === 'km') {
+      //     return `${length / 3281} ${to}`;
+
+      //   } else if (from === 'ft' && to === 'miles') {
+      //     return `${length / 5280} ${to}`;
+
+      //   } else if (from === to) {
+      //     return `${length} ${to}`;
+      //   }
+      // }
+
+      // console.log(convertLength(50, 'miles', 'km'));
+      // console.log(convertLength(32, 'km', 'miles'));
+      // console.log(convertLength(50, 'km', 'km'));
+
+      // console.log(convertLength(5, 'miles', 'km'));
+      // console.log(convertLength(5, 'miles', 'ft'));
+      // console.log(convertLength(5, 'km', 'ft'));
+
+      // console.log(convertLength(5, 'lbs', 'lbs'));
+
+      // let calculation = "";
+
+      // function updateCalculation(digit){
+      //   calculation += digit;
+      //   console.log(calculation);
+      // }
+
+      // let cartQuantity = 0;
+
+      // function updateCartQuantity(value) {
+
+      //   if (cartQuantity + value > 10) {
+      //     alert('The cart is full');
+      //     return;
+      //   } else if (cartQuantity + value < 0) {
+      //     alert('Not enough items in the cart');
+      //     return;
+      //   }
+      //     cartQuantity += value;
+      //     console.log(`Cart quantity: ${cartQuantity}`);
+      // }
+
+      // const product = {
+      //   name: "basketball",
+      //   price: 2095,
+      // }
+
+      // console.log(product);
+
+      // product.price += 500;
+
+      // console.log(product);
+
+      // product['delivery-time'] = '3 days';
+
+      // console.log(product);
+
+      // function comparePrice(product1, product2){
+      //   if(product1.price < product2.price){
+      //     return product1;
+      //   } else {return product2}
+      // }
+
+      // const product1 = {
+      //   name: 'basketball',
+      //   price: 2095
+      // }
+
+      // const product2 = {
+      //   name: 'socks',
+      //   price: 1090
+      // }
+
+      // console.log(comparePrice(product1, product2))
+
+      // function isSameProduct(product1, product2) {
+      //   return (
+      //     product1.name === product2.name &&
+      //     product1.price === product2.price
+      //   );
+      // }
+
+      // const product1 = {
+      //   name: 'basketball',
+      //   price: 2095
+      // };
+
+      // const product2 = {
+      //   name: 'socks',
+      //   price: 1090
+      // };
+
+      // const product3 = {
+      //   name: 'basketball',
+      //   price: 2095
+      // };
+
+      // console.log(isSameProduct(product1, product2));
+      // console.log(isSameProduct(product1, product3));
+
+      // console.log('Good Morning'.toLowerCase());
+      // console.log('TESTING'.toLowerCase());
+
+      // console.log('hello'.repeat(2));
+      // console.log('test'.repeat(3));
+
+      // let calculation = JSON.parse(localStorage.getItem('calculation')) || '';
+
+      // function updateCalculation(value) {
+      //   calculation += value;
+      //   console.log(calculation);
+      //   localStorage.setItem('calculation', calculation);
+      // }
+
+      // const score = JSON.parse(localStorage.getItem('score')) || {wins: 0, losses: 0};
+
+      // function guessGame(guess){
+      //   const randomNumber = Math.random();
+      //   const result = randomNumber < 0.5 ? 'heads' : 'tails';
+
+      //   console.log(guess === result ? 'You win!' : 'You lose!');
+
+      //   if (guess === result) {
+      //     score.wins++;
+      //   } else {
+      //     score.losses++;
+      //   }
+      //   console.log(score);
+
+      //   localStorage.setItem('score', JSON.stringify(score));
+      // }
+
+      // const input = document.querySelector(".discountInput");
+      // const button = document.querySelector("button");
+      // const result = document.querySelector(".result");
+
+      // function calculate() {
+      //   let numberInput = +input.value;
+      //   if (numberInput > 0 && numberInput < 40) {
+      //     result.textContent = `$${numberInput + 10}`
+      //     input.value = ''
+      //   } else if (numberInput > 40) {
+      //     result.textContent = `$${numberInput}`;
+      //     input.value = ''
+      //   } else {
+      //     result.textContent = `Please enter a whole number.`
+      //     input.value = ''
+      //   }
+      // }
+
+      // button.addEventListener("click", () => {
+      //   calculate();
+      // });
+
+      // input.addEventListener("keydown", (e) => {
+      //   if (e.key === "Enter") {
+      //     calculate();
+      //   }
+      // });
+
+      // const button = document.querySelector("button");
+      // console.log(button);
+      // const button2 = document.querySelector(".b9");
+      // console.log(button2);
+
+      // const buttons = document.querySelectorAll("button");
+      // const p = document.querySelector("p");
+
+      // buttons.forEach(button => {
+      //   button.addEventListener("click", (e) => {
+      //     p.innerHTML = `You chose: ${e.target.textContent}`;
+      //   });
+      // });
+
+      // const button = document.querySelector("button");
+      // const input = document.querySelector(".nameInput");
+      // const p = document.querySelector(".result");
+
+      // button.addEventListener("click", e => {
+      //   p.innerHTML = `Your name is: ${input.value}`;
+      // });
+
+      // input.addEventListener("keydown", e => {
+      //   if(e.key === "Enter"){
+      //     p.innerHTML = `Your name is: ${input.value}`;
+      //   }
+      // });
+
+      // String(25)
+      // console.log('25' - 5);
+      // console.log('25' + 5);
+
+      // window.document
+      // window.console.log('window');
+      // window.alert
+
+      // function handleCostKeydown(event) {
+      //   if (event.key === 'Enter') {
+      //     calculateTotal();
+      //   }
+      // }
+
+      // function calculateTotal() {
+      //   const inputElement = document.querySelector('.js-cost-input');
+      //   let cost = Number(inputElement.value);
+
+      //   if (cost < 40) {
+      //     cost = cost + 10;
+      //   }
+
+      //   document.querySelector('.js-total-cost')
+      //     .innerHTML = `$${Math.round(cost * 100) / 100}`;
+      // }
+
+      // function subscribe() {
+      //   const buttonElement = document.querySelector('.js-subscribe-button');
+
+      //   if (buttonElement.innerText === 'Subscribe') {
+      //     buttonElement.innerHTML = 'Subscribed';
+      //   } else {
+      //     buttonElement.innerHTML = 'Subscribe';
+      //   }
+      // }
+
+      // const input = document.querySelector(".keyInput");
+      // const p = document.querySelector("p");
+
+      // input.addEventListener("keyup", () => {
+      //   p.innerHTML = input.value;
+      // });
+
+      // let cartQuantity = JSON.parse(localStorage.getItem('paragraph')) || 0;
+      // const p = document.querySelector("p");
+      // p.innerHTML = `Cart quantity: ${cartQuantity}`;
+
+      // function updateCartQuantity(change) {
+      // 	if (cartQuantity + change > 10) {
+      // 		alert('The cart is full');
+      // 		return;
+      // 	}
+
+      // 	if (cartQuantity + change < 0) {
+      // 		alert('Not enough items in the cart');
+      // 		return;
+      // 	}
+
+      // 	cartQuantity += change;
+      // 	p.innerHTML = `Cart quantity: ${cartQuantity}`;
+      // 	localStorage.setItem('paragraph', JSON.stringify(cartQuantity));
+      // }
+
+      // let calculation = localStorage.getItem('calculation') || '';
+      // const paragraph = document.querySelector(".result");
+      // paragraph.innerHTML = calculation;
+
+      // function updateCalculation(value) {
+      // 	calculation += value;
+      // 	paragraph.innerHTML = calculation;
+      // 	localStorage.setItem('calculation', calculation);
+      // }
+
+      // // Optional: you can also create a function in order
+      // // to reuse this code.
+      // function saveCalculation() {
+      // 	localStorage.setItem('calculation', calculation);
+      // }
+
+      // console.log(document.querySelector("button").classList.contains("js-button"));
+
+      // const buttons = document.querySelectorAll("button");
+
+      // buttons.forEach(button => {
+      //   button.addEventListener("click", () => {
+      //     if (!button.classList.contains("is-toggled")) {
+      //       button.classList.add("is-toggled")
+      //     } else { button.classList.remove("is-toggled"); }
+      //   });
+      // });
+
+      // buttons.forEach(button => {
+      //   button.addEventListener("click", () => {
+      //     buttons.forEach(b => b.classList.remove("is-toggled"));
+      //     button.classList.add("is-toggled");
+      //   });
+      // });
+
+      // function handleCostKeydown(event) {
+      //   if (event.key === 'Enter') {
+      //     calculateTotal();
+      //   }
+      // }
+
+      // function calculateTotal() {
+      //   const inputElement = document.querySelector('.js-cost-input');
+      //   let cost = Number(inputElement.value);
+
+      //   if (cost >= 0 && cost < 40) {
+      //     cost += 10
+      //     document.querySelector('.js-total-cost')
+      //     .innerHTML = `$${Math.round(cost * 100) / 100}`;
+      //     document.querySelector('.js-total-cost').classList.remove('red');
+      //   } else {
+      //     document.querySelector('.js-total-cost')
+      //     .innerHTML = `Error: cost cannot be less than $0`;
+      //     document.querySelector('.js-total-cost').classList.add('red');
+      //   }
+      // }
+
+    </script>
+  </body>
+
+</html>

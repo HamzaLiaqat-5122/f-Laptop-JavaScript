@@ -1,0 +1,218 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+html,body{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* // 1. When a checkbox is clicked, toggle the input type of a password field between "password" and "text". */
+
+/* form{
+    height: 30rem;
+    width: 30rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+    background-color: red;
+    background: linear-gradient(#333, #d2a3d3, #23d, #ce311a);
+    border-radius: .9rem;
+    color: white;
+    font-weight: bold;
+}
+
+.password{
+    border: 2px solid gray;
+    border-radius: 6px;
+    font-size: .8rem;
+    padding: .2rem .8rem;
+    outline: none;
+} */
+
+/* // 2. When a button is clicked, change the background color of all <p> elements to yellow. */
+
+
+    /* .paragraphs{
+        height: 20rem;
+        width: 30rem;
+        background-color: chocolate;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: column;
+        gap: 30px;
+        border-radius: 0.8rem;
+    }
+    
+    p{
+        margin: 1rem;
+        color: white;
+    }
+
+    button{
+        padding: 1rem 2rem;
+        border-radius: .8rem;
+        border: 2px solid black;
+        background-color: salmon;
+        cursor: pointer;
+    } */
+
+/* // 3. When a user selects an image file using an <input type="file">, display the image in an <img> tag as a preview. */
+
+/* // 4. Prevent the user from copying text from a <p> element. Show an alert that says "Copying is disabled" when copy is attempted. */
+
+
+
+/* // 5. When a button is clicked, take the value from an input field and add it as a new <li> in an unordered list. */
+
+/* body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 50px;
+    background-color: #f4f4f4;
+  }
+
+  input[type="text"] {
+    padding: 10px;
+    width: 200px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin-left: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #0056b3;
+  }
+
+  ul {
+    list-style-type: disc;
+    margin-top: 30px;
+    padding-left: 0;
+  }
+
+  li {
+    background-color: #fff;
+    padding: 10px;
+    margin: 5px auto;
+    width: 250px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    text-align: left;
+  } */
+
+/* // 6. When an input field loses focus (onblur), convert the value inside it to uppercase. */
+
+/* input{
+    width: 30rem;
+    text-indent: 0.5rem;
+    height: 3rem;
+    border-radius: .8rem;
+    background-color :salmon;
+    border: 3px solid darkgray;
+    color: white;
+    font-size: 1.2rem;
+}
+
+input::placeholder{
+    color: white;
+} */
+
+/* // 7. Have two buttons: "Increase" and "Decrease". When clicked, they should change the font size of a <p> element accordingly. */
+
+/* .container{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.btn{
+    display: flex;
+    gap: 20px;
+}
+
+p{
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.increase, .decrease{
+    padding: .5rem 1.2rem;
+    border-radius: 0.8rem;
+    border: none;
+    outline: none;
+    background-color: rgb(74, 160, 214);
+    color: white;
+    font-weight: bold;
+    font-size: 1rem;
+}
+ */
+
+/* // 8. When a "Scroll to Top" button is clicked, scroll the webpage smoothly back to the top. */
+
+/* // 9. Create a manual image carousel: when "Next" or "Previous" buttons are clicked, change the image src of an <img> tag. */
+
+/* body {
+    background: #f0f0f0;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 50px;
+  }
+
+  .carousel {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    display: inline-block;
+  }
+
+  #img {
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: all 0.4s ease-in-out;
+  }
+
+  .buttons {
+    margin-top: 20px;
+  }
+
+  .buttons button {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 0 10px;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+
+  .buttons button:hover {
+    background: #0056b3;
+  } */
+
+/* // 10. In a form with a name input, when the submit button is clicked, check if the input is empty. If it is, prevent form submission and show an alert. */
