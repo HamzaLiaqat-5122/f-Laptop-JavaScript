@@ -1,0 +1,89 @@
+/* style.css */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background: #f4f4f4;
+}
+
+.product-section {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.product-card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+}
+
+.product-card img {
+  max-width: 100%;
+  border-radius: 8px;
+}
+
+.product-card h3 {
+  margin: 15px 0 10px;
+  font-size: 18px;
+  color: #333;
+}
+
+.product-card p {
+  color: #666;
+  font-size: 14px;
+}
+
+/* Pagination Styles */
+.pagination {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.page-link {
+  display: inline-block;
+  margin: 0 5px;
+  padding: 10px 16px;
+  background: #fff;
+  color: #333;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background 0.2s;
+  cursor: pointer;
+}
+
+.page-link:hover {
+  background: #007bff;
+  color: #fff;
+}
+
+.page-link.active {
+  background: #007bff;
+  color: #fff;
+  border-color: #007bff;
+}
+
+/* .prev {
+  position: absolute;
+  top: 378px;
+  left: 420px;
+}
+
+.next {
+  position: absolute;
+  top: 378px;
+  left: 820px;
+} */

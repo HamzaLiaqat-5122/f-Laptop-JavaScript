@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script type="module" src="index.js"></script>
+    <title>16. Chatty</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h2>From</h2>
+            <ul id="userList" class="from a">
+                <li data-user="Hamza" class="active">Hamza</li>
+                <li data-user="Subhan">Subhan</li>
+                <li data-user="Usman">Usman</li>
+            </ul>
+        </div>
+
+        
+        <div class="chat-section">
+            <div class="chat-header">
+                <div>Chat with <span id="chatWith">Subhan</span></div>
+                <input type="text" class="addUser">
+            </div>
+            <div id="chatBox" class="chat-box">
+                <!-- <div class="message sent"><span class="text">piyaz</span></div>
+                <div class="message received"><span class="text">Kese ho subhan</span></div> -->
+            </div>
+            <div class="input-area">
+                <input type="text" id="messageInput" placeholder="Type a message...">
+                <button id="sendBtn">Send</button>
+            </div>
+        </div>
+        <div class="sidebar">
+            <h2>To</h2>
+            <ul id="userList" class="to a">
+                <li data-user="Hamza">Hamza</li>
+                <li data-user="Subhan" class="active">Subhan</li>
+                <li data-user="Usman">Usman</li>
+            </ul>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ElecroBot</title>
+    <script type="module" defer src="index.js"></script>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <!-- <link rel="stylesheet" href="index_responsive_refined.css"> -->
+    <script type="module" defer src="extractedData_v2.js"></script>
+    <!-- <link rel="stylesheet" href="index_comprehensive_responsive.css"> -->
+    <!-- <script type="module" src="e"></script> -->
+</head>
+
+<body>
+    <header>
+        <div class="headerform" id="header">
+            <div class="logo"><img src="https://tailwindui.com/img/flags/flag-canada.svg" alt=""
+                    class="block h-auto w-5 flex-shrink-0" alt="">CAD</div>
+            <p class="header-delivery-text">Get free delivery on orders over $100</p>
+            <div class="header-sign">
+                <span>Sign in</span>
+                <span>Create account</span>
+            </div>
+        </div>
+        <div class="nav">
+            <div class="nav-menu">
+                <img class="nav-logo" src="https://electrobot.netlify.app/images/Electrobot.svg" alt="">
+                <ul>
+                    <li>Components</li>
+                    <li>Microcontrollers</li>
+                    <li>Sensors</li>
+                    <li>Store</li>
+                </ul>
+            </div>
+            <div class="nav-icons">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" aria-hidden="false" class="h-6 w-6">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0">
+                    </path>
+                </svg>
+
+                <svg class="heart" xmlns="http://www.w3.org/2000/svg" fill="context-fill" viewBox="0 0 24 24"
+                    stroke-width="1.5" stroke="currentColor" aria-hidden="true"
+                    class="h-6 w-6 flex-shrink-0 text-cyan-900">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z">
+                    </path>
+                </svg>
+                <div class="cart-div">
+                    <svg class="cart" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" aria-hidden="true" class="h-6 w-6 flex-shrink-0 text-cyan-900"
+                        id="cart-open">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z">
+                        </path>
+                    </svg>
+                    <span class="itemslength">0</span>
+                </div>
+            </div>
+        </div>
+        <div class="shopping-bag">
+            <div class="overlay-bag">
+                <div class="heading-exit-bag">
+                    <h4>Shopping cart</h4>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" aria-hidden="true" class="h-6 w-6" id="closebag">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </div>
+                <div class="itemsbags">
+                    <!-- <div class="addedProductDetails">
+                    <div class="addedProductImage">
+                        <img src="img/61R1A7CuHTL._AC_SX679_.jpg" alt="">
+                    </div>
+                    <div class="model-title">
+                        <div class="model_content">
+                            <span>Arduino Nano</span>
+                            <span>$35.00</span>
+                        </div>
+                        <div class="modeltext">
+                            <span>REV3 [A000005]</span>
+                        </div>
+                        <div class="model_remove_price">
+                            <div class="quantity">
+                                <div class="show-text">
+                                    <span>1</span>
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                </div>
+                                <div class="innertext">
+                                    <span><i class="fa-solid fa-check"></i>1</span>
+                                    <span>2</span>
+                                    <span>3</span>
+                                    <span>4</span>
+                                    <span>5</span>
+                                    <span>6</span>
+                                    <span>7</span>
+                                    <span>8</span>
+                                    <span>9</span>
+                                    <span>10</span>
+                                </div>
+                            </div>
+                            <span>Remove</span>
+                        </div>
+                    </div>
+                </div> -->
+                </div>
+                <div class="noitembag">
+                    <h2>There is no item in the cart.</h2>
+                </div>
+                <div class="checkout-bag">
+                    <div class="totalprice">
+                        <span>Subtotal</span>
+                        <span id="totalBuyProductPrice">0</span>
+                    </div>
+                    <p>Shipping and taxes calculated at checkout.</p>
+                    <button class="checkout-section-goBtn">Checkout</button>
+                    <p id="continueShopping">or <span>Continue Shopping →</span></p>
+                </div>
+            </div>
+    </header>
+    <hr class="header-hr">
+
+
+    <!-- Components section Start -->
+    <div class="components">
+        <!-- <div class="component-items">
+            <img src="img/61D9yTlgIbL._SX466_.jpg" alt="">
+            <div class="component-content">
+                <p>Arduino</p>
+                <p>Shop now</p>
+            </div> -->
+    </div>
+    <!-- Components section End -->
+    <!-- Header Section End -->
+
+    <!-- sensors section start -->
+
+    <!-- checkout form section starts  -->
+
+    <section class="checkout-form">
+        <div class="checkout-parts">
+            <div class="checkout-left">
+                <form action="" class="checkout-1stform">
+                    <h2>Contact Information</h2>
+                    <div class="checkout-form-email">
+                        <h4>Email</h4>
+                        <input type="text" id="checkEmail" />
+                        <span class="correctemail sameformspan"></span>
+                    </div>
+                    <!-- checkout-form-email end-->
+
+                    <div class="checkout-shippingInformation">
+                        <h2>Shipping information</h2>
+                        <div class="c-nameInformation">
+                            <div class="c-firstName">
+                                <h4>First name</h4>
+                                <input type="text" id="checkFirstName" />
+                                <span class="correctfirstname sameformspan"></span>
+                            </div>
+                            <!-- c-firstName end-->
+                            <div class="c-lastName">
+                                <h4>Last name</h4>
+                                <input type="text" id="checkLastName" />
+                                <span class="correctlastname sameformspan"></span>
+                            </div>
+                            <!-- c-lastName end-->
+                        </div>
+                        <!-- c-nameInformation end-->
+
+                        <div class="c-companyInformation">
+                            <h4>Company</h4>
+                            <input type="text" id="checkCompanyName" />
+                            <span class="correctcompanyName sameformspan"></span>
+                        </div>
+                        <!-- c-companyInformation end-->
+                        <div class="c-addressInformation">
+                            <h4>Address</h4>
+                            <input type="text" id="checkAddress" />
+                            <span class="correctaddress sameformspan"></span>
+                        </div>
+                        <!-- c-addressInformation end-->
+                        <div class="c-apartmentInformation">
+                            <h4>Apartment, suite, etc.</h4>
+                            <input type="text" id="checkApartment" />
+                            <span class="correctApartment sameformspan"></span>
+                        </div>
+                        <!-- c-apartmentInformation end-->
+
+                        <div class="c-countryInformation">
+                            <div class="c-city">
+                                <h4>City</h4>
+                                <input type="text" id="checkCity" />
+                                <span class="correctCity sameformspan"></span>
+                            </div>
+                            <!-- c-firstName end-->
+                            <div class="c-country">
+                                <h4>Country</h4>
+                                <input type="text" id="checkCountry" />
+                                <span class="correctCountry sameformspan"></span>
+                            </div>
+                            <!-- c-lastName end-->
+                        </div>
+                        <!-- c-nameInformation end-->
+
+                        <div class="c-stateInformation">
+                            <div class="c-state">
+                                <h4>State / Province</h4>
+                                <input type="text" id="checkState" />
+                                <span class="correctState sameformspan"></span>
+                            </div>
+                            <!-- c-state end-->
+                            <div class="c-postalCode">
+                                <h4>Postal code</h4>
+                                <input type="tel" id="checkPostalCode" />
+                                <span class="correctPostalCode sameformspan"></span>
+                            </div>
+                            <!-- c-postalCode end-->
+                        </div>
+                        <!-- c-stateInformation end-->
+
+                        <div class="c-phoneInformation">
+                            <h4>Phone</h4>
+                            <input type="tel" id="checkPhoneNumber" />
+                            <span class="correctPhoneNumber sameformspan"></span>
+                        </div>
+                        <!-- c-apartmentInformation end-->
+                    </div>
+                    <!-- checkout-shippingInformation end-->
+
+                    <div class="checkout-deliveryMethodInformation">
+                        <h2>Delivery method</h2>
+                        <div class="deliveryMethodInformation">
+                            <div class="c-standard c-deliveryjsclass ad">
+                                <div class="c-standardtick">
+                                    <h3>Standard</h3>
+                                    <svg width="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                        fill="currentColor" aria-hidden="true" class="h-4 w-4 text-cyan-400">
+                                        <path fill-rule="evenodd"
+                                            d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z"
+                                            clip-rule="evenodd"></path>
+                                    </svg>
+                                </div>
+                                <p>4-10 business days</p>
+                                <span class="c-standardspan">$5</span>
+                            </div>
+                            <!-- c-standard end-->
+                            <div class="c-express ad">
+                                <div class="c-expresstick">
+                                    <h3>Express</h3>
+                                    <svg width="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                        fill="currentColor" aria-hidden="true" class="h-4 w-4 text-cyan-400">
+                                        <path fill-rule="evenodd"
+                                            d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z"
+                                            clip-rule="evenodd"></path>
+                                    </svg>
+                                </div>
+                                <p>2-5 business days</p>
+                                <span class="c-expressspan">$16</span>
+                            </div>
+                            <!-- c-express end-->
+                        </div>
+                        <!-- deliveryMethodInformation-->
+                    </div>
+                    <!-- checkout-deliveryMethodInformation-->
+
+                    <div class="checkout-creditCardInformation">
+                        <h2>Credit Card Information</h2>
+                        <div class="c-cardNumber">
+                            <h4>Card number</h4>
+                            <input type="tel" id="checkCardNumber" />
+                            <span class="correctCardNumber sameformspan"></span>
+                        </div>
+                        <!-- c-cardNumber end-->
+                        <div class="c-nameoncard">
+                            <h4>Name on card</h4>
+                            <input type="text" id="checkNameCard" />
+                            <span class="correctNameCard sameformspan"></span>
+                        </div>
+                        <!-- c-nameoncard end-->
+                        <div class="c-cardCVC">
+                            <div class="c-expirationDate">
+                                <h4>Expiration date (MM/YY)</h4>
+                                <input type="tel" id="checkExpireDate" />
+                                <span class="correctExpireDate sameformspan"></span>
+                            </div>
+                            <div class="c-CVC">
+                                <h4>CVC</h4>
+                                <input type="password" id="checkCVC" />
+                                <span class="correctCVC sameformspan"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!--checkout-creditCardInformation-->
+
+                    <button class="c-clearFormBtn">Clear Form</button>
+                </form>
+            </div>
+
+            <!-- checkout-left end-->
+
+
+            <div class="checkout-right">
+                <h2>Shopping cart</h2>
+                <div class="formnoitems">
+                    <h2>There is no item in the cart.</h2>
+                </div>
+                <section class="formright">
+                    <div id="form_items">
+                        <!-- <div class="checkout-form-product">
+                        <div class="cfp-leftbox">
+                            <div class="cfp-img">
+                            <img src="https://m.media-amazon.com/images/I/61sAWhnRfaL._SX466_.jpg" alt="">
+                        </div>  cfp-img end
+                        <div class="cfp-leftboxtext">
+                            <h4>Ultrasonic Distance Sensor</h4>
+                            <span class="cfp-modelNumber">HC-SR04</span>
+                            <div class="quantity">
+                                <div class="show-text">
+                                    <span>1</span>
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                </div>
+                                <div class="innertext">
+                                    <span><i class="fa-solid fa-check"></i>1</span>
+                                    <span>2</span>
+                                    <span>3</span>
+                                    <span>4</span>
+                                    <span>5</span>
+                                    <span>6</span>
+                                    <span>7</span>
+                                    <span>8</span>
+                                    <span>9</span>
+                                    <span>10</span>
+                                </div> 
+                            </div> 
+                        </div> 
+                    </div> 
+                    <div class="cfp-rightbox">
+                        <span>$5.99</span>
+                        <span>Remove</span>
+                    </div>
+                </div> checkout-form-product end -->
+                    </div>
+                    <div class="product-form-subtotal">
+                        <div class="c-subtotalprice">
+                            <div class="c-subtotal">Subtotal</div>
+                            <div class="c-subtotal-price">$0</div>
+                        </div>
+                        <div class="c-shippingprice">
+                            <div class="c-shipping">Shipping</div>
+                            <div class="c-shipping-price">$5.00</div>
+                        </div>
+                        <div class="c-taxesprice">
+                            <div class="c-taxes">Taxes</div>
+                            <div class="c-taxes-price">$0.13</div>
+                        </div>
+                        <hr class="c-subhr">
+                        <div class="c-totalprice">
+                            <div class="c-total">Total</div>
+                            <div class="c-total-price">$11.12</div>
+                        </div>
+                    </div><!-- product-form-subtotal end-->
+                    <div class="c-agreepayout">
+                        <div class="check-termsconditions">
+                            <input type="checkbox">
+                            <p>I agree with the <span>terms and conditions</span>.</p>
+                        </div>
+                        <button class="pay-btn">Pay now</button>
+                    </div> <!-- .c-agreepayout end  -->
+                </section>
+            </div> <!-- checkout-right end-->
+
+        </div> <!-- checkout-parts end-->
+    </section>
+
+    <!-- checkout form section  ends -->
+
+    <div class="sensors">
+        <div class="allcomponents_heading">
+            <h2 class="component-name">Sensors</h2>
+            <span class="component-length">(10)</span>
+        </div>
+        <div class="products">
+
+        </div>
+    </div>
+
+    <section class="product-details-section">
+        <section class="products-page">
+            
+        </section>
+        <div class="featured-container">
+            <h3>Featured products</h3>
+            <div class="products">
+
+            </div>
+        </div>
+    </section>
+    <!-- store section starts  -->
+    <section class="store">
+        <div class="store-heading-sort">
+            <h1>Store</h1>
+            <div class="store-sort-content">
+                <div class="store-sort-button-div">
+                    <h4>Most Popular</h4>
+                    <p>Featured</p>
+                    <p>Best Rating</p>
+                    <p>Price: Low to High</p>
+                    <p>Price: High to Low</p>
+                </div>
+                <button class="store-sort-button">Sort</button>
+                <svg class="store-sort-down" width="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                    fill="currentColor" aria-hidden="true" id="store_sort_downpopup">
+                    <path fill-rule="evenodd"
+                        d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                        clip-rule="evenodd"></path>
+                </svg>
+                <svg width="20" class="store-sort-window" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                    fill="currentColor" aria-hidden="true" class="h-5 w-5 " id="store_detail_Product">
+                    <path fill-rule="evenodd"
+                        d="M4.25 2A2.25 2.25 0 002 4.25v2.5A2.25 2.25 0 004.25 9h2.5A2.25 2.25 0 009 6.75v-2.5A2.25 2.25 0 006.75 2h-2.5zm0 9A2.25 2.25 0 002 13.25v2.5A2.25 2.25 0 004.25 18h2.5A2.25 2.25 0 009 15.75v-2.5A2.25 2.25 0 006.75 11h-2.5zm9-9A2.25 2.25 0 0011 4.25v2.5A2.25 2.25 0 0013.25 9h2.5A2.25 2.25 0 0018 6.75v-2.5A2.25 2.25 0 0015.75 2h-2.5zm0 9A2.25 2.25 0 0011 13.25v2.5A2.25 2.25 0 0013.25 18h2.5A2.25 2.25 0 0018 15.75v-2.5A2.25 2.25 0 0015.75 11h-2.5z"
+                        clip-rule="evenodd"></path>
+                </svg>
+            </div>
+        </div>
+        <hr class="store-hr" />
+
+        <div class="store-parts">
+
+            <div class="store-left">
+                <div class="store-category1">
+                    <div class="store-searchfilter">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="search" name="" id="store_filter" placeholder="Find items by name.." />
+                    </div>
+                    <div class="store-filtercancel-btn" id="cancel_filter">
+                        <svg width="10px" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="1.5" stroke="currentColor" aria-hidden="true"
+                            class="h-3 w-2.5 text-red-500 hover:text-red-300">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                        <span>Filters</span>
+                    </div>
+                </div>
+                <!-- store-category 1 end-->
+                <div class="store-category2">
+                    <div class="sensors-types">
+                        <h4>Distance Sensors</h4>
+                        <span>(1)</span>
+                    </div>
+                    <div class="sensors-types">
+                        <h4>Temperature Sensors</h4>
+                        <span>(2)</span>
+                    </div>
+                    <div class="sensors-types">
+                        <h4>PH Sensors</h4>
+                        <span>(1)</span>
+                    </div>
+                    <div class="sensors-types">
+                        <h4>Water Level Sensors</h4>
+                        <span>(1)</span>
+                    </div>
+                    <div class="sensors-types">
+                        <h4>Turbidity Sensors</h4>
+                        <span>(1)</span>
+                    </div>
+                    <div class="sensors-types">
+                        <h4>Pressure Sensors</h4>
+                        <span>(2)</span>
+                    </div>
+                    <div class="sensors-types">
+                        <h4>Gas Sensors</h4>
+                        <span>(1)</span>
+                    </div>
+                    <div class="sensors-types sensors-typelast">
+                        <h4>Balancing Sensors</h4>
+                        <span>(1)</span>
+                    </div>
+                    <hr class="store-sensorsqHr" />
+                </div>
+                <!-- store-category2 end-->
+
+                <div class="store-category3">
+                    <div class="store-filtersSelection" id="brand_border">
+                        <h4>Brand</h4>
+                        <span class="show_brand_icon">+</span>
+                    </div>
+                    <div class="store-brand">
+                        <div class="store-brand-items">
+                            <input type="checkbox">
+                            <span>Virtuabotix</span>
+                        </div>
+                        <div class="store-brand-items">
+                            <input type="checkbox">
+                            <span>Fujitsu</span>
+                        </div>
+                        <div class="store-brand-items">
+                            <input type="checkbox">
+                            <span>Texas Instruments</span>
+                        </div>
+                        <div class="store-brand-items">
+                            <input type="checkbox">
+                            <span>Uxcell</span>
+                        </div>
+                        <div class="store-brand-items">
+                            <input type="checkbox">
+                            <span>Chanzon</span>
+                        </div>
+                        <div class="store-brand-items">
+                            <input type="checkbox">
+                            <span>Brilinker</span>
+                        </div>
+                        <div class="store-brand-items">
+                            <input type="checkbox">
+                            <span>Bridgelux</span>
+                        </div>
+                        <div class="store-brand-items">
+                            <input type="checkbox">
+                            <span>BOJACK</span>
+                        </div>
+                        <div class="store-brand-items">
+                            <input type="checkbox">
+                            <span>PATKIL</span>
+                        </div>
+                        <div class="store-brand-items">
+                            <input type="checkbox">
+                            <span>arduino</span>
+                        </div>
+                        <div class="store-brand-items">
+                            <input type="checkbox">
+                            <span>Raspberry Pi</span>
+                        </div>
+                        <div class="store-brand-items">
+                            <input type="checkbox">
+                            <span>Espressif</span>
+                        </div>
+                        <div class="store-brand-items">
+                            <input type="checkbox">
+                            <span>HiLetgo</span>
+                        </div>
+                        <div class="store-brand-items">
+                            <input type="checkbox">
+                            <span>Stemedu</span>
+                        </div>
+                        <div class="store-brand-items">
+                            <input type="checkbox">
+                            <span>Geekstory</span>
+                        </div>
+                        <div class="store-brand-items">
+                            <input type="checkbox">
+                            <span>Adafruit</span>
+                        </div>
+                        <div class="store-brand-items">
+                            <input type="checkbox">
+                            <span>SparkFun</span>
+                        </div>
+                        <div class="store-brand-items">
+                            <input type="checkbox">
+                            <span>WeAct Studio</span>
+                        </div>
+                        <div class="store-brand-items">
+                            <input type="checkbox">
+                            <span>Stm32</span>
+                        </div>
+                        <div class="store-brand-items">
+                            <input type="checkbox">
+                            <span>JESSINIE</span>
+                        </div>
+                        <div class="store-brand-items">
+                            <input type="checkbox">
+                            <span>H Electrode</span>
+                        </div>
+                        <div class="store-brand-items">
+                            <input type="checkbox">
+                            <span>GAGALOR</span>
+                        </div>
+                        <div class="store-brand-items">
+                            <input type="checkbox">
+                            <span>KEYESTUDIO</span>
+                        </div>
+                        <div class="store-brand-items">
+                            <input type="checkbox">
+                            <span>EC</span>
+                        </div>
+                    </div>
+                    <div class="store-filtersSelection" id="category_border">
+                        <h4>Category</h4>
+                        <span class="store_categories_show">+</span>
+                    </div>
+                    <div class="store-category-items">
+                        <div class="store-brand-items">
+                            <input type="checkbox">
+                            <span>components</span>
+                        </div>
+                        <div class="store-brand-items">
+                            <input type="checkbox">
+                            <span>microcontrollers</span>
+                        </div>
+                        <div class="store-brand-items">
+                            <input type="checkbox">
+                            <span>sensors</span>
+                        </div>
+                    </div>
+                    <div class="store-filtersSelection" id="rating_border">
+                        <h4>Rating</h4>
+                        <span class="rating-show">+</span>
+                    </div>
+                    <div class="store-rating-showicons ">
+                        <div class="store-rating-showicon1 storestaricon">
+                            <i class="fa-regular fa-star"></i>
+                        </div>
+                        <div class="store-rating-showicon2 storestaricon">
+                            <i class="fa-regular fa-star"></i>
+                        </div>
+                        <div class="store-rating-showicon3 storestaricon">
+                            <i class="fa-regular fa-star"></i>
+                        </div>
+                        <div class="store-rating-showicon4 storestaricon">
+                            <i class="fa-regular fa-star"></i>
+                        </div>
+                        <div class="store-rating-showicon5 storestaricon">
+                            <i class="fa-regular fa-star"></i>
+                        </div>
+                    </div>
+                    <div class="store-filtersSelection" id="sliderprice_border">
+                        <h4>Price</h4>
+                        <span class="sliderprice_show">+</span>
+                    </div>
+                    <div class="rangeSlider-container">
+                        <div class="values">
+                            <span id="range1">0</span>
+                            <!-- <span>&dash;</span> -->
+                            <span id="range2">200</span>
+                        </div>
+                        <div class="slider-track"></div>
+                        <input type="range" min="0" max="200" step="5" value="0" id="slider-01">
+                        <input type="range" min="5" max="200" step="5" value="200" id="slider-02">
+                    </div>
+                </div>
+                <!-- store-category3 end-->
+            </div>
+            <!-- store-left end -->
+
+            <div class="store-right">
+                <!-- <div class="store-components"> -->
+
+                <!-- store-menusvg-components-data -->
+                <!-- </div> -->
+                <!-- store-menusvg-components-->
+                <!-- </div> -->
+                <!-- store-right end -->
+            </div>
+            <div class="products">
+
+            </div>
+        </div>
+        <!-- store-parts end -->
+        <div class="store-last-slider" id="slider">
+            <div class="store-last-sliderprevious button_slider">
+                <i class="fa-solid fa-arrow-left "></i>
+                <span>Previous</span>
+            </div>
+            <div class="store-slider-number">
+                <span class="active">1</span>
+                <span>2</span>
+                <span>3</span>
+                <span>4</span>
+                <span>5</span>
+                <span class="dots">...</span>
+                <span>7</span>
+            </div>
+            <div class="store-last-slidernext button_slider">
+                <span>Next</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </div>
+        </div>
+    </section>
+    <!-- store section ends -->
+
+    <section class="Heart">
+        <div class="heart_container">
+            <h3>Wishlist</h3>      
+            <div class="heart_empty">
+                <p>There is no item in the wishlist.</p>
+            </div>
+            <div class="heart_box">
+                <div class="heart_item">
+                    <div class="heart_img">
+                        <img src="img/61sAWhnRfaL._SX466_.jpg" alt="">
+                    </div>
+                    <div class="heart_content">
+                        <div class="heart_price">
+                            <span>PH Sensor</span>
+                            <span>$190</span>
+                        </div>
+                        <div class="model_heart">PH-014</div>
+                        <div class="heart_remove">
+                            <span>Qty: 4 available</span>
+                            <span>Remove</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- sensors section end   -->
+    <!-- finish Shoppping section start -->
+    <section class="finishShopping">
+        <div class="finishShoppingContainer">
+            <div class="finishContent">
+                <div class="finishBox1">
+                    <span>Payment successful</span>
+                    <h1>Thanks for ordering</h1>
+                    <p>We appreciate your order, we're currently processing it. So hang tight and we'll send you
+                        confirmation very soon!</p>
+                </div>
+                <span class="AgainShopping">Continue Shopping →</span>
+            </div>
+        </div>
+    </section>
+    <!-- finish Shoppping section End -->
+
+    <!-- Hero Section Start -->
+    <section class="allsection">
+        <section>
+            <div class="Hero">
+                <div class="hero_Content">
+                    <h1>Want to buy <span>Electronics Hardware</span></h1>
+                    <p>We provide you all sorts of electronics hardware. We have microcontrollers, sensors, inductors,
+                        capacitors, and resistors of different brands.</p>
+                    <button>Shop now</button>
+                </div>
+                <div class="hero_image">
+                    <img src="https://images.unsplash.com/photo-1603732551681-2e91159b9dc2?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=870&amp;q=80"
+                        alt="">
+                </div>
+            </div>
+        </section>
+        <!-- Hero Section End -->
+
+        <!-- Product Section Start -->
+        <section>
+            <div class="product-container">
+                <h3>Trending products</h3>
+                <div class="products"></div>
+            </div>
+        </section>
+        <!-- Product Section End -->
+
+        <!-- brand Section Start -->
+        <section class="Brands">
+            <hr class="brand-hr">
+            <div class="brand">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <hr class="brand-hr">
+        </section>
+        <!-- brand Section End -->
+
+        <!-- services section start  -->
+        <section class="services">
+            <div class="service">
+                <div class="service-item">
+                    <img src="https://electrobot.netlify.app/images/Free_Shipping.svg" alt="">
+                    <h4>Free Shipping</h4>
+                    <p>It's actually free delivery when your order is above $100. So, don't forget to save some extra
+                        bucks.
+                    </p>
+                </div>
+                <div class="service-item">
+                    <img src="https://electrobot.netlify.app/images/Customer_Support.svg" alt="">
+                    <h4>24/7 Customer Support</h4>
+                    <p>We provide 24/7 customer support as we care about our customer's time and money. Our staff is
+                        always
+                        on the toes to help out the customers.</p>
+                </div>
+                <div class="service-item">
+                    <img src="https://electrobot.netlify.app/images/Gift.svg" alt="">
+                    <h4>Gift Items</h4>
+                    <p>You can send items to your friends or family members who have hobbies related to electronics.</p>
+                </div>
+            </div>
+        </section>
+    </section>
+    <!-- services section end  -->
+    <hr class="footer-hr">
+    <!-- Footer section Start  -->
+    <footer>
+        <div class="container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Products</th>
+                        <th>Service</th>
+                        <th>Company</th>
+                        <th>Legal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Sensors</td>
+                        <td>Shipping & Returns</td>
+                        <td>Who we are</td>
+                        <td>Terms of Service</td>
+                    </tr>
+                    <tr>
+                        <td>Arduino</td>
+                        <td>Warranty</td>
+                        <td>Sustainability</td>
+                        <td>Return Policy</td>
+                    </tr>
+                    <tr>
+                        <td>Capacitors</td>
+                        <td>FAQ</td>
+                        <td>Press</td>
+                        <td>Privacy Policy</td>
+                    </tr>
+                    <tr>
+                        <td>Esp32</td>
+                        <td>Find a store</td>
+                        <td>Terms & Conditions</td>
+                        <td>Shipping Policy</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Get in touch</td>
+                        <td>Privacy</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="copyright">
+            <div class="copyright-data">
+                <span>Shipping to Canada ($CAD)</span>
+                <span>English</span>
+            </div>
+            <div class="copyright-icons">
+                <a><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="facebook-f"
+                        class="svg-inline--fa fa-facebook-f w-4" role="img" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 512 512">
+                        <path fill="currentColor"
+                            d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z">
+                        </path>
+                    </svg></a>
+                <a><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="twitter"
+                        class="svg-inline--fa fa-twitter w-4" role="img" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 512 512">
+                        <path fill="currentColor"
+                            d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z">
+                        </path>
+                    </svg></a>
+                <a><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="instagram"
+                        class="svg-inline--fa fa-instagram w-4" role="img" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 512 512">
+                        <path fill="currentColor"
+                            d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z">
+                        </path>
+                    </svg></a>
+                <a><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="google"
+                        class="svg-inline--fa fa-google w-4" role="img" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 512 512">
+                        <path fill="currentColor"
+                            d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z">
+                        </path>
+                    </svg></a>
+            </div>
+            <div class="copy_year">
+                <span>@ 2022 ElectroBot, Ltd.</span>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer section end  -->
+
+
+</body>
+
+</html>

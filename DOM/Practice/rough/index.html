@@ -641,6 +641,14 @@
     " class="calculate-button">Calculate</button>
     <p class="js-total-cost"></p> -->
 
+    <!-- <button>Start</button> -->
+
+    <!-- <button>Add to cart</button>
+     <p class="js-message"></p> -->
+
+    <!-- <button class="add">Add</button>
+     <button class="remove">Remove</button> -->
+
     <script>
       // let name = "hamza";
       // console.log(`My name is ${name}`)
@@ -1047,6 +1055,367 @@
       //     document.querySelector('.js-total-cost').classList.add('red');
       //   }
       // }
+
+      // const nums = [10, 20, 30];
+      // nums[nums.length - 1] = 99;
+      // nums[2] = 99;
+      // nums.splice(2, 1, 99)
+      // nums.splice(-1, 1, 99)
+      // console.log(nums);
+
+      // function getLastValue(array){
+      //   return array[array.length - 1];
+      // }
+
+      // console.log(getLastValue([1, 20, 22, 24, 5]));
+      // console.log(getLastValue(['hi', 'hello', 'good']));
+
+      // function swapArray(array){
+      //   const lastIndex = array.length - 1;
+
+      //   let lastValue = array[lastIndex];
+      //   let firstValue = array[0];
+
+      //   array[0] = lastValue;
+      //   array[lastIndex] = firstValue;
+
+      //   return array;
+      // }
+
+      // console.log(swapArray([1, 20, 22, 24, 5]));
+      // console.log(swapArray(['hi', 'hello', 'good']));
+
+      // for(let i = 0; i <= 10; i+= 2){
+      //   console.log(i);
+      // }
+
+      // for(let i = 5; i >= 0; i--){
+      //   console.log(i);
+      // }
+
+      // let i = 0;
+      // while(i <= 10){
+      //   console.log(i);
+      //   i += 2;
+      // }
+
+      // let i = 5;
+      // while(i >= 0){
+      //   console.log(i);
+      //   i--;
+      // }
+
+      // const array = [1, 2, 3];
+      // for(let i = 0; i < array.length; i++){
+      //   console.log(array[i] + 1)
+      // }
+
+      // function addOne(array){
+      //   for(let i = 0; i < array.length; i++){
+      //     console.log(array[i] + 1);
+      //   }
+      // }
+
+      // addOne([1, 2, 3]);
+      // addOne([-2, -1, 0, 99]);
+
+      // function addNum(array, num){
+      //   for(let i = 0; i < array.length; i++){
+      //     console.log(array[i] + num);
+      //   }
+      // }
+
+      // addNum([1, 2, 3], 2);
+      // addNum([1, 2, 3], 3);
+      // addNum([-2, -1, 0, 99], 2);
+
+      // function addArrays(array1, array2) {
+      //   const result = [];
+
+      //   for (let i = 0; i < array1.length; i++) {
+      //     result.push(array1[i] + array2[i]);
+      //   }
+
+      //   return result;
+      // }
+
+      // console.log(addArrays([1, 1, 2], [1, 1 ,3]));
+      // console.log(addArrays([1, 2, 3], [4, 5, 6]));
+
+      // function countPositive(nums){
+      //   let positiveCount = 0;
+      //   for(let i = 0; i < nums.length; i++){
+      //     if(nums[i] > 0){
+      //       positiveCount++
+      //     }
+      //   }
+      //   return positiveCount;
+      // }
+
+      // console.log(countPositive([1, -3, 5]));
+      // console.log(countPositive([-2, 3, -5, 7, 10]));
+
+      // function minMax(nums){
+      //   let obj = {min: null, max: null};
+      //   for(let i = 0; i < nums.length; i++){
+      //     if(nums[i] < nums[0]){
+      //       obj.min = nums[i]
+      //     } if (nums[i] > nums[0]){
+      //       obj.max = nums[i];
+      //     } else if (nums[i] === nums[i]){
+      //       obj.min = nums[i];
+      //       obj.max = nums[i]
+      //     } else if (nums[i] === null){
+      //       obj.min = null;
+      //       obj.max = null;
+      //     }
+      //   }
+      //   return obj;
+      // }
+
+      // console.log(minMax([1, -3, 5]));
+      // console.log(minMax([-2, 3, -5, 7, 10]));
+      // console.log(minMax([]));
+      // console.log(minMax([3]));
+
+      // function countWords(words) {
+      //   const result = {};
+
+      //   for (let i = 0; i < words.length; i++) {
+      //     const word = words[i];
+
+      //     if (!result[word]) {
+      //       result[word] = 1;
+      //     } else {
+      //       result[word]++;
+      //     }
+      //   }
+
+      //   return result;
+      // }
+
+      // console.log(countWords(['apple', 'grape', 'apple', 'apple']));
+
+      // let index = -1;
+
+      // // const array = ['hello', 'world', 'search', 'good'];
+      // // const array = ['not', 'found'];
+      // for(let i = 0; i < array.length; i++){
+      //   if (array[i] === "search"){
+      //     index = i;
+      //   }
+      // }
+      // console.log(index)
+
+      // const array = ['hello', 'world', 'search', 'good', 'search'];
+
+      // let index = -1;
+
+      // for(let i = 0; i < array.length; i++){
+      //   if(array[i] === "search"){
+      //     index = i;
+      //     break;
+      //   }
+      // }
+
+      // console.log(index);
+
+      // function findIndex(array, word) {
+      //   let index = -1;
+      //   for (let i = 0; i < array.length; i++) {
+      //     if (array[i] === word) {
+      //       index = i;
+      //       break;
+      //     }
+      //   }
+      //   return index;
+      // }
+
+      // console.log(findIndex(['green', 'red', 'blue', 'red'], 'red'));
+      // console.log(findIndex(['green', 'red', 'blue', 'red'], 'yellow'));
+
+      // function removeEgg(foods){
+      //   let noEggArray = [];
+      //   for(let i = 0; i < foods.length; i++){
+      //     if(foods[i] === "egg"){
+      //       continue;
+      //     }
+      //     noEggArray.push(foods[i]);
+      //   }
+      //   return noEggArray;
+      // }
+
+      // console.log(removeEgg(['egg', 'apple', 'egg', 'egg', 'ham']));
+
+      // function removeEgg(foods) {
+      //   let arr = [];
+      //   let count = 0;
+      //   for (let i = 0; i < foods.length; i++) {
+      //     let reversedFoods = foods.slice().reverse();
+      //     let food = reversedFoods[i];
+      //     if (count < 2 && food === 'egg') {
+      //       count++
+      //       continue;
+      //     }
+      //     arr.push(food);
+      //   }
+      //   return arr.reverse();
+      // }
+
+      // console.log(removeEgg(['egg', 'apple', 'egg', 'egg', 'ham']));
+
+      // const foods = ['egg', 'apple', 'egg', 'egg', 'ham'];
+      // console.log(removeEgg(foods));
+      // console.log(foods);
+
+      // for(let i = 1; i <= 20; i++){
+      //   if(i % 3 === 0 && i % 5 === 0 ){
+      //     console.log("FizzBuzz");
+      //   } else if (i % 3 === 0){
+      //     console.log("Fizz");
+      //   } else if (i % 5 === 0){
+      //     console.log("Buzz");
+      //   } else {
+      //     console.log(i);
+      //   }
+      // }
+
+      // function findIndex(array, word) {
+      //   for (let i = 0; i < array.length; i++) {
+      //     if (array[i] === word) {
+      //       return i;
+      //     }
+      //   }
+      //   return -1;
+      // }
+
+      // function unique(array) {
+      //   let result = [];
+      //   for (let i = 0; i < array.length; i++) {
+      //     let item = array[i];
+      //     if (findIndex(result, item) === -1) {
+      //       result.push(item)
+      //     }
+      //   }
+      //   return result;
+      // }
+
+      // console.log(unique(['green', 'red', 'blue', 'red']));
+      // console.log(unique(['red', 'green', 'green', 'red']));
+
+      // const add = function(){
+      //   console.log(2 + 3);
+      // }
+
+      // // add();
+      // // add();
+
+      // const runTwice = function(fun){
+      //   fun();
+      //   fun();
+      // }
+
+      // runTwice(function(){console.log('12b')})
+      // runTwice(add);
+
+      // const button = document.querySelector("button");
+
+      // button.addEventListener("click", e => {
+      //   button.textContent = 'Loading...'
+      //   setTimeout(() => {
+      //     button.textContent = 'Finished!';
+      //   }, 1000);
+      // })
+
+      // let id;
+
+      // const button = document.querySelector("button");
+      // button.addEventListener("click", e => {
+      //   const messageElement = document.querySelector(".js-message");
+      //   messageElement.innerHTML = 'Added';
+      //   clearTimeout(id);
+
+      //   id = setTimeout(() => {
+      //     messageElement.innerHTML = '';
+      //   }, 2000);
+      // });
+
+      // const add = document.querySelector(".add");
+      // const remove = document.querySelector(".remove");
+      // let messages = JSON.parse(localStorage.getItem('message')) || 0;
+
+      // add.addEventListener("click", e => {
+      //   messages++
+      //   localStorage.setItem('message', JSON.stringify(messages));
+      // });
+
+      // remove.addEventListener("click", e => {
+      //   if(messages > 0){
+      //     messages--  
+      //   }
+      //   localStorage.setItem('message', JSON.stringify(messages));
+      // });
+
+      // setInterval(function() {
+      //   if (document.title === 'rough') {
+      //     document.title = `${messages === 0 ? 'rough' : `(${messages}) New messages`}`;
+      //   } else {
+      //     document.title = 'rough';
+      //   }
+      // }, 1000);
+
+      // const multiply = (num1, num2) => {
+      //   return num1 * num2;
+      // };
+
+      // console.log(multiply(2,3));
+      // console.log(multiply(7,10));
+
+      // const multiply = (num1, num2) => num1 * num2;
+
+      // console.log(multiply(2,3));
+      // console.log(multiply(7,10));
+
+      // const countPositive = (nums) => {
+      //   let count = 0;
+      //   nums.forEach(num => {
+      //     if(num > 0){
+      //       count++
+      //     }
+      //   });
+      //   return count;
+      // }
+
+      // console.log(countPositive([1, -3, 5]));
+      // console.log(countPositive([-2, 3, -5, 7, 10]));
+
+      // const addNum = (array, num) => {
+      //  return array.map(value => value + num);
+      // }
+
+      // console.log(addNum([1, 2, 3], 2));
+      // console.log(addNum([-2,-1, 0,99], 2));
+
+      // const removeEgg = foods => {
+      //   return foods.filter(food => food !== 'egg');
+      // }
+
+      // console.log(removeEgg(['egg', 'apple', 'egg', 'egg', 'ham']));
+
+      // const removeEgg = foods => {
+      //   let count = 0;
+      //   return foods.filter(food => {
+      //     if(food === 'egg' && count < 2){
+      //       count++
+      //       return false;
+      //     }
+      //     return true
+      //   });
+      // }
+
+      // console.log(removeEgg(['egg', 'apple', 'egg', 'egg', 'ham']));
+
+      
 
     </script>
   </body>

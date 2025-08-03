@@ -1,0 +1,111 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+.sidebar {
+  width: 200px;
+  background-color: #f3f3f3;
+  border-right: 1px solid #ccc;
+  padding: 20px;
+}
+
+.sidebar h2 {
+  margin-top: 0;
+}
+
+#userList {
+  list-style: none;
+  padding: 0;
+}
+
+#userList li {
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+#userList li.active {
+  background-color: #dcdcdc;
+  font-weight: bold;
+}
+
+.chat-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-bottom: 1px solid #ccc;
+}
+
+.chat-box {
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.message {
+  margin-bottom: 10px;
+}
+
+.message.sent {
+  text-align: right;
+}
+
+.message .text {
+  display: inline-block;
+  padding: 10px;
+  border-radius: 10px;
+  max-width: 60%;
+  text-align: left;
+}
+
+.message.sent .text {
+  background-color: rgb(162, 53, 250);
+  color: white;
+}
+
+.message.received .text {
+  background-color: #f1f0f0;
+}
+
+.status {
+  font-size: 0.8em;
+  color: #999;
+}
+
+.input-area {
+  padding: 10px;
+  display: flex;
+  border-top: 1px solid #ccc;
+}
+
+#messageInput {
+  flex: 1;
+  padding: 10px;
+  font-size: 1em;
+}
+
+#sendBtn {
+  padding: 10px 15px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.addUser {
+  display: block;
+}

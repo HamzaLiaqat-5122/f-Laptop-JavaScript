@@ -54,7 +54,8 @@
       margin: 60px 0px 16px;
     }
 
-    .reset {
+    .reset,
+    .auto-play {
       background-color: white;
       border: none;
       font-size: 15px;
@@ -69,9 +70,12 @@
   <h1>Rock Paper Scissors</h1>
 
   <div class="buttons">
-    <button class="move-button" data-move="rock"><img src="images/rps/rock-emoji.png" class="move-img" alt="Rock"></button>
-    <button class="move-button" data-move="paper"><img src="images/rps/paper-emoji.png" class="move-img" alt="Paper"></button>
-    <button class="move-button" data-move="scissors"><img src="images/rps/scissors-emoji.png" class="move-img" alt="Scissors"></button>
+    <button class="move-button" data-move="rock"><img src="images/rps/rock-emoji.png" class="move-img"
+        alt="Rock"></button>
+    <button class="move-button" data-move="paper"><img src="images/rps/paper-emoji.png" class="move-img"
+        alt="Paper"></button>
+    <button class="move-button" data-move="scissors"><img src="images/rps/scissors-emoji.png" class="move-img"
+        alt="Scissors"></button>
   </div>
 
   <p class="result-para"></p>
@@ -84,6 +88,8 @@
   </div>
 
   <button class="reset">Reset Score</button>
+  <button class="auto-play">Auto Play</button>
+
 
   <script>
     const buttons = document.querySelectorAll(".move-button");
@@ -93,6 +99,7 @@
     const resultPara = document.querySelector('.result-para');
     const movesPara = document.querySelector(".moves-para");
     const resetButton = document.querySelector(".reset");
+    const autoPlay = document.querySelector(".auto-play");
 
     const choices = ["rock", "paper", "scissors"];
     const compArray = {
@@ -134,9 +141,9 @@
 
         resultPara.innerHTML = result;
         movesPara.innerHTML = `
-          You <img src="${compArray[humanMove]}" class="move-img" alt="${humanMove}"> 
-          <img src="${compArray[computerMove]}" class="move-img" alt="${computerMove}"> Computer
-        `;
+      You <img src="${compArray[humanMove]}" class="move-img" alt="${humanMove}"> 
+      <img src="${compArray[computerMove]}" class="move-img" alt="${computerMove}"> Computer
+    `;
 
         updateScoreUI();
         localStorage.setItem("score", JSON.stringify(outcomesCount));
@@ -148,6 +155,51 @@
       updateScoreUI();
       localStorage.setItem("score", JSON.stringify(outcomesCount));
     });
+
+    // Autoplay functionality
+    let intervalId = null;
+
+    autoPlay.addEventListener("click", () => {
+      if (intervalId) {
+        clearInterval(intervalId);
+        intervalId = null;
+        autoPlay.textContent = "Auto Play";
+      } else {
+        intervalId = setInterval(() => {
+          const humanMove = choices[Math.floor(Math.random() * choices.length)];
+          const computerMove = choices[Math.floor(Math.random() * choices.length)];
+
+          let result;
+          if (
+            (humanMove === "rock" && computerMove === "scissors") ||
+            (humanMove === "paper" && computerMove === "rock") ||
+            (humanMove === "scissors" && computerMove === "paper")
+          ) {
+            result = "You win.";
+            outcomesCount.wins++;
+          } else if (humanMove === computerMove) {
+            result = "Tie.";
+            outcomesCount.ties++;
+          } else {
+            result = "You lose.";
+            outcomesCount.losses++;
+          }
+
+          resultPara.innerHTML = result;
+          movesPara.innerHTML = `
+        You <img src="${compArray[humanMove]}" class="move-img" alt="${humanMove}"> 
+        <img src="${compArray[computerMove]}" class="move-img" alt="${computerMove}"> Computer
+      `;
+
+          updateScoreUI();
+          localStorage.setItem("score", JSON.stringify(outcomesCount));
+        }, 1000);
+
+        autoPlay.textContent = "Stop Auto Play";
+      }
+    });
+
+
   </script>
 
 </body>
