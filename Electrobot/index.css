@@ -1849,7 +1849,7 @@ table tr td {
     color: #6B7280;
     padding: 2vw 1vw;
     border-top: 2px solid white;
-    display: none;
+    /* display: none; */
 }
 
 .store-slider-number span.active {

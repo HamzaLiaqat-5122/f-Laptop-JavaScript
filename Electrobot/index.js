@@ -997,23 +997,127 @@ document.addEventListener("click", (e) => {
 // Store: Right part By default products display
 
 const storeRightProducts = document.querySelector('.store .products');
+const paginationDiv = document.querySelector('.store-slider-number');
+const previous = document.querySelector('.store-last-sliderprevious');
+const next = document.querySelector('.store-last-slidernext');
+const productsPerPage = 9;
+
+let spansLengthInPagination = Math.ceil(data.length / productsPerPage);
+
+// 1. Create pagination spans
+for (let i = 1; i <= spansLengthInPagination; i++) {
+  const paginationSpan = document.createElement("span");
+  paginationSpan.textContent = i;
+  paginationSpan.style.display = 'block';
+  paginationDiv.append(paginationSpan);
+}
+
 const storePaginationSpans = document.querySelectorAll(".store-slider-number span");
 
-showTrendingProducts(data, storeRightProducts)
+if (storePaginationSpans.length > 0) {
+  storePaginationSpans[0].classList.add('active');
+}
 
-storePaginationSpans.forEach(span => {
-  if(storeRightProducts.innerHTML.trim() !== ''){
-    span.style.display = 'block';
-    productDetailsFunction();
-   } else {
-     span.style.display = 'none'; // static logic will do that later
-  } 
-})
+if (storePaginationSpans.length > 6) {
+  storePaginationSpans[5].textContent = '...';
+  storePaginationSpans[5].classList.add('disabled');
+}
 
+function updatePaginationEllipsis(clickedIndex) {
+  if (storePaginationSpans.length <= 6) return; 
 
+  if ([4, 5, 7].includes(clickedIndex)) {
+    if (storePaginationSpans[1]) {
+      storePaginationSpans[1].textContent = '...';
+      storePaginationSpans[1].classList.add('disabled');
+    }
+    if (storePaginationSpans[5]) {
+      storePaginationSpans[5].textContent = '6';
+      storePaginationSpans[5].classList.remove('disabled');
+    }
+  } else if ([1, 2, 3].includes(clickedIndex)) {
+    if (storePaginationSpans[1]) {
+      storePaginationSpans[1].textContent = '2';
+      storePaginationSpans[1].classList.remove('disabled');
+    }
+    if (storePaginationSpans[5]) {
+      storePaginationSpans[5].textContent = '...';
+      storePaginationSpans[5].classList.add('disabled');
+    }
+  }
+}
+
+storePaginationSpans.forEach((span) => {
+  span.addEventListener('click', () => {
+    const clickedText = span.textContent;
+
+    if (clickedText === '...') return;
+
+    storePaginationSpans.forEach(s => s.classList.remove('active'));
+    span.classList.add('active');
+
+    const clickedIndex = parseInt(clickedText);
+    
+    if (!isNaN(clickedIndex)) {
+      updatePaginationEllipsis(clickedIndex); 
+      showProductsByPage(clickedIndex);
+    }
+  });
+});
+
+function showProductsByPage(pageNumber) {
+  const startIndex = (pageNumber - 1) * productsPerPage;
+  const endIndex = startIndex + productsPerPage;
+  const currentProducts = data.slice(startIndex, endIndex);
+
+  storeRightProducts.innerHTML = '';
+  showTrendingProducts(currentProducts, storeRightProducts);
+}
+
+previous.addEventListener("click", () => {
+  const activeSpan = document.querySelector(".store-slider-number span.active");
+  const prevSpan = activeSpan?.previousElementSibling;
+
+  if (prevSpan && prevSpan.textContent !== '...') {
+    const prevPage = parseInt(prevSpan.textContent);
+    if (!isNaN(prevPage)) {
+      activeSpan.classList.remove("active");
+      prevSpan.classList.add("active");
+
+      showProductsByPage(prevPage);
+      updatePaginationEllipsis(prevPage);
+    }
+  }
+});
+
+next.addEventListener("click", () => {
+  const activeSpan = document.querySelector(".store-slider-number span.active");
+  const nextSpan = activeSpan?.nextElementSibling;
+
+  if (nextSpan && nextSpan.textContent !== '...') {
+    const nextPage = parseInt(nextSpan.textContent);
+    if (!isNaN(nextPage)) {
+      activeSpan.classList.remove("active");
+      nextSpan.classList.add("active");
+
+      showProductsByPage(nextPage);
+      updatePaginationEllipsis(nextPage);
+    }
+  }
+});
+
+showProductsByPage(1);
+productDetailsFunction();
 
 
 // Store: Right part By default products display end
+
+
+// Store: Right part search product Logic
+
+
+
+// Store: Right part search product Logic Ends
 
 // components first NavLink Logic
 const componentsGrid = document.querySelector(".components");
@@ -1180,6 +1284,7 @@ attachRemoveWishlistListeners();
 window.addEventListener('DOMContentLoaded', () => {
   updateCartIconColors();
   renderCartItems(data);
+
 });
 
 
