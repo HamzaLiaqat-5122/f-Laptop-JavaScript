@@ -1144,6 +1144,43 @@ storeSearchFilter.addEventListener("input", () => {
 
 // Store: Right part search product Logic Ends
 
+
+// Store: Sensors Category onclick logic + filter cancel button
+
+const sensorTypes = document.querySelectorAll('.sensors-types h4');
+
+sensorTypes.forEach(sensor => {
+  sensor.addEventListener("click", e => {
+    const sensorName = e.target.textContent.toLowerCase();
+    filteredData = data.filter(product => {
+      return product.subcategory === sensorName;
+    })
+    updatePagination();
+    showProductsByPage(1);
+    productDetailsFunction();
+
+  }) // sensor
+}) // sensorTypes
+
+// filter cancel button:
+
+const storeCancelFilter = document.querySelector('.store-filtercancel-btn');
+
+storeCancelFilter.addEventListener('click', () => {
+
+  storeSearchFilter.value = '';
+
+  filteredData = [...data];
+
+  updatePagination();
+  showProductsByPage(1);
+  productDetailsFunction();
+});
+
+
+// Store: Sensors Category onclick logic + filter cancel button Ends 
+
+
 // components first NavLink Logic
 const componentsGrid = document.querySelector(".components");
 
