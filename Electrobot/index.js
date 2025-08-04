@@ -1001,30 +1001,58 @@ const paginationDiv = document.querySelector('.store-slider-number');
 const previous = document.querySelector('.store-last-sliderprevious');
 const next = document.querySelector('.store-last-slidernext');
 const productsPerPage = 9;
+let filteredData = [...data];
+
 
 let spansLengthInPagination = Math.ceil(data.length / productsPerPage);
 
 // 1. Create pagination spans
-for (let i = 1; i <= spansLengthInPagination; i++) {
-  const paginationSpan = document.createElement("span");
-  paginationSpan.textContent = i;
-  paginationSpan.style.display = 'block';
-  paginationDiv.append(paginationSpan);
+function updatePagination() {
+  paginationDiv.innerHTML = ''; // clear existing spans
+
+  spansLengthInPagination = Math.ceil(filteredData.length / productsPerPage);
+
+  for (let i = 1; i <= spansLengthInPagination; i++) {
+    const paginationSpan = document.createElement("span");
+    paginationSpan.textContent = i;
+    paginationSpan.style.display = 'block';
+    paginationDiv.append(paginationSpan);
+  }
+
+  const storePaginationSpansUpdated = document.querySelectorAll(".store-slider-number span");
+
+  if (storePaginationSpansUpdated.length > 0) {
+    storePaginationSpansUpdated[0].classList.add('active');
+  }
+
+  if (storePaginationSpansUpdated.length > 6) {
+    storePaginationSpansUpdated[5].textContent = '...';
+    storePaginationSpansUpdated[5].classList.add('disabled');
+  }
+
+  storePaginationSpansUpdated.forEach((span) => {
+    span.addEventListener('click', () => {
+      const clickedText = span.textContent;
+
+      if (clickedText === '...') return;
+
+      storePaginationSpansUpdated.forEach(s => s.classList.remove('active'));
+      span.classList.add('active');
+
+      const clickedIndex = parseInt(clickedText);
+
+      if (!isNaN(clickedIndex)) {
+        updatePaginationEllipsis(clickedIndex);
+        showProductsByPage(clickedIndex);
+      }
+    });
+  });
 }
 
-const storePaginationSpans = document.querySelectorAll(".store-slider-number span");
-
-if (storePaginationSpans.length > 0) {
-  storePaginationSpans[0].classList.add('active');
-}
-
-if (storePaginationSpans.length > 6) {
-  storePaginationSpans[5].textContent = '...';
-  storePaginationSpans[5].classList.add('disabled');
-}
 
 function updatePaginationEllipsis(clickedIndex) {
-  if (storePaginationSpans.length <= 6) return; 
+  const storePaginationSpans = document.querySelectorAll('.store-slider-number span')
+  if (storePaginationSpans.length <= 6) return;
 
   if ([4, 5, 7].includes(clickedIndex)) {
     if (storePaginationSpans[1]) {
@@ -1047,32 +1075,15 @@ function updatePaginationEllipsis(clickedIndex) {
   }
 }
 
-storePaginationSpans.forEach((span) => {
-  span.addEventListener('click', () => {
-    const clickedText = span.textContent;
-
-    if (clickedText === '...') return;
-
-    storePaginationSpans.forEach(s => s.classList.remove('active'));
-    span.classList.add('active');
-
-    const clickedIndex = parseInt(clickedText);
-    
-    if (!isNaN(clickedIndex)) {
-      updatePaginationEllipsis(clickedIndex); 
-      showProductsByPage(clickedIndex);
-    }
-  });
-});
-
 function showProductsByPage(pageNumber) {
   const startIndex = (pageNumber - 1) * productsPerPage;
   const endIndex = startIndex + productsPerPage;
-  const currentProducts = data.slice(startIndex, endIndex);
+  const currentProducts = filteredData.slice(startIndex, endIndex);
 
   storeRightProducts.innerHTML = '';
   showTrendingProducts(currentProducts, storeRightProducts);
 }
+
 
 previous.addEventListener("click", () => {
   const activeSpan = document.querySelector(".store-slider-number span.active");
@@ -1107,6 +1118,7 @@ next.addEventListener("click", () => {
 });
 
 showProductsByPage(1);
+updatePagination();
 productDetailsFunction();
 
 
@@ -1115,6 +1127,19 @@ productDetailsFunction();
 
 // Store: Right part search product Logic
 
+const storeSearchFilter = document.querySelector('#store_filter')
+
+storeSearchFilter.addEventListener("input", () => {
+  let typedText = storeSearchFilter.value.trim().toLowerCase();
+
+  filteredData = data.filter(product =>
+    product.title.toLowerCase().includes(typedText)
+  );
+
+  updatePagination();
+  showProductsByPage(1);
+  productDetailsFunction();
+});
 
 
 // Store: Right part search product Logic Ends
