@@ -29,11 +29,9 @@ function showTrendingProducts(products, place) {
   if (isAltLayout) {
     place.style.display = 'flex';
     place.style.flexDirection = 'column';
-    place.style.gap = '1.4vw';
   } else {
     place.style.display = 'grid';
     place.style.gridTemplateColumns = 'repeat(3, 1fr)';
-    place.style.gap = '1.2vw';
   }
 
   place.innerHTML = '';
