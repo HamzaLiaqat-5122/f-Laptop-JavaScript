@@ -26,12 +26,15 @@ function displayStarRating(rating) {
 let isAltLayout = false;
 
 function showTrendingProducts(products, place) {
+  const storeSection = document.querySelector('.store');
   if (isAltLayout) {
     place.style.display = 'flex';
     place.style.flexDirection = 'column';
   } else {
     place.style.display = 'grid';
-    place.style.gridTemplateColumns = 'repeat(3, 1fr)';
+    if (storeSection.style.display === 'block') {
+      place.style.gridTemplateColumns = 'repeat(3, 1fr)';
+    }
   }
 
   place.innerHTML = '';
@@ -1046,7 +1049,7 @@ let spansLengthInPagination = Math.ceil(data.length / productsPerPage);
 
 // 1. Create pagination spans
 function updatePagination() {
-  paginationDiv.innerHTML = ''; 
+  paginationDiv.innerHTML = '';
 
   spansLengthInPagination = Math.ceil(filteredData.length / productsPerPage);
 
@@ -1263,6 +1266,7 @@ const storeSortWindowSvg = document.querySelector('.store-sort-window');
 storeSortWindowSvg.addEventListener('click', () => {
   isAltLayout = !isAltLayout;
   showProductsByPage(1);
+  productDetailsFunction();
 });
 
 
