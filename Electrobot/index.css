@@ -1692,6 +1692,7 @@ table tr td {
     border-radius: 0.6vw;
     width: 100%;
     padding: 0.6vw 1vw 1vw;
+    margin-bottom: 1vw;
 }
 
 .store-menusvg-components-data {
@@ -1700,13 +1701,16 @@ table tr td {
 
 .store-msc-data-leftimg {
     box-shadow: 0 2px 3px rgba(211, 211, 211, 0.5);
-    object-fit: cover;
+    object-fit: contain;
+    width: 22vw;
     height: 17vw;
 }
 
 .store-msc-data-leftimg img {
+    object-fit: contain;
     border-radius: .6vw;
     height: 100%;
+    width: 100%;
 }
 
 .store-msc-data-right {
@@ -1749,7 +1753,6 @@ table tr td {
 
 .store-msc-data-right1Rating svg {
     color: #facc15;
-
     margin-right: .3vw;
     margin-top: .1vw;
 }

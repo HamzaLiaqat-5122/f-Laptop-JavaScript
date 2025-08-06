@@ -23,47 +23,102 @@ function displayStarRating(rating) {
   return sg
 }
 
+let isAltLayout = false;
+
 function showTrendingProducts(products, place) {
+  if (isAltLayout) {
+    place.style.display = 'flex';
+    place.style.flexDirection = 'column';
+    place.style.gap = '1.4vw';
+  } else {
+    place.style.display = 'grid';
+    place.style.gridTemplateColumns = 'repeat(3, 1fr)';
+    place.style.gap = '1.2vw';
+  }
+
   place.innerHTML = '';
 
   products.forEach(product => {
-    place.innerHTML += `
-      <div class="items" id="${product.id}">
-        <div class="img-box">
-          <img src="${product.url}" alt="">
+    if (!isAltLayout) {
+      // Default display grid card
+      place.innerHTML += `
+        <div class="items" id="${product.id}">
+          <div class="img-box">
+            <img src="${product.url}" alt="">
+          </div>
+          <p class='products-title'>${product.title.length > 16 ? `${product.title.slice(0, 17)}...` : product.title}</p>
+          <div class="products-rating">
+            ${displayStarRating(Math.floor(product.rating))}
+          </div>
+          <span>${product.reviews} reviews</span>
+          <div class="products-price">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+              stroke="currentColor" aria-hidden="true" class="h-6 w-6 text-cyan-400 cursor-pointer">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z">
+              </path>
+            </svg>
+            <span>$${product.price}</span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+              stroke="currentColor" aria-hidden="true" class="h-6 w-6 text-cyan-400 cursor-pointer">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z">
+              </path>
+            </svg>
+          </div>
         </div>
-        <p class='products-title'>${product.title.length > 16 ? `${product.title.slice(0, 17)}...` : product.title}</p>
-        <div class="products-rating">
-          ${displayStarRating(Math.floor(product.rating))}
+      `;
+    } else {
+      // other card one per row
+      place.innerHTML += `
+        <div class="store-menusvg-components">
+          <div class="store-menusvg-components-data">
+            <div class="store-msc-data-leftimg">
+              <img src="${product.url}" alt="not found" />
+            </div>
+            <div class="store-msc-data-right">
+              <div class="store-msc-data-right1">
+                <p>${product.category}</p>
+                <div class="store-msc-data-right1Rating">
+                  <svg width="20" xmlns="http://www.w3.org/2000/svg"
+                      class="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor" >
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                  </svg>
+                  <span>${Math.floor(product.rating)}.00</span>
+                  <span>(${product.reviews} reviews)</span>
+                </div>
+                <div class="store-msc-data-right1heart">
+                  <svg width="24" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                    aria-hidden="true" class="h-6 w-6 text-cyan-400 cursor-pointer" data-heart="${product.id}">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/>
+                  </svg>
+                </div>
+                <span class="store-msc-right-transistor">${product.subcategory}</span>
+              </div>
+              <div class="store-msc-data-right2">
+                <h1 data-products="${product.id}">${product.title}</h1>
+              </div>
+              <div class="store-msc-data-right3">
+                <p>${product.description.slice(0, 210)}...</p>
+              </div>
+              <div class="store-msc-data-right4">
+                <span>$${product.price}</span>
+              </div>
+            </div>
+          </div>
         </div>
-        <span>${product.reviews} reviews</span>
-        <div class="products-price">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-            stroke="currentColor" aria-hidden="true" class="h-6 w-6 text-cyan-400 cursor-pointer">
-            <path stroke-linecap="round" stroke-linejoin="round"
-              d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z">
-            </path>
-          </svg>
-          <span>$${product.price}</span>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-            stroke="currentColor" aria-hidden="true" class="h-6 w-6 text-cyan-400 cursor-pointer">
-            <path stroke-linecap="round" stroke-linejoin="round"
-              d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z">
-            </path>
-          </svg>
-        </div>
-      </div>
-    `;
+      `;
+    }
   });
 
-  // Add to wishlist Part
-
   const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
-  document.querySelectorAll('.products .items').forEach(item => {
-    const id = item.id;
+  document.querySelectorAll('.products .items, .store-menusvg-components').forEach(item => {
+    const id = item.id || item.querySelector('[data-heart]')?.getAttribute('data-heart');
     if (wishlist.includes(id)) {
-      const heartIcone = item.querySelector('.products-price svg');
-      heartIcone.setAttribute('fill', '#22D3EE');
+      const heartIcon = item.querySelector('[data-heart]');
+      if (heartIcon) heartIcon.setAttribute('fill', '#22D3EE');
     }
   });
 
@@ -72,6 +127,7 @@ function showTrendingProducts(products, place) {
   renderCartItems(data);
   updateCartTotalAmount();
 }
+
 
 showTrendingProducts(trendingProducts, HomePageTrendingProductsGrid);
 
@@ -250,22 +306,6 @@ function attachRemoveWishlistListeners() {
     });
   });
 }
-
-
-
-
-
-
-// productItems.forEach(item => {
-//   let itemAttrFill = item.children[4].children[0].getAttribute('fill') || ''
-//   // const productId = e.target.parentElement.parentElement.id;
-//   // if (productId === item.id) {
-//   //   item.children[4].children[0].setAttribute('fill', '#22D3EE');
-//   // }
-
-// })
-
-
 
 
 // Add to Wishlist logic End
@@ -1008,7 +1048,7 @@ let spansLengthInPagination = Math.ceil(data.length / productsPerPage);
 
 // 1. Create pagination spans
 function updatePagination() {
-  paginationDiv.innerHTML = ''; // clear existing spans
+  paginationDiv.innerHTML = ''; 
 
   spansLengthInPagination = Math.ceil(filteredData.length / productsPerPage);
 
@@ -1216,6 +1256,19 @@ storeSortOptions.forEach((option, index) => {
 
 // Store: sort button modal inside filters on click logic end
 
+
+// Store: products card display change svg logic
+
+
+const storeSortWindowSvg = document.querySelector('.store-sort-window');
+
+storeSortWindowSvg.addEventListener('click', () => {
+  isAltLayout = !isAltLayout;
+  showProductsByPage(1);
+});
+
+
+// Store: products card display change svg logic Ends
 
 // components first NavLink Logic
 const componentsGrid = document.querySelector(".components");
