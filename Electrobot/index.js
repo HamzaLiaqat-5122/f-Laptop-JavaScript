@@ -99,7 +99,7 @@ function showTrendingProducts(products, place) {
                 <span class="store-msc-right-transistor">${product.subcategory}</span>
               </div>
               <div class="store-msc-data-right2">
-                <h1 data-products="${product.id}">${product.title}</h1>
+                <h1 data-products="${product.id}" class='products-title'>${product.title}</h1>
               </div>
               <div class="store-msc-data-right3">
                 <p>${product.description.slice(0, 210)}...</p>
@@ -652,6 +652,7 @@ function productDetailsFunction() {
       sensorsSection.style.display = 'none';
       allSections.style.display = 'none';
       productDetailsSection.style.display = 'block';
+      storeSection.style.display = 'none';
       document.documentElement.scrollTop = 0;
 
       data.forEach(product => {
