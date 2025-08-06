@@ -1366,6 +1366,7 @@ table tr td {
 
 .store-sort-down {
     margin-right: 1.8vw;
+    cursor: pointer;
 }
 
 .store-sort-content {
@@ -1425,6 +1426,11 @@ table tr td {
     color: #111827;
     font-weight: 500;
     font-size: 1.1vw;
+    cursor: pointer;
+}
+
+.store-sort-window {
+    cursor: pointer;
 }
 
 .store-sort svg {
@@ -1466,6 +1472,7 @@ table tr td {
     border-bottom: 2px solid rgba(211, 211, 211, 0.5);
     padding-bottom: 0.6vw;
 }
+
 .store-category1 i {
     font-size: .95vw;
     color:rgb(143, 143, 143);
@@ -1495,6 +1502,7 @@ table tr td {
     border: 1px solid var(--secondry-color);
     border-radius: 30px;
     padding: 0.35vw 0.8vw;
+    cursor: pointer;
 }
 
 .store-filtercancel-btn svg {
@@ -1835,7 +1843,7 @@ table tr td {
     color: #6B7280;
     font-weight: 600;
     font-size: 1vw;
-
+    cursor: pointer;
 }
 
 .store-slider-number {
@@ -1849,6 +1857,7 @@ table tr td {
     color: #6B7280;
     padding: 2vw 1vw;
     border-top: 2px solid white;
+    cursor: pointer;
     /* display: none; */
 }
 

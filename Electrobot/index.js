@@ -1180,6 +1180,42 @@ storeCancelFilter.addEventListener('click', () => {
 
 // Store: Sensors Category onclick logic + filter cancel button Ends 
 
+// Store: sort button modal inside filters on click logic 
+
+
+const storeSortOptions = document.querySelectorAll('.store-sort-button-div h4, .store-sort-button-div p');
+
+storeSortOptions.forEach((option, index) => {
+  option.addEventListener('click', () => {
+    switch (index) {
+      case 0: // Most Popular
+        filteredData = data.filter(product => product.trending === true);
+        break;
+      case 1: // Featured
+        filteredData = data.filter(product => product.featured === true);
+        break;
+      case 2: // Best Rating
+        filteredData = data.filter(product => product.rating === '5');
+        break;
+      case 3: // Price: Low to High
+        filteredData = [...data].sort((a, b) => a.price - b.price);
+        break;
+      case 4: // Price: High to Low
+        filteredData = [...data].sort((a, b) => b.price - a.price);
+        break;
+    }
+
+    updatePagination();
+    showProductsByPage(1);
+    productDetailsFunction();
+
+    storeProductsSortModal.style.display = 'none';
+  });
+});
+
+
+// Store: sort button modal inside filters on click logic end
+
 
 // components first NavLink Logic
 const componentsGrid = document.querySelector(".components");
