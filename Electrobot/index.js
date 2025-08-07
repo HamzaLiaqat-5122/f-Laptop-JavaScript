@@ -868,6 +868,7 @@ function productDetailsFunction() {
           breadCrumbCategory.addEventListener('click', e => {
 
             sensorProducts.innerHTML = '';
+            isAltLayout = false;
 
             const breadCrumbCategories = data.filter(prod => e.target.textContent.slice(3) === prod.category);
 
@@ -894,6 +895,7 @@ function productDetailsFunction() {
           breadCrumbSubCategory.addEventListener('click', e => {
 
             sensorProducts.innerHTML = '';
+            isAltLayout = false;
 
             const breadCrumbSubCategories = data.filter(prod => e.target.textContent.slice(3) === prod.subcategory);
 
