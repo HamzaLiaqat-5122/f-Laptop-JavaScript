@@ -1561,6 +1561,28 @@ table tr td {
     font-size: 1vw;
     color: #4b5563;
 }
+/*  */
+
+.store-category-item {
+    padding-top: 1.3vw;
+    display: flex;
+    gap: .9vw;
+    align-items: center;
+}
+
+.store-category-item input {
+    width: 1.1vw;
+    height: 1.1vw;
+    /* scale: 2; */
+    outline: 1px solid lightgray;
+    outline-offset: -0.15vw;
+    border-radius: 0;
+}
+
+.store-category-item span {
+    font-size: 1vw;
+    color: #4b5563;
+}
 
 .store-category-items {
     padding: 0.35vw 0;
