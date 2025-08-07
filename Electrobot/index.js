@@ -1194,15 +1194,21 @@ const sensorTypes = document.querySelectorAll('.sensors-types h4');
 sensorTypes.forEach(sensor => {
   sensor.addEventListener("click", e => {
     const sensorName = e.target.textContent.toLowerCase();
+    
+    brandCheckboxes.forEach(cb => {
+      cb.checked = false;
+    });
+
     filteredData = data.filter(product => {
       return product.subcategory === sensorName;
-    })
+    });
+
     updatePagination();
     showProductsByPage(1);
     productDetailsFunction();
+  });
+});
 
-  }) // sensor
-}) // sensorTypes
 
 // filter cancel button:
 
@@ -1272,6 +1278,35 @@ storeSortWindowSvg.addEventListener('click', () => {
 
 
 // Store: products card display change svg logic Ends
+
+// Store: Brand CheckBoxes Logic start
+
+const brandCheckboxes = document.querySelectorAll('.store-brand-items input[type="checkbox"]');
+
+brandCheckboxes.forEach(checkbox => {
+  checkbox.addEventListener('change', () => {
+
+    const selectedBrands = Array.from(brandCheckboxes)
+      .filter(cb => cb.checked)
+      .map(cb => cb.nextElementSibling.textContent.toLowerCase());
+
+    if (selectedBrands.length === 0) {
+      filteredData = [...data];
+    } else {
+      filteredData = data.filter(product =>
+        selectedBrands.includes(product.brand.toLowerCase())
+      );
+    }
+
+    updatePagination();
+    showProductsByPage(1);
+    productDetailsFunction();
+  });
+});
+
+
+// Store: Brand CheckBoxes Logic start Ends
+
 
 // components first NavLink Logic
 const componentsGrid = document.querySelector(".components");
