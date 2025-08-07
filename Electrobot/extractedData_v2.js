@@ -346,7 +346,7 @@ export default [
     {
       "id": "ind-02",
       "title": "100uH Radial Leaded Power Inductors",
-      "brand": "Xcell",
+      "brand": "UXcell",
       "model": "UXcell0394",
       "url": "https://m.media-amazon.com/images/I/61D9yTlgIbL._SX466_.jpg",
       "rating": "5",
