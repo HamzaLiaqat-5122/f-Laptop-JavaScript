@@ -1274,11 +1274,33 @@ storeSortOptions.forEach((option, index) => {
 
 // Store: products card display change svg logic
 
+isAltLayout = false;
 
-const storeSortWindowSvg = document.querySelector('.store-sort-window');
+const defaultSvg = `
+<svg class='store-sort-window' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" 
+     aria-hidden="true" class="h-5 w-5">
+  <path fill-rule="evenodd" 
+        d="M4.25 2A2.25 2.25 0 002 4.25v2.5A2.25 2.25 0 004.25 9h2.5A2.25 2.25 0 009 6.75v-2.5A2.25 2.25 0 006.75 2h-2.5zm0 9A2.25 2.25 0 002 13.25v2.5A2.25 2.25 0 004.25 18h2.5A2.25 2.25 0 009 15.75v-2.5A2.25 2.25 0 006.75 11h-2.5zm9-9A2.25 2.25 0 0011 4.25v2.5A2.25 2.25 0 0013.25 9h2.5A2.25 2.25 0 0018 6.75v-2.5A2.25 2.25 0 0015.75 2h-2.5zm0 9A2.25 2.25 0 0011 13.25v2.5A2.25 2.25 0 0013.25 18h2.5A2.25 2.25 0 0018 15.75v-2.5A2.25 2.25 0 0015.75 11h-2.5z" 
+        clip-rule="evenodd">
+  </path>
+</svg>
+`;
 
-storeSortWindowSvg.addEventListener('click', () => {
+const altSvg = `
+<svg class='store-sort-window' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" 
+     aria-hidden="true" class="h-5 w-5">
+  <path fill-rule="evenodd" 
+        d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10zm0 5.25a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75a.75.75 0 01-.75-.75z" 
+        clip-rule="evenodd">
+  </path>
+</svg>
+`;
+
+const sortIcon = document.querySelector('#sortIconContainer');
+
+sortIcon.addEventListener('click', () => {
   isAltLayout = !isAltLayout;
+  sortIcon.innerHTML = isAltLayout ? altSvg : defaultSvg;
   showProductsByPage(1);
   productDetailsFunction();
 });
