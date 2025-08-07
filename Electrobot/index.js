@@ -1193,15 +1193,15 @@ const sensorTypes = document.querySelectorAll('.sensors-types h4');
 
 sensorTypes.forEach(sensor => {
   sensor.addEventListener("click", e => {
-    const sensorName = e.target.textContent.toLowerCase();
-    
-    brandCheckboxes.forEach(cb => {
-      cb.checked = false;
-    });
+    activeSensor = e.target.textContent.toLowerCase();
 
-    filteredData = data.filter(product => {
-      return product.subcategory === sensorName;
-    });
+    brandCheckboxes.forEach(cb => cb.checked = false);
+    categoryCheckboxes.forEach(cb => cb.checked = false);
+
+    selectedBrands = [];
+    selectedCategories = [];
+
+    filteredData = data.filter(product => product.subcategory === activeSensor);
 
     updatePagination();
     showProductsByPage(1);
@@ -1210,20 +1210,25 @@ sensorTypes.forEach(sensor => {
 });
 
 
+
 // filter cancel button:
 
 const storeCancelFilter = document.querySelector('.store-filtercancel-btn');
-
 storeCancelFilter.addEventListener('click', () => {
-
   storeSearchFilter.value = '';
+  activeSensor = null;
+  selectedBrands = [];
+  selectedCategories = [];
+
+  brandCheckboxes.forEach(cb => cb.checked = false);
+  categoryCheckboxes.forEach(cb => cb.checked = false);
 
   filteredData = [...data];
-
   updatePagination();
   showProductsByPage(1);
   productDetailsFunction();
 });
+
 
 
 // Store: Sensors Category onclick logic + filter cancel button Ends 
@@ -1286,27 +1291,60 @@ const brandCheckboxes = document.querySelectorAll('.store-brand-items input[type
 brandCheckboxes.forEach(checkbox => {
   checkbox.addEventListener('change', () => {
 
-    const selectedBrands = Array.from(brandCheckboxes)
+    activeSensor = null;
+
+    selectedBrands = Array.from(brandCheckboxes)
       .filter(cb => cb.checked)
       .map(cb => cb.nextElementSibling.textContent.toLowerCase());
 
-    if (selectedBrands.length === 0) {
-      filteredData = [...data];
-    } else {
-      filteredData = data.filter(product =>
-        selectedBrands.includes(product.brand.toLowerCase())
-      );
-    }
-
-    updatePagination();
-    showProductsByPage(1);
-    productDetailsFunction();
+    applyCombinedFilters();
   });
 });
 
 
-// Store: Brand CheckBoxes Logic start Ends
 
+// Store: Brand CheckBoxes Logic start 
+
+const categoryCheckboxes = document.querySelectorAll('.store-category-item input[type="checkbox"]');
+
+let activeSensor = null;
+let selectedBrands = [];
+let selectedCategories = [];
+
+categoryCheckboxes.forEach(checkbox => {
+  checkbox.addEventListener('change', () => {
+    activeSensor = null;
+
+    selectedCategories = Array.from(categoryCheckboxes)
+      .filter(cb => cb.checked)
+      .map(cb => cb.value.toLowerCase());
+
+    applyCombinedFilters();
+  });
+});
+
+
+
+function applyCombinedFilters() {
+
+  if (selectedBrands.length === 0 && selectedCategories.length === 0) {
+    filteredData = data;
+  } else {
+    filteredData = data.filter(product => {
+      const brandMatch = selectedBrands.includes(product.brand.toLowerCase());
+      const categoryMatch = selectedCategories.includes(product.category.toLowerCase());
+
+      return brandMatch || categoryMatch;
+    });
+  }
+
+  updatePagination();
+  showProductsByPage(1);
+  productDetailsFunction();
+}
+
+
+// Store: Brand CheckBoxes Logic Ends 
 
 // components first NavLink Logic
 const componentsGrid = document.querySelector(".components");
