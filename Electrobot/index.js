@@ -385,6 +385,8 @@ function renderCartItems(data) {
   const noItemBagMessage = document.querySelector('.noitembag');
   const itemsBagContainer = document.querySelector('.itemsbags')
   const checkoutSectionGoBtn = document.querySelector('.checkout-section-goBtn');
+  const formNoItemContainer = document.querySelector('.formnoitems');
+  const formRightSection = document.querySelector('.formright')
   const cartIcon = document.querySelector(".cart");
   let cartQuantity = document.querySelector('.itemslength');
 
@@ -397,6 +399,8 @@ function renderCartItems(data) {
     checkoutSectionGoBtn.disabled = true;
     checkoutSectionGoBtn.style.opacity = '.5';
     checkoutSectionGoBtn.style.cursor = 'not-allowed'
+    formNoItemContainer.style.display = 'flex';
+    formRightSection.style.display = 'none';
     cartIcon.style.fill = 'none'
     return;
   }
@@ -404,6 +408,8 @@ function renderCartItems(data) {
   checkoutSectionGoBtn.disabled = false;
   checkoutSectionGoBtn.style.opacity = '1';
   checkoutSectionGoBtn.style.cursor = 'pointer'
+  formNoItemContainer.style.display = 'none';
+  formRightSection.style.display = 'block';
   noItemBagMessage.style.display = 'none';
   cartIcon.style.fill = '#164E63'
 
@@ -1453,7 +1459,7 @@ function updatePriceRange(e) {
   maxPrice = slider2Val;
 
   range1.textContent = `$${minPrice.toFixed(1)}`;
-  range2.textContent = `$${maxPrice}`; 
+  range2.textContent = `$${maxPrice}`;
 
   applyPriceFilter();
 }
@@ -1466,7 +1472,7 @@ function applyPriceFilter() {
   selectedCategories = [];
   activeSensor = null;
 
-  filteredData = data.filter(product => 
+  filteredData = data.filter(product =>
     product.price >= minPrice && product.price <= maxPrice
   );
 
@@ -1623,7 +1629,8 @@ componentsGrid.addEventListener("click", e => {
 
 // Checkout form products payment logic starts
 
-
+const formNoItemContainer = document.querySelector('.formnoitems');
+const formRightSection = document.querySelector('.formright')
 
 // Checkout form products payment logic Ends
 
