@@ -949,6 +949,7 @@ checkoutSectionGoBtn.addEventListener("click", e => {
   productDetailsSection.style.display = 'none'
   storeSection.style.display = 'none';
   checkoutFormSection.style.display = 'block';
+  closeCartModal();
 })
 
 // CheckOut Form Hide / Unhide Logic End
@@ -1617,9 +1618,14 @@ componentsGrid.addEventListener("click", e => {
 });
 
 
-
-
 // components second NavLink Logic End
+
+
+// Checkout form products payment logic starts
+
+
+
+// Checkout form products payment logic Ends
 
 // Go To home button Logic 
 
