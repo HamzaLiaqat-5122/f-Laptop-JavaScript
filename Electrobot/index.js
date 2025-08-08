@@ -1195,6 +1195,7 @@ const sensorTypes = document.querySelectorAll('.sensors-types h4');
 
 sensorTypes.forEach(sensor => {
   sensor.addEventListener("click", e => {
+    resetRatingStars();
     activeSensor = e.target.textContent.toLowerCase();
 
     brandCheckboxes.forEach(cb => cb.checked = false);
@@ -1217,6 +1218,7 @@ sensorTypes.forEach(sensor => {
 
 const storeCancelFilter = document.querySelector('.store-filtercancel-btn');
 storeCancelFilter.addEventListener('click', () => {
+  resetRatingStars();
   storeSearchFilter.value = '';
   activeSensor = null;
   selectedBrands = [];
@@ -1314,7 +1316,7 @@ const brandCheckboxes = document.querySelectorAll('.store-brand-items input[type
 
 brandCheckboxes.forEach(checkbox => {
   checkbox.addEventListener('change', () => {
-
+    resetRatingStars();
     activeSensor = null;
 
     selectedBrands = Array.from(brandCheckboxes)
@@ -1337,6 +1339,7 @@ let selectedCategories = [];
 
 categoryCheckboxes.forEach(checkbox => {
   checkbox.addEventListener('change', () => {
+    resetRatingStars();
     activeSensor = null;
 
     selectedCategories = Array.from(categoryCheckboxes)
@@ -1367,8 +1370,58 @@ function applyCombinedFilters() {
   productDetailsFunction();
 }
 
-
 // Store: Brand CheckBoxes Logic Ends 
+
+// Store: Show Products By Rating Logic
+
+const ratingStars = document.querySelectorAll('.storestaricon');
+
+function resetRatingStars() {
+  ratingStars.forEach(s => {
+    const icon = s.querySelector('i');
+    if (!icon) return;
+    icon.classList.remove('fa-solid');
+    icon.classList.add('fa-regular');
+    icon.style.color = '';
+  });
+}
+
+ratingStars.forEach((star, index) => {
+  star.addEventListener('click', () => {
+
+    ratingStars.forEach((s, i) => {
+      const icon = s.querySelector('i');
+      if (!icon) return;
+
+      if (i <= index) {
+        icon.classList.remove('fa-regular');
+        icon.classList.add('fa-solid');
+        icon.style.color = '#FACC15';
+      } else {
+        icon.classList.remove('fa-solid');
+        icon.classList.add('fa-regular');
+        icon.style.color = '';
+      }
+    });
+
+    brandCheckboxes.forEach(cb => cb.checked = false);
+    categoryCheckboxes.forEach(cb => cb.checked = false);
+    selectedBrands = [];
+    selectedCategories = [];
+    activeSensor = null;
+
+    const selectedRating = index + 1;
+    filteredData = data.filter(product => Number(product.rating) <= selectedRating);
+
+    updatePagination();
+    showProductsByPage(1);
+    productDetailsFunction();
+  });
+});
+
+
+
+// Store: Show Products By Rating Logic Ends
 
 // components first NavLink Logic
 const componentsGrid = document.querySelector(".components");
