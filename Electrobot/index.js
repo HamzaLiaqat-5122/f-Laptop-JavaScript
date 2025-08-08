@@ -1420,8 +1420,67 @@ ratingStars.forEach((star, index) => {
 });
 
 
-
 // Store: Show Products By Rating Logic Ends
+
+// Store: Price Range Slider Logic Starts
+
+// Price Range Slider Elements
+const slider1 = document.getElementById('slider-01');
+const slider2 = document.getElementById('slider-02');
+const range1 = document.getElementById('range1');
+const range2 = document.getElementById('range2');
+
+let minPrice = parseInt(slider1.value);
+let maxPrice = parseInt(slider2.value);
+
+
+function updatePriceRange(e) {
+  let slider1Val = parseInt(slider1.value);
+  let slider2Val = parseInt(slider2.value);
+
+  if (slider1Val >= slider2Val) {
+    slider1Val = slider2Val;
+    slider1.value = slider1Val;
+  }
+
+  if (slider2Val <= slider1Val) {
+    slider2Val = slider1Val;
+    slider2.value = slider2Val;
+  }
+
+  minPrice = slider1Val;
+  maxPrice = slider2Val;
+
+  range1.textContent = `$${minPrice.toFixed(1)}`;
+  range2.textContent = `$${maxPrice}`; 
+
+  applyPriceFilter();
+}
+
+function applyPriceFilter() {
+
+  brandCheckboxes.forEach(cb => cb.checked = false);
+  categoryCheckboxes.forEach(cb => cb.checked = false);
+  selectedBrands = [];
+  selectedCategories = [];
+  activeSensor = null;
+
+  filteredData = data.filter(product => 
+    product.price >= minPrice && product.price <= maxPrice
+  );
+
+  updatePagination();
+  showProductsByPage(1);
+  productDetailsFunction();
+}
+
+slider1.addEventListener('input', updatePriceRange);
+slider2.addEventListener('input', updatePriceRange);
+slider1.addEventListener('input', resetRatingStars);
+slider2.addEventListener('input', resetRatingStars);
+
+
+// Store: Price Range Slider Logic Ends
 
 // components first NavLink Logic
 const componentsGrid = document.querySelector(".components");
