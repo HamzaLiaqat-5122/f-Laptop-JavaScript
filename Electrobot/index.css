@@ -2761,8 +2761,8 @@ input[type="range"]:active::-webkit-slider-thumb {
     margin: auto;
     padding: 10px 0;
     border-radius: .23vw;
-    font-weight: 500;
-    font-size: .8vw;
+    font-weight: 300;
+    font-size: .75vw;
 }
 
 
@@ -2774,7 +2774,7 @@ input[type="range"]:active::-webkit-slider-thumb {
     border-radius: .3vw;
     position: absolute;
     top: -4px;
-    left: -2.5px;
+    left: -10.5px;
 }
 
 #range2 {
@@ -2784,7 +2784,7 @@ input[type="range"]:active::-webkit-slider-thumb {
     border-radius: .3vw;
     position: absolute;
     top: -4px;
-    right: -2.5px;
+    right: -7.5px;
 }
 
 #range1::before {
