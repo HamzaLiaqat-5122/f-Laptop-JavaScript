@@ -126,7 +126,7 @@ function showTrendingProducts(products, place) {
   AddToWishlist();
   updateCartIconColors();
   renderCartItems(data);
-  updateCartTotalAmount();
+  updateCartTotalAmount(data);
 }
 
 
@@ -372,6 +372,7 @@ const noItemBagMessage = document.querySelector('.noitembag');
 const itemsBagContainer = document.querySelector('.itemsbags')
 
 
+// Helper to get/set cart items with quantity
 function getCartItems() {
   return JSON.parse(localStorage.getItem('cartItems')) || [];
 }
@@ -380,43 +381,55 @@ function setCartItems(items) {
   localStorage.setItem('cartItems', JSON.stringify(items));
 }
 
-
+// Main render function
 function renderCartItems(data) {
   const noItemBagMessage = document.querySelector('.noitembag');
-  const itemsBagContainer = document.querySelector('.itemsbags')
+  const itemsBagContainer = document.querySelector('.itemsbags');
   const checkoutSectionGoBtn = document.querySelector('.checkout-section-goBtn');
   const formNoItemContainer = document.querySelector('.formnoitems');
-  const formRightSection = document.querySelector('.formright')
+  const formRightSection = document.querySelector('.formright');
   const cartIcon = document.querySelector(".cart");
-  let cartQuantity = document.querySelector('.itemslength');
+  const cartQuantity = document.querySelector('.itemslength');
+  const formItems = document.querySelector("#form_items");
 
   const cartItems = getCartItems();
-  itemsBagContainer.innerHTML = '';
 
-  cartQuantity.textContent = cartItems.length;
+  // Clear containers before render
+  itemsBagContainer.innerHTML = '';
+  formItems.innerHTML = '';
+
   if (cartItems.length === 0) {
     noItemBagMessage.style.display = 'flex';
     checkoutSectionGoBtn.disabled = true;
     checkoutSectionGoBtn.style.opacity = '.5';
-    checkoutSectionGoBtn.style.cursor = 'not-allowed'
+    checkoutSectionGoBtn.style.cursor = 'not-allowed';
     formNoItemContainer.style.display = 'flex';
     formRightSection.style.display = 'none';
-    cartIcon.style.fill = 'none'
+    cartIcon.style.fill = 'none';
+    cartQuantity.textContent = '0';
+    updateCartIconColors(); // To clear any coloring
+    updateCartTotalAmount(data);
     return;
   }
 
+  noItemBagMessage.style.display = 'none';
   checkoutSectionGoBtn.disabled = false;
   checkoutSectionGoBtn.style.opacity = '1';
-  checkoutSectionGoBtn.style.cursor = 'pointer'
+  checkoutSectionGoBtn.style.cursor = 'pointer';
   formNoItemContainer.style.display = 'none';
   formRightSection.style.display = 'block';
-  noItemBagMessage.style.display = 'none';
-  cartIcon.style.fill = '#164E63'
+  cartIcon.style.fill = '#164E63';
 
-  cartItems.forEach(productId => {
+  // Calculate total quantity for cart icon badge
+  const totalQuantity = cartItems.reduce((acc, item) => acc + (Number(item.quantity) || 0), 0);
+
+  cartQuantity.textContent = totalQuantity;
+
+  cartItems.forEach(({ id: productId, quantity }) => {
     const product = data.find(p => p.id === productId);
     if (!product) return;
 
+    // Cart item HTML
     const itemHTML = `
       <div class="addedProductDetails" data-id="${product.id}">
         <div class="addedProductImage">
@@ -425,7 +438,7 @@ function renderCartItems(data) {
         <div class="model-title">
           <div class="model_content">
             <span>${product.title}</span>
-            <span class='price' data-price="${product.price}">$${product.price}</span>
+          <span class='price' data-price="${product.price}">$${Number(product.price).toFixed(2)}</span>
           </div>
           <div class="modeltext">
             <span>${product.id}</span>
@@ -433,21 +446,21 @@ function renderCartItems(data) {
           <div class="model_remove_price">
             <div class="quantity">
               <div class="show-text">
-                <span>1</span>
+                <span>${quantity}</span>
                 <i class="fa-solid fa-chevron-down"></i>
               </div>
-              <div class="innertext">
-                                    <span><i class="tick fa-solid fa-check arrow-down"></i>1</span>
-                                    <span>1</span>
-                                    <span>2</span>
-                                    <span>3</span>
-                                    <span>4</span>
-                                    <span>5</span>
-                                    <span>6</span>
-                                    <span>7</span>
-                                    <span>8</span>
-                                    <span>9</span>
-                                    <span>10</span>
+              <div class="innertext" style="display:none;">
+                <span><i class="tick fa-solid fa-check arrow-down"></i>1</span>
+                <span>1</span>
+                <span>2</span>
+                <span>3</span>
+                <span>4</span>
+                <span>5</span>
+                <span>6</span>
+                <span>7</span>
+                <span>8</span>
+                <span>9</span>
+                <span>10</span>
               </div>
             </div>
             <span class="remove-cart-item">Remove</span>
@@ -457,129 +470,176 @@ function renderCartItems(data) {
     `;
     itemsBagContainer.insertAdjacentHTML('beforeend', itemHTML);
 
-    document.body.addEventListener("click", function (e) {
-      const quantityOption = e.target.closest(".innertext span:not(:first-child)");
-      if (!quantityOption) return;
-
-      const allQuantitySpans = document.querySelectorAll(".innerText span");
-
-      allQuantitySpans.forEach(span => {
-        span.addEventListener("click", e => {
-          const clickedSpan = e.currentTarget;
-
-          if (!clickedSpan.classList.contains('fa-check')) {
-
-            allQuantitySpans.forEach(s => s.classList.remove('fa-solid', 'fa-check', 'arrow-down'));
-
-            clickedSpan.classList.add('fa-solid', 'fa-check', 'arrow-down');
-          }
-        });
-      });
-
-
-      const selectedQuantity = parseInt(quantityOption.textContent);
-      const cartItem = quantityOption.closest(".addedProductDetails");
-
-      const showText = cartItem.querySelector(".show-text span");
-      showText.textContent = selectedQuantity;
-
-      // Remove tick icon from all spans
-      const QuantitySpans = cartItem.querySelectorAll(".innertext span");
-      QuantitySpans.forEach(span => {
-        const icon = span.querySelector("i");
-        if (icon) icon.remove();
-      });
-
-      // Add tick icon to selected span
-      quantityOption.innerHTML = `<i class="tick fa-solid fa-check arrow-down"></i>${selectedQuantity}`;
-
-      const priceElement = cartItem.querySelector(".price");
-      const originalPrice = parseFloat(priceElement.dataset.price);
-      const newPrice = (originalPrice * selectedQuantity).toFixed(2);
-      priceElement.textContent = `$${newPrice}`;
-
-      cartItem.querySelector(".innertext").style.display = 'none';
-
-      updateCartTotalAmount();
-      updateCartItemsLength();
-    });
+    // Checkout item HTML
+    const checkoutHTML = `
+      <div class="checkout-form-product" data-id="${product.id}">
+        <div class="cfp-leftbox">
+          <div class="cfp-img">
+            <img src="${product.url}" alt="">
+          </div>  
+          <div class="cfp-leftboxtext">
+            <h4>${product.title}</h4>
+            <span class="cfp-modelNumber">${product.id}</span>
+            <div class="quantity">
+              <div class="show-text">
+                <span>${quantity}</span>
+                <i class="fa-solid fa-chevron-down"></i>
+              </div>
+              <div class="innertext" style="display:none;">
+                <span><i class="fa-solid fa-check"></i>1</span>
+                <span>1</span>
+                <span>2</span>
+                <span>3</span>
+                <span>4</span>
+                <span>5</span>
+                <span>6</span>
+                <span>7</span>
+                <span>8</span>
+                <span>9</span>
+                <span>10</span>
+              </div> 
+            </div> 
+          </div> 
+        </div>  
+        <div class="cfp-rightbox">
+          <span class="checkout-price" data-price="${product.price}">$${Number(product.price).toFixed(2)}</span>
+          <span class="remove-checkout-item" data-id="${product.id}">Remove</span>
+        </div>
+      </div>
+    `;
+    formItems.insertAdjacentHTML('beforeend', checkoutHTML);
   });
 
-  function updateCartItemsLength() {
-    const allQuantitySpans = document.querySelectorAll('.show-text span');
-
-    const totalItems = [...allQuantitySpans].reduce((acc, span) => {
-      const qty = parseInt(span.textContent);
-      return acc + (isNaN(qty) ? 0 : qty);
-    }, 0);
-
-    document.querySelector('.itemslength').textContent = totalItems;
-  }
-
-
-
-  document.addEventListener('DOMContentLoaded', () => {
-    let activeDropdown = null;
-
-    document.addEventListener('click', e => {
-      const showText = e.target.closest('.show-text');
-      const isInnerText = e.target.closest('.innertext');
-
-      if (showText) {
-        const parent = showText.closest('.addedProductDetails');
-        const innerText = parent.querySelector('.innertext');
-
-        if (activeDropdown === innerText) {
-          innerText.style.display = 'none';
-          activeDropdown = null;
-        } else {
-
-          if (activeDropdown) activeDropdown.style.display = 'none';
-
-          innerText.style.display = 'block';
-          activeDropdown = innerText;
-        }
-
-      } else if (!isInnerText) {
-        if (activeDropdown) {
-          activeDropdown.style.display = 'none';
-          activeDropdown = null;
-        }
-      }
-    });
-  });
-
-
+  attachQuantityListeners();
   attachRemoveListeners();
+  attachCheckoutRemoveListeners();
+
+  updateCartTotalAmount(data);
 }
 
+// Quantity dropdown toggle & selection handler (both cart & checkout)
+function attachQuantityListeners() {
+  document.querySelectorAll('.addedProductDetails, .checkout-form-product').forEach(item => {
+    const showText = item.querySelector('.show-text');
+    const innerText = item.querySelector('.innertext');
+
+    // Toggle dropdown
+    showText.addEventListener('click', () => {
+      // Close other dropdowns
+      document.querySelectorAll('.innertext').forEach(div => {
+        if (div !== innerText) div.style.display = 'none';
+      });
+
+      // Toggle current
+      innerText.style.display = innerText.style.display === 'block' ? 'none' : 'block';
+    });
+
+    // Quantity selection
+    innerText.querySelectorAll('span:not(:first-child)').forEach(span => {
+      span.addEventListener('click', e => {
+        const selectedQuantity = parseInt(e.target.textContent);
+        const productId = item.dataset.id;
+
+        // Update localStorage quantity
+        let cartItems = getCartItems();
+        const idx = cartItems.findIndex(i => i.id === productId);
+        if (idx > -1) {
+          cartItems[idx].quantity = selectedQuantity;
+          setCartItems(cartItems);
+        }
+
+        // Close dropdown
+        innerText.style.display = 'none';
+
+        // Rerender everything to sync UI & prices
+        renderCartItems(data);
+      });
+    });
+  });
+
+  // Click outside closes all dropdowns
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.show-text') && !e.target.closest('.innertext')) {
+      document.querySelectorAll('.innertext').forEach(div => {
+        div.style.display = 'none';
+      });
+    }
+  });
+}
+
+// Remove listeners for cart section
 function attachRemoveListeners() {
   document.querySelectorAll('.remove-cart-item').forEach(btn => {
     btn.addEventListener('click', e => {
       const productCard = e.target.closest('.addedProductDetails');
       const productId = productCard.dataset.id;
 
-      const cartIcon = document.querySelector('.cart');
-
       let cartItems = getCartItems();
-      cartItems = cartItems.filter(id => id !== productId);
+      cartItems = cartItems.filter(i => i.id !== productId);
       setCartItems(cartItems);
 
-      productCard.remove();
-
-      if (cartItems.length === 0) {
-        noItemBagMessage.style.display = 'flex';
-      }
-
-      updateCartIconColors();
       renderCartItems(data);
-      updateCartTotalAmount();
+      updateCartIconColors();
     });
   });
 }
 
+// Remove listeners for checkout section
+function attachCheckoutRemoveListeners() {
+  document.querySelectorAll('.remove-checkout-item').forEach(btn => {
+    btn.addEventListener('click', e => {
+      const productId = e.target.dataset.id;
+
+      let cartItems = getCartItems();
+      cartItems = cartItems.filter(i => i.id !== productId);
+      setCartItems(cartItems);
+
+      renderCartItems(data);
+    });
+  });
+}
+
+// Update cart icon fill colors
+function updateCartIconColors() {
+  const cartItems = getCartItems();
+
+  document.querySelectorAll('.items').forEach(productEl => {
+    const productId = productEl.id;
+    const cartIcon = productEl.querySelector('.products-price svg:last-child');
+    if (!cartIcon) return;
+
+    if (cartItems.some(item => item.id === productId)) {
+      cartIcon.style.fill = '#22D3EE';
+    } else {
+      cartIcon.style.fill = 'none';
+    }
+  });
+
+  // Also update main cart icon color if needed:
+  const mainCartIcon = document.querySelector('.cart');
+  if (mainCartIcon) {
+    mainCartIcon.style.fill = cartItems.length > 0 ? '#164E63' : 'none';
+  }
+}
 
 
+// Update total price display (cart + checkout)
+function updateCartTotalAmount(data) {
+  const cartItems = getCartItems();
+  let total = 0;
+
+  cartItems.forEach(({ id, quantity }) => {
+    const product = data.find(p => p.id === id);
+    if (product) total += product.price * quantity;
+  });
+
+  const cartTotalAmountSpan = document.querySelector('#totalBuyProductPrice');
+  if (cartTotalAmountSpan) {
+    cartTotalAmountSpan.textContent = `$${total.toFixed(2)}`;
+  }
+}
+
+// Event listener to toggle product add/remove from cart (cart icon click)
 document.body.addEventListener('click', function (e) {
   const clickedIcon = e.target.closest('.products-price svg:last-child');
   if (!clickedIcon) return;
@@ -590,55 +650,19 @@ document.body.addEventListener('click', function (e) {
   const productId = productEl.id;
   let cartItems = getCartItems();
 
-  const isInCart = cartItems.includes(productId);
-
-  if (isInCart) {
-    cartItems = cartItems.filter(id => id !== productId);
+  const index = cartItems.findIndex(item => item.id === productId);
+  if (index > -1) {
+    // Remove item from cart
+    cartItems.splice(index, 1);
   } else {
-    cartItems.push(productId);
+    // Add new item with quantity 1
+    cartItems.push({ id: productId, quantity: 1 });
   }
 
   setCartItems(cartItems);
   updateCartIconColors();
   renderCartItems(data);
-  updateCartTotalAmount();
 });
-
-
-function updateCartIconColors() {
-  const cartItems = getCartItems();
-
-  document.querySelectorAll('.items').forEach(productEl => {
-    const productId = productEl.id;
-
-    const cartIcone = productEl.querySelector('.products-price svg:last-child');
-    if (!cartIcone) return;
-
-    if (cartItems.includes(productId)) {
-      cartIcone.style.fill = '#22D3EE';
-    } else {
-      cartIcone.style.fill = 'none';
-    }
-  });
-}
-
-// cart Pricing 
-
-function updateCartTotalAmount() {
-  const cartProductPrices = document.querySelectorAll('.model_content span:last-child');
-
-  const total = [...cartProductPrices].reduce((acc, price) => {
-    if (price) {
-      const text = price.textContent.trim();
-      const number = Number(text.startsWith('$') ? text.slice(1) : text);
-      return acc + (isNaN(number) ? 0 : number);
-    }
-    return acc;
-  }, 0);
-
-  const cartTotalAmountSpan = document.querySelector('#totalBuyProductPrice');
-  cartTotalAmountSpan.textContent = `$${total.toFixed(2)}`;
-}
 
 
 // cart Pricing Ends
@@ -931,7 +955,7 @@ function productDetailsFunction() {
   AddToWishlist();
   updateCartIconColors();
   renderCartItems(data);
-  updateCartTotalAmount();
+  updateCartTotalAmount(data);
 }
 
 showTrendingProducts(featuredProducts, featuredProductsContainer);
