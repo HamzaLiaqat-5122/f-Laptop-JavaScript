@@ -682,17 +682,30 @@ document.body.addEventListener('click', function (e) {
   renderCartItems(data);
 });
 
-function updateCheckoutSummary(data) {
-  const cartItems = getCartItems();
 
+function updateCheckoutSummary(data) {
+  
+  const cStandard = document.querySelector('.c-standard');
+  const cExpress = document.querySelector('.c-express');
+  
+  const cartItems = getCartItems();
+  
   let subtotal = 0;
   cartItems.forEach(({ id, quantity }) => {
     const product = data.find(p => p.id === id);
     if (product) subtotal += product.price * quantity;
   });
+  
+  
+  let shipping = 0;
 
-  const shipping = subtotal > 0 ? 5.00 : 0; 
-  const taxes = subtotal * 0.10; 
+  if (cStandard.classList.contains('c-deliveryjsclass')) {
+    shipping = 5
+  } else if (cExpress.classList.contains('c-deliveryjsclass')) {
+    shipping = 16;
+  }
+
+  const taxes = subtotal * 0.10;
 
   const total = subtotal + shipping + taxes;
 
@@ -1707,18 +1720,21 @@ cStandard.style.cursor = 'pointer';
 cExpress.style.cursor = 'pointer';
 
 cStandard.addEventListener("click", e => {
-  if(cExpress.classList.contains('c-deliveryjsclass')){
+  if (cExpress.classList.contains('c-deliveryjsclass')) {
     cExpress.classList.remove('c-deliveryjsclass');
   }
   cStandard.classList.add('c-deliveryjsclass');
-})
+  updateCheckoutSummary(data);
+});
 
 cExpress.addEventListener("click", e => {
-  if(cStandard.classList.contains('c-deliveryjsclass')){
+  if (cStandard.classList.contains('c-deliveryjsclass')) {
     cStandard.classList.remove('c-deliveryjsclass');
   }
   cExpress.classList.add('c-deliveryjsclass');
-})
+  updateCheckoutSummary(data); 
+});
+
 
 // Checkout Form Validation Logic Ends
 
