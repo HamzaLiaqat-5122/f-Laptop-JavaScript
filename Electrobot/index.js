@@ -390,7 +390,7 @@ function updateTickIcon(innerTextDiv, selectedQuantity) {
     if (span.textContent.trim() === String(selectedQuantity)) {
       const tickIcon = document.createElement('i');
       tickIcon.className = 'fa-solid fa-check';
-      tickIcon.style.marginRight = '5px'; 
+      tickIcon.style.marginRight = '5px';
 
       span.prepend(tickIcon);
     }
@@ -421,7 +421,7 @@ function renderCartItems(data) {
     formRightSection.style.display = 'none';
     cartIcon.style.fill = 'none';
     cartQuantity.textContent = '0';
-    updateCartIconColors(); 
+    updateCartIconColors();
     updateCartTotalAmount(data);
     return;
   }
@@ -543,6 +543,8 @@ function renderCartItems(data) {
   attachCheckoutRemoveListeners();
 
   updateCartTotalAmount(data);
+  updateCheckoutSummary(data);
+
 }
 
 function attachQuantityListeners() {
@@ -680,6 +682,30 @@ document.body.addEventListener('click', function (e) {
   renderCartItems(data);
 });
 
+function updateCheckoutSummary(data) {
+  const cartItems = getCartItems();
+
+  let subtotal = 0;
+  cartItems.forEach(({ id, quantity }) => {
+    const product = data.find(p => p.id === id);
+    if (product) subtotal += product.price * quantity;
+  });
+
+  const shipping = subtotal > 0 ? 5.00 : 0; 
+  const taxes = subtotal * 0.10; 
+
+  const total = subtotal + shipping + taxes;
+
+  const subtotalEl = document.querySelector('.c-subtotal-price');
+  const shippingEl = document.querySelector('.c-shipping-price');
+  const taxesEl = document.querySelector('.c-taxes-price');
+  const totalEl = document.querySelector('.c-total-price');
+
+  if (subtotalEl) subtotalEl.textContent = `$${subtotal.toFixed(2)}`;
+  if (shippingEl) shippingEl.textContent = `$${shipping.toFixed(2)}`;
+  if (taxesEl) taxesEl.textContent = `$${taxes.toFixed(2)}`;
+  if (totalEl) totalEl.textContent = `$${total.toFixed(2)}`;
+}
 
 
 // cart Pricing Ends
@@ -1669,12 +1695,32 @@ componentsGrid.addEventListener("click", e => {
 // components second NavLink Logic End
 
 
-// Checkout form products payment logic starts
+// Checkout Form Validation Logic Starts
 
-const formNoItemContainer = document.querySelector('.formnoitems');
-const formRightSection = document.querySelector('.formright')
+// 1. Delivery Method Logic
 
-// Checkout form products payment logic Ends
+const cStandard = document.querySelector('.c-standard');
+const cExpress = document.querySelector('.c-express ');
+
+
+cStandard.style.cursor = 'pointer';
+cExpress.style.cursor = 'pointer';
+
+cStandard.addEventListener("click", e => {
+  if(cExpress.classList.contains('c-deliveryjsclass')){
+    cExpress.classList.remove('c-deliveryjsclass');
+  }
+  cStandard.classList.add('c-deliveryjsclass');
+})
+
+cExpress.addEventListener("click", e => {
+  if(cStandard.classList.contains('c-deliveryjsclass')){
+    cStandard.classList.remove('c-deliveryjsclass');
+  }
+  cExpress.classList.add('c-deliveryjsclass');
+})
+
+// Checkout Form Validation Logic Ends
 
 // Go To home button Logic 
 
