@@ -1181,6 +1181,7 @@ productDetailsFunction();
 const storeSearchFilter = document.querySelector('#store_filter')
 
 storeSearchFilter.addEventListener("input", () => {
+  resetRatingStars();
   let typedText = storeSearchFilter.value.trim().toLowerCase();
 
   filteredData = data.filter(product =>
