@@ -371,8 +371,6 @@ continueShopping.addEventListener("click", () => {
 const noItemBagMessage = document.querySelector('.noitembag');
 const itemsBagContainer = document.querySelector('.itemsbags')
 
-
-// Helper to get/set cart items with quantity
 function getCartItems() {
   return JSON.parse(localStorage.getItem('cartItems')) || [];
 }
@@ -381,7 +379,24 @@ function setCartItems(items) {
   localStorage.setItem('cartItems', JSON.stringify(items));
 }
 
-// Main render function
+
+function updateTickIcon(innerTextDiv, selectedQuantity) {
+
+  innerTextDiv.querySelectorAll('i.fa-check').forEach(icon => icon.remove());
+
+  const spans = innerTextDiv.querySelectorAll('span');
+  spans.forEach(span => {
+
+    if (span.textContent.trim() === String(selectedQuantity)) {
+      const tickIcon = document.createElement('i');
+      tickIcon.className = 'fa-solid fa-check';
+      tickIcon.style.marginRight = '5px'; 
+
+      span.prepend(tickIcon);
+    }
+  });
+}
+
 function renderCartItems(data) {
   const noItemBagMessage = document.querySelector('.noitembag');
   const itemsBagContainer = document.querySelector('.itemsbags');
@@ -394,7 +409,6 @@ function renderCartItems(data) {
 
   const cartItems = getCartItems();
 
-  // Clear containers before render
   itemsBagContainer.innerHTML = '';
   formItems.innerHTML = '';
 
@@ -407,7 +421,7 @@ function renderCartItems(data) {
     formRightSection.style.display = 'none';
     cartIcon.style.fill = 'none';
     cartQuantity.textContent = '0';
-    updateCartIconColors(); // To clear any coloring
+    updateCartIconColors(); 
     updateCartTotalAmount(data);
     return;
   }
@@ -420,7 +434,6 @@ function renderCartItems(data) {
   formRightSection.style.display = 'block';
   cartIcon.style.fill = '#164E63';
 
-  // Calculate total quantity for cart icon badge
   const totalQuantity = cartItems.reduce((acc, item) => acc + (Number(item.quantity) || 0), 0);
 
   cartQuantity.textContent = totalQuantity;
@@ -429,7 +442,6 @@ function renderCartItems(data) {
     const product = data.find(p => p.id === productId);
     if (!product) return;
 
-    // Cart item HTML
     const itemHTML = `
       <div class="addedProductDetails" data-id="${product.id}">
         <div class="addedProductImage">
@@ -438,7 +450,7 @@ function renderCartItems(data) {
         <div class="model-title">
           <div class="model_content">
             <span>${product.title}</span>
-          <span class='price' data-price="${product.price}">$${Number(product.price).toFixed(2)}</span>
+            <span class='price' data-price="${product.price}">$${Number(product.price).toFixed(2)}</span>
           </div>
           <div class="modeltext">
             <span>${product.id}</span>
@@ -450,7 +462,6 @@ function renderCartItems(data) {
                 <i class="fa-solid fa-chevron-down"></i>
               </div>
               <div class="innertext" style="display:none;">
-                <span><i class="tick fa-solid fa-check arrow-down"></i>1</span>
                 <span>1</span>
                 <span>2</span>
                 <span>3</span>
@@ -470,7 +481,6 @@ function renderCartItems(data) {
     `;
     itemsBagContainer.insertAdjacentHTML('beforeend', itemHTML);
 
-    // Checkout item HTML
     const checkoutHTML = `
       <div class="checkout-form-product" data-id="${product.id}">
         <div class="cfp-leftbox">
@@ -486,7 +496,6 @@ function renderCartItems(data) {
                 <i class="fa-solid fa-chevron-down"></i>
               </div>
               <div class="innertext" style="display:none;">
-                <span><i class="fa-solid fa-check"></i>1</span>
                 <span>1</span>
                 <span>2</span>
                 <span>3</span>
@@ -510,6 +519,25 @@ function renderCartItems(data) {
     formItems.insertAdjacentHTML('beforeend', checkoutHTML);
   });
 
+  cartItems.forEach(({ id: productId, quantity }) => {
+
+    const addedProduct = itemsBagContainer.querySelector(`.addedProductDetails[data-id="${productId}"]`);
+    if (addedProduct) {
+      const innerTextDiv = addedProduct.querySelector('.innertext');
+      if (innerTextDiv) {
+        updateTickIcon(innerTextDiv, quantity);
+      }
+    }
+
+    const checkoutProduct = formItems.querySelector(`.checkout-form-product[data-id="${productId}"]`);
+    if (checkoutProduct) {
+      const innerTextDiv = checkoutProduct.querySelector('.innertext');
+      if (innerTextDiv) {
+        updateTickIcon(innerTextDiv, quantity);
+      }
+    }
+  });
+
   attachQuantityListeners();
   attachRemoveListeners();
   attachCheckoutRemoveListeners();
@@ -517,30 +545,25 @@ function renderCartItems(data) {
   updateCartTotalAmount(data);
 }
 
-// Quantity dropdown toggle & selection handler (both cart & checkout)
 function attachQuantityListeners() {
   document.querySelectorAll('.addedProductDetails, .checkout-form-product').forEach(item => {
     const showText = item.querySelector('.show-text');
     const innerText = item.querySelector('.innertext');
 
-    // Toggle dropdown
+
     showText.addEventListener('click', () => {
-      // Close other dropdowns
       document.querySelectorAll('.innertext').forEach(div => {
         if (div !== innerText) div.style.display = 'none';
       });
 
-      // Toggle current
       innerText.style.display = innerText.style.display === 'block' ? 'none' : 'block';
     });
 
-    // Quantity selection
-    innerText.querySelectorAll('span:not(:first-child)').forEach(span => {
+    innerText.querySelectorAll('span').forEach(span => {
       span.addEventListener('click', e => {
         const selectedQuantity = parseInt(e.target.textContent);
         const productId = item.dataset.id;
 
-        // Update localStorage quantity
         let cartItems = getCartItems();
         const idx = cartItems.findIndex(i => i.id === productId);
         if (idx > -1) {
@@ -548,16 +571,14 @@ function attachQuantityListeners() {
           setCartItems(cartItems);
         }
 
-        // Close dropdown
-        innerText.style.display = 'none';
+        updateTickIcon(innerText, selectedQuantity);
 
-        // Rerender everything to sync UI & prices
+        innerText.style.display = 'none';
         renderCartItems(data);
       });
     });
   });
 
-  // Click outside closes all dropdowns
   document.addEventListener('click', (e) => {
     if (!e.target.closest('.show-text') && !e.target.closest('.innertext')) {
       document.querySelectorAll('.innertext').forEach(div => {
@@ -567,7 +588,7 @@ function attachQuantityListeners() {
   });
 }
 
-// Remove listeners for cart section
+
 function attachRemoveListeners() {
   document.querySelectorAll('.remove-cart-item').forEach(btn => {
     btn.addEventListener('click', e => {
@@ -584,7 +605,6 @@ function attachRemoveListeners() {
   });
 }
 
-// Remove listeners for checkout section
 function attachCheckoutRemoveListeners() {
   document.querySelectorAll('.remove-checkout-item').forEach(btn => {
     btn.addEventListener('click', e => {
@@ -599,7 +619,6 @@ function attachCheckoutRemoveListeners() {
   });
 }
 
-// Update cart icon fill colors
 function updateCartIconColors() {
   const cartItems = getCartItems();
 
@@ -615,7 +634,6 @@ function updateCartIconColors() {
     }
   });
 
-  // Also update main cart icon color if needed:
   const mainCartIcon = document.querySelector('.cart');
   if (mainCartIcon) {
     mainCartIcon.style.fill = cartItems.length > 0 ? '#164E63' : 'none';
@@ -623,7 +641,6 @@ function updateCartIconColors() {
 }
 
 
-// Update total price display (cart + checkout)
 function updateCartTotalAmount(data) {
   const cartItems = getCartItems();
   let total = 0;
@@ -639,7 +656,7 @@ function updateCartTotalAmount(data) {
   }
 }
 
-// Event listener to toggle product add/remove from cart (cart icon click)
+
 document.body.addEventListener('click', function (e) {
   const clickedIcon = e.target.closest('.products-price svg:last-child');
   if (!clickedIcon) return;
@@ -655,7 +672,6 @@ document.body.addEventListener('click', function (e) {
     // Remove item from cart
     cartItems.splice(index, 1);
   } else {
-    // Add new item with quantity 1
     cartItems.push({ id: productId, quantity: 1 });
   }
 
@@ -663,6 +679,7 @@ document.body.addEventListener('click', function (e) {
   updateCartIconColors();
   renderCartItems(data);
 });
+
 
 
 // cart Pricing Ends
