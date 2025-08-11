@@ -891,6 +891,7 @@ function productDetailsFunction() {
 
           // Add to Basket button click 
           const addToBasketBtn = document.querySelector('[data-basket="basket"]');
+          addToBasketBtn.style.cursor = 'pointer';
 
           addToBasketBtn.addEventListener("click", () => {
             const productId = addToBasketBtn.getAttribute("data-bagPro");
