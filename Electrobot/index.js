@@ -161,6 +161,7 @@ navListItems[2].addEventListener("click", e => {
   checkoutFormSection.style.display = 'none';
   storeSection.style.display = 'none';
   componentsGrid.style.display = 'none';
+  document.querySelector(".finishShopping").style.display = "none";
 
   navListItems[0].style.color = '#454D59';
   navListItems[0].style.borderBottom = 'none';
@@ -195,6 +196,7 @@ heartIcon.addEventListener("click", e => {
   checkoutFormSection.style.display = 'none';
   storeSection.style.display = 'none';
   componentsGrid.style.display = 'none';
+  document.querySelector(".finishShopping").style.display = "none";
 
   navListItems[0].style.color = '#454D59';
   navListItems[0].style.borderBottom = 'none';
@@ -412,6 +414,8 @@ function renderCartItems(data) {
   itemsBagContainer.innerHTML = '';
   formItems.innerHTML = '';
 
+  formRightSection.style.display = 'block';
+
   if (cartItems.length === 0) {
     noItemBagMessage.style.display = 'flex';
     checkoutSectionGoBtn.disabled = true;
@@ -419,6 +423,9 @@ function renderCartItems(data) {
     checkoutSectionGoBtn.style.cursor = 'not-allowed';
     formNoItemContainer.style.display = 'flex';
     formRightSection.style.display = 'none';
+
+    formItems.innerHTML = '';
+
     cartIcon.style.fill = 'none';
     cartQuantity.textContent = '0';
     updateCartIconColors();
@@ -426,16 +433,15 @@ function renderCartItems(data) {
     return;
   }
 
+  // If there are items
   noItemBagMessage.style.display = 'none';
   checkoutSectionGoBtn.disabled = false;
   checkoutSectionGoBtn.style.opacity = '1';
   checkoutSectionGoBtn.style.cursor = 'pointer';
   formNoItemContainer.style.display = 'none';
-  formRightSection.style.display = 'block';
   cartIcon.style.fill = '#164E63';
 
   const totalQuantity = cartItems.reduce((acc, item) => acc + (Number(item.quantity) || 0), 0);
-
   cartQuantity.textContent = totalQuantity;
 
   cartItems.forEach(({ id: productId, quantity }) => {
@@ -520,21 +526,16 @@ function renderCartItems(data) {
   });
 
   cartItems.forEach(({ id: productId, quantity }) => {
-
     const addedProduct = itemsBagContainer.querySelector(`.addedProductDetails[data-id="${productId}"]`);
     if (addedProduct) {
       const innerTextDiv = addedProduct.querySelector('.innertext');
-      if (innerTextDiv) {
-        updateTickIcon(innerTextDiv, quantity);
-      }
+      if (innerTextDiv) updateTickIcon(innerTextDiv, quantity);
     }
 
     const checkoutProduct = formItems.querySelector(`.checkout-form-product[data-id="${productId}"]`);
     if (checkoutProduct) {
       const innerTextDiv = checkoutProduct.querySelector('.innertext');
-      if (innerTextDiv) {
-        updateTickIcon(innerTextDiv, quantity);
-      }
+      if (innerTextDiv) updateTickIcon(innerTextDiv, quantity);
     }
   });
 
@@ -544,8 +545,8 @@ function renderCartItems(data) {
 
   updateCartTotalAmount(data);
   updateCheckoutSummary(data);
-
 }
+
 
 function attachQuantityListeners() {
   document.querySelectorAll('.addedProductDetails, .checkout-form-product').forEach(item => {
@@ -684,19 +685,19 @@ document.body.addEventListener('click', function (e) {
 
 
 function updateCheckoutSummary(data) {
-  
+
   const cStandard = document.querySelector('.c-standard');
   const cExpress = document.querySelector('.c-express');
-  
+
   const cartItems = getCartItems();
-  
+
   let subtotal = 0;
   cartItems.forEach(({ id, quantity }) => {
     const product = data.find(p => p.id === id);
     if (product) subtotal += product.price * quantity;
   });
-  
-  
+
+
   let shipping = 0;
 
   if (cStandard.classList.contains('c-deliveryjsclass')) {
@@ -739,6 +740,7 @@ function productDetailsFunction() {
       allSections.style.display = 'none';
       productDetailsSection.style.display = 'block';
       storeSection.style.display = 'none';
+      document.querySelector(".finishShopping").style.display = "none";
       document.documentElement.scrollTop = 0;
 
       data.forEach(product => {
@@ -887,6 +889,32 @@ function productDetailsFunction() {
                     </div>
                     `
 
+          // Add to Basket button click 
+          const addToBasketBtn = document.querySelector('[data-basket="basket"]');
+
+          addToBasketBtn.addEventListener("click", () => {
+            const productId = addToBasketBtn.getAttribute("data-bagPro");
+            let cartItems = getCartItems();
+            let found = false; 
+
+            for (let i = 0; i < cartItems.length; i++) {
+              if (cartItems[i].id === productId) {
+                cartItems[i].quantity += 1;
+                found = true;
+                break; 
+              }
+            }
+
+            if (!found) {
+              cartItems.push({ id: productId, quantity: 1 });
+            }
+
+            setCartItems(cartItems);
+            updateCartIconColors();
+            renderCartItems(data);
+          });
+
+
           // Generating Customer Reviews
 
           let customersDescription = document.querySelector('.customers-description');
@@ -944,6 +972,7 @@ function productDetailsFunction() {
             productDetailsSection.style.display = 'none'
             checkoutFormSection.style.display = 'none';
             storeSection.style.display = 'none';
+            document.querySelector(".finishShopping").style.display = "none";
           })
 
           // Making breadCrumb Category Interactive
@@ -963,6 +992,7 @@ function productDetailsFunction() {
             sensorsSection.style.display = 'block';
             checkoutFormSection.style.display = 'none';
             storeSection.style.display = 'none';
+            document.querySelector(".finishShopping").style.display = "none";
 
             const sensorsLengthSpan = document.querySelector('.component-length');
             const componentName = document.querySelector('.component-name');
@@ -990,6 +1020,7 @@ function productDetailsFunction() {
             sensorsSection.style.display = 'block';
             checkoutFormSection.style.display = 'none';
             storeSection.style.display = 'none';
+            document.querySelector(".finishShopping").style.display = "none";
 
             const sensorsLengthSpan = document.querySelector('.component-length');
             const componentName = document.querySelector('.component-name');
@@ -1035,7 +1066,9 @@ checkoutSectionGoBtn.addEventListener("click", e => {
   productDetailsSection.style.display = 'none'
   storeSection.style.display = 'none';
   checkoutFormSection.style.display = 'block';
+  document.querySelector(".finishShopping").style.display = "none";
   closeCartModal();
+  renderCartItems(data);
 })
 
 // CheckOut Form Hide / Unhide Logic End
@@ -1055,6 +1088,7 @@ function goToStore() {
   wishlistSection.style.display = 'none';
   productDetailsSection.style.display = 'none'
   checkoutFormSection.style.display = 'none';
+  document.querySelector(".finishShopping").style.display = "none";
 }
 
 navListItems[3].addEventListener('click', e => {
@@ -1732,9 +1766,313 @@ cExpress.addEventListener("click", e => {
     cStandard.classList.remove('c-deliveryjsclass');
   }
   cExpress.classList.add('c-deliveryjsclass');
-  updateCheckoutSummary(data); 
+  updateCheckoutSummary(data);
 });
 
+
+// Form Validation Starts
+
+// Get all input elements
+let email = document.getElementById("checkEmail");
+let firstName = document.getElementById("checkFirstName");
+let lastName = document.getElementById("checkLastName");
+let companyName = document.getElementById("checkCompanyName");
+let address = document.getElementById("checkAddress");
+let address2 = document.getElementById("checkApartment");
+let city = document.getElementById("checkCity");
+let country = document.getElementById("checkCountry");
+let state = document.getElementById("checkState");
+let postalCode = document.getElementById("checkPostalCode");
+let phone = document.getElementById("checkPhoneNumber");
+let cardNumber = document.getElementById("checkCardNumber");
+let nameOnCard = document.getElementById("checkNameCard");
+let expirationDate = document.getElementById("checkExpireDate");
+let cvc = document.getElementById("checkCVC");
+
+let clearBtn = document.querySelector(".c-clearFormBtn");
+let payBtn = document.querySelector(".pay-btn");
+
+const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+// Validation functions for each field
+function checkEmail() {
+  let error = email.nextElementSibling;
+  error.style.color = 'red'
+  let val = email.value.trim();
+
+  if (val === "") {
+    error.textContent = "Please enter your email";
+  } else if (!emailRegex.test(val)) {
+    error.textContent = "Enter valid email";
+  } else {
+    error.textContent = "";
+  }
+}
+
+
+function checkFirstName() {
+  let error = firstName.nextElementSibling;
+  error.style.color = 'red'
+  if (firstName.value.trim() === "") {
+    error.textContent = "Please enter your first name";
+  } else {
+    error.textContent = "";
+  }
+}
+
+function checkLastName() {
+  let error = lastName.nextElementSibling;
+  error.style.color = 'red'
+  if (lastName.value.trim() === "") {
+    error.textContent = "Please enter your last name";
+  } else {
+    error.textContent = "";
+  }
+}
+
+function checkCompanyName() {
+  let error = companyName.nextElementSibling;
+  error.style.color = 'red'
+  if (companyName.value.trim() === "") {
+    error.textContent = "Please enter your company name";
+  } else {
+    error.textContent = "";
+  }
+}
+
+function checkAddress() {
+  let error = address.nextElementSibling;
+  error.style.color = 'red'
+  if (address.value.trim() === "") {
+    error.textContent = "Please enter your address";
+  } else {
+    error.textContent = "";
+  }
+}
+
+function checkAddress2() {
+  let error = address2.nextElementSibling;
+  error.style.color = 'red'
+  if (address2.value.trim() !== "" && address2.value.length < 6) {
+    error.textContent = "Address must be at least 6 characters";
+  } else {
+    error.textContent = "";
+  }
+}
+
+function checkCity() {
+  let error = city.nextElementSibling;
+  error.style.color = 'red'
+  if (city.value.trim() === "") {
+    error.textContent = "Please enter your city";
+  } else {
+    error.textContent = "";
+  }
+}
+
+function checkCountry() {
+  let error = country.nextElementSibling;
+  error.style.color = 'red'
+  if (country.value.trim() === "") {
+    error.textContent = "Please enter your country";
+  } else {
+    error.textContent = "";
+  }
+}
+
+function checkState() {
+  let error = state.nextElementSibling;
+  error.style.color = 'red'
+  if (state.value.trim() === "") {
+    error.textContent = "Please enter your state / province";
+  } else {
+    error.textContent = "";
+  }
+}
+
+function checkPostalCode() {
+  let error = postalCode.nextElementSibling;
+  error.style.color = 'red'
+  if (postalCode.value.trim() === "") {
+    error.textContent = "Please enter your postal code";
+  } else {
+    error.textContent = "";
+  }
+}
+
+function checkPhone() {
+  let error = phone.nextElementSibling;
+  error.style.color = 'red'
+  let val = phone.value.trim();
+  if (val === "") {
+    error.textContent = "Please enter your phone.";
+  } else if (val.length < 10) {
+    error.textContent = "Phone number must be at least 10 numbers";
+  } else if (val.length > 11) {
+    error.textContent = "Phone number must be at most 11 numbers";
+  } else if (isNaN(val)) {
+    error.textContent = "Enter valid number";
+  } else {
+    error.textContent = "";
+  }
+}
+
+function checkCardNumber() {
+  let error = cardNumber.nextElementSibling;
+  error.style.color = 'red'
+  let val = cardNumber.value.trim();
+  if (val === "") {
+    error.textContent = "Please enter your card number";
+  } else if (val.length < 14) {
+    error.textContent = "Card number must be at least 14 numbers";
+  } else if (val.length > 16) {
+    error.textContent = "Card number must be at most 16 numbers";
+  } else if (isNaN(val)) {
+    error.textContent = "Enter valid card number";
+  } else {
+    error.textContent = "";
+  }
+}
+
+function checkNameOnCard() {
+  let error = nameOnCard.nextElementSibling;
+  error.style.color = 'red'
+  let val = nameOnCard.value.trim();
+  if (val === "") {
+    error.textContent = "Please enter your name on card";
+  } else if (val.length < 2) {
+    error.textContent = "name_on_card must be at least 2 characters";
+  } else {
+    error.textContent = "";
+  }
+}
+
+function checkExpirationDate() {
+  let error = expirationDate.nextElementSibling;
+  error.style.color = 'red'
+  let val = expirationDate.value.trim();
+  let regex = /^\d{2}\/\d{2}$/;
+  if (val !== "" && !regex.test(val)) {
+    error.textContent = "Enter valid expiration date";
+  } else {
+    error.textContent = "";
+  }
+}
+
+function checkCVC() {
+  let error = cvc.nextElementSibling;
+  error.style.color = 'red'
+  let val = cvc.value.trim();
+  if (val === "") {
+    error.textContent = "Enter card's cvc code";
+  } else if (val.length < 3) {
+    error.textContent = "CVC code must be atleast 3 numbers";
+  } else if (val.length > 4) {
+    error.textContent = "CVC code must be at most 4 numbers";
+  } else if (isNaN(val)) {
+    error.textContent = "Enter valid cvc code";
+  } else {
+    error.textContent = "";
+  }
+}
+
+// Attach real-time + blur validation
+email.addEventListener("input", checkEmail);
+email.addEventListener("blur", checkEmail);
+firstName.addEventListener("input", checkFirstName);
+firstName.addEventListener("blur", checkFirstName);
+lastName.addEventListener("input", checkLastName);
+lastName.addEventListener("blur", checkLastName);
+companyName.addEventListener("input", checkCompanyName);
+companyName.addEventListener("blur", checkCompanyName);
+address.addEventListener("input", checkAddress);
+address.addEventListener("blur", checkAddress);
+address2.addEventListener("input", checkAddress2);
+address2.addEventListener("blur", checkAddress2);
+city.addEventListener("input", checkCity);
+city.addEventListener("blur", checkCity);
+country.addEventListener("input", checkCountry);
+country.addEventListener("blur", checkCountry);
+state.addEventListener("input", checkState);
+state.addEventListener("blur", checkState);
+postalCode.addEventListener("input", checkPostalCode);
+postalCode.addEventListener("blur", checkPostalCode);
+phone.addEventListener("input", checkPhone);
+phone.addEventListener("blur", checkPhone);
+cardNumber.addEventListener("input", checkCardNumber);
+cardNumber.addEventListener("blur", checkCardNumber);
+nameOnCard.addEventListener("input", checkNameOnCard);
+nameOnCard.addEventListener("blur", checkNameOnCard);
+expirationDate.addEventListener("input", checkExpirationDate);
+expirationDate.addEventListener("blur", checkExpirationDate);
+cvc.addEventListener("input", checkCVC);
+cvc.addEventListener("blur", checkCVC);
+
+// Clear form
+clearBtn.addEventListener("click", function (e) {
+  e.preventDefault();
+  document.querySelectorAll("input").forEach(inp => {
+    inp.value = "";
+    inp.nextElementSibling.textContent = "";
+  });
+});
+
+document.querySelectorAll("section").forEach(sec => console.log(sec));
+
+// Pay now click
+payBtn.addEventListener("click", function (e) {
+  e.preventDefault();
+
+  // Run all validation functions here...
+  checkEmail();
+  checkFirstName();
+  checkLastName();
+  checkCompanyName();
+  checkAddress();
+  checkAddress2();
+  checkCity();
+  checkCountry();
+  checkState();
+  checkPostalCode();
+  checkPhone();
+  checkCardNumber();
+  checkNameOnCard();
+  checkExpirationDate();
+  checkCVC();
+
+  // If all validations pass (no error text in spans)
+  let hasError = false;
+  document.querySelectorAll(".sameformspan").forEach(span => {
+    if (span.textContent.trim() !== "") {
+      hasError = true;
+    }
+  });
+
+  if (!hasError) {
+    // Hide all main sections
+    checkoutFormSection.style.display = 'none';
+    productDetailsSection.style.display = 'none';
+    storeSection.style.display = 'none';
+    heartBox.style.display = 'none';
+    allSections.style.display = 'none';
+
+    // Show finishShopping section
+    document.querySelector(".finishShopping").style.display = "block";
+  }
+});
+
+document.querySelector(".AgainShopping").addEventListener("click", function () {
+
+  setCartItems([]);
+
+  renderCartItems(data);
+  document.querySelector(".finishShopping").style.display = "none";
+  storeSection.style.display = "block";
+});
+
+
+
+// Form Validation Ends
 
 // Checkout Form Validation Logic Ends
 
@@ -1750,6 +2088,7 @@ goToHomePageBtn.addEventListener('click', e => {
   checkoutFormSection.style.display = 'none';
   storeSection.style.display = 'none';
   componentsGrid.style.display = 'none'
+  document.querySelector(".finishShopping").style.display = "none";
 
   navListItems[0].style.color = '#454D59';
   navListItems[0].style.borderBottom = 'none';
@@ -1778,3 +2117,4 @@ if (wishlist.length === 0) {
   emptyHeart.style.display = 'none';
   heartIcon.setAttribute('fill', '#164e63');
 }
+
