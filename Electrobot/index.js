@@ -232,20 +232,20 @@ function renderWishlistItems(data) {
     const wishlistItem = document.createElement('div');
     wishlistItem.classList.add('heart_item');
     wishlistItem.innerHTML = `
-        <div class="heart_img">
-          <img src="${product.url}" alt="${product.title}">
-        </div>
-        <div class="heart_content">
-          <div class="heart_price">
-            <span>${product.title}</span>
-            <span>$${product.price}</span>
-          </div>
-          <div class="model_heart" style="display:none">${product.id}</div>
-          <div class="heart_remove">
-            <span>Qty: ${product.items_in_stock} available</span>
-            <span class='removeProduct' data-id='${product.id}'>Remove</span>
-          </div>
-        </div>
+                    <div class="heart_img">
+                        <img src="${product.url}" alt="">
+                    </div>
+                    <div class="heart_content">
+                        <div class="heart_price">
+                            <span>${product.title}</span>
+                            <span>$${product.price}</span>
+                        </div>
+                        <div class="model_heart">${product.id}</div>
+                        <div class="heart_remove">
+                            <span>Qty: ${product.items_in_stock} available</span>
+                            <span class='removeProduct' data-id="${product.id}">Remove</span>
+                        </div>
+                    </div>
       `;
     heartBox.appendChild(wishlistItem);
   });
