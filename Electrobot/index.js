@@ -7,6 +7,10 @@ const HomePageTrendingProductsGrid = document.querySelector('.product-container 
 let trendingProducts = data.filter(product => product.trending === true);
 let featuredProducts = data.filter(product => product.featured === true);
 
+let wishlistItems = JSON.parse(localStorage.getItem('wishlist')) || [];
+const heartBox = document.querySelector('.heart_box');
+const emptyHeart = document.querySelector('.heart_empty');
+const mainHeartIcon = document.querySelector('.heart');
 
 function displayStarRating(rating) {
   let sg = ``
@@ -53,7 +57,7 @@ function showTrendingProducts(products, place) {
           </div>
           <span>${product.reviews} reviews</span>
           <div class="products-price">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+            <svg data-heart="${product.id}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" 
               stroke="currentColor" aria-hidden="true" class="h-6 w-6 text-cyan-400 cursor-pointer">
               <path stroke-linecap="round" stroke-linejoin="round"
                 d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z">
@@ -89,7 +93,7 @@ function showTrendingProducts(products, place) {
                   <span>(${product.reviews} reviews)</span>
                 </div>
                 <div class="store-msc-data-right1heart">
-                  <svg width="24" xmlns="http://www.w3.org/2000/svg" fill="none"
+                  <svg data-heart="${product.id}" width="24" xmlns="http://www.w3.org/2000/svg" fill="none"
                     viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                     aria-hidden="true" class="h-6 w-6 text-cyan-400 cursor-pointer" data-heart="${product.id}">
                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -114,19 +118,10 @@ function showTrendingProducts(products, place) {
     }
   });
 
-  const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
-  document.querySelectorAll('.products .items, .store-menusvg-components').forEach(item => {
-    const id = item.id || item.querySelector('[data-heart]')?.getAttribute('data-heart');
-    if (wishlist.includes(id)) {
-      const heartIcon = item.querySelector('[data-heart]');
-      if (heartIcon) heartIcon.setAttribute('fill', '#22D3EE');
-    }
-  });
-
-  AddToWishlist();
   updateCartIconColors();
   renderCartItems(data);
   updateCartTotalAmount(data);
+  updateWishlistUI()
 }
 
 
@@ -149,9 +144,8 @@ const featuredProductsContainer = document.querySelector('.featured-container .p
 let sensorsData = data.filter(product => product.category === 'sensors');
 
 
-
 navListItems[2].addEventListener("click", e => {
-
+  isAltLayout = false;
   sensorProducts.innerHTML = ''
 
   wishlistSection.style.display = 'none'
@@ -209,106 +203,109 @@ heartIcon.addEventListener("click", e => {
 
 // Add to Wishlist Logic
 
-const heartBox = document.querySelector('.heart_box');
-const emptyHeart = document.querySelector('.heart_empty');
 
-
-function AddToWishlist() {
-  const heartIcons = document.querySelectorAll('.products-price svg:first-child');
-  let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
-
-  heartIcons.forEach(icon => {
-    icon.addEventListener("click", e => {
-      const productId = e.target.closest('.items')?.id;
-      if (!productId) return;
-
-      const isAlreadyWishlisted = wishlist.includes(productId);
-      const product = data.find(p => p.id === productId);
-
-      if (isAlreadyWishlisted) {
-        wishlist = wishlist.filter(id => id !== productId);
-        e.target.setAttribute('fill', 'none');
-
-        const heartItems = document.querySelectorAll('.heart_item');
-        heartItems.forEach(item => {
-          if (item.querySelector('.model_heart').textContent === productId) {
-            item.remove();
-          }
-        });
-
-      } else {
-        wishlist.push(productId);
-        e.target.setAttribute('fill', '#22D3EE');
-
-        const existingItem = [...document.querySelectorAll('.heart_item')]
-          .find(item => item.querySelector('.model_heart').textContent === productId);
-
-        if (!existingItem) {
-          const heartHTML = `
-            <div class="heart_item">
-              <div class="heart_img">
-                <img src=${product.url} alt="">
-              </div>
-              <div class="heart_content">
-                <div class="heart_price">
-                  <span>${product.title}</span>
-                  <span>$${product.price}</span>
-                </div>
-                <div class="model_heart">${product.id}</div>
-                <div class="heart_remove">
-                  <span>Qty: ${product.items_in_stock} available</span>
-                  <span class='removeProduct' data-id='${product.id}'>Remove</span>
-                </div>
-              </div>
-            </div>
-          `;
-          heartBox.innerHTML += heartHTML;
-        }
-      }
-
-      if (wishlist.length === 0) {
-        heartBox.style.display = 'none';
-        emptyHeart.style.display = 'flex';
-        heartIcon.setAttribute('fill', 'none');
-      } else {
-        heartBox.style.display = 'block';
-        emptyHeart.style.display = 'none';
-        heartIcon.setAttribute('fill', '#164e63');
-      }
-
-      localStorage.setItem('wishlist', JSON.stringify(wishlist));
-
-      attachRemoveWishlistListeners();
-    });
-  });
+function setWishlistItems(items) {
+  wishlistItems = items;
+  localStorage.setItem('wishlist', JSON.stringify(wishlistItems));
+  updateWishlistUI();
 }
 
 
-function attachRemoveWishlistListeners() {
-  const removeBtns = document.querySelectorAll('.removeProduct');
+function renderWishlistItems(data) {
+  heartBox.innerHTML = '';
 
-  removeBtns.forEach(btn => {
-    btn.addEventListener("click", e => {
-      const productId = btn.dataset.id;
+  if (wishlistItems.length === 0) {
+    heartBox.style.display = 'none';
+    emptyHeart.style.display = 'flex';
+    mainHeartIcon.setAttribute('fill', 'none');
+    return;
+  }
 
-      let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
-      wishlist = wishlist.filter(id => id !== productId);
-      localStorage.setItem('wishlist', JSON.stringify(wishlist));
+  heartBox.style.display = 'block';
+  emptyHeart.style.display = 'none';
+  mainHeartIcon.setAttribute('fill', '#164e63');
 
-      const matchingIcons = document.querySelectorAll(`.products .items[id='${productId}'] .products-price svg:first-child`);
-      matchingIcons.forEach(icon => icon.setAttribute('fill', 'none'));
+  wishlistItems.forEach(itemId => {
+    const product = data.find(p => String(p.id) === String(itemId));
+    if (!product) return;
 
-      const heartItem = btn.closest('.heart_item');
-      if (heartItem) heartItem.remove();
-
-      if (wishlist.length === 0) {
-        heartBox.style.display = 'none';
-        emptyHeart.style.display = 'flex';
-        heartIcon.setAttribute('fill', 'none');
-      }
-    });
+    const wishlistItem = document.createElement('div');
+    wishlistItem.classList.add('heart_item');
+    wishlistItem.innerHTML = `
+        <div class="heart_img">
+          <img src="${product.url}" alt="${product.title}">
+        </div>
+        <div class="heart_content">
+          <div class="heart_price">
+            <span>${product.title}</span>
+            <span>$${product.price}</span>
+          </div>
+          <div class="model_heart" style="display:none">${product.id}</div>
+          <div class="heart_remove">
+            <span>Qty: ${product.items_in_stock} available</span>
+            <span class='removeProduct' data-id='${product.id}'>Remove</span>
+          </div>
+        </div>
+      `;
+    heartBox.appendChild(wishlistItem);
   });
 }
+
+function toggleWishlist(productId) {
+  const heartIcons = document.querySelectorAll(`[data-heart="${productId}"]`);
+
+  if (wishlistItems.includes(productId)) {
+    wishlistItems = wishlistItems.filter(id => id !== productId);
+    setWishlistItems(wishlistItems);
+
+    heartIcons.forEach(icon => icon.setAttribute('fill', 'none'));
+
+  } else {
+    wishlistItems.push(productId);
+    setWishlistItems(wishlistItems);
+
+    heartIcons.forEach(icon => icon.setAttribute('fill', '#22D3EE'));
+  }
+
+  renderWishlistItems(data);
+}
+
+
+function updateWishlistUI() {
+  const wishlist = wishlistItems
+  if (wishlist.length === 0) {
+    heartBox.style.display = 'none';
+    emptyHeart.style.display = 'flex';
+    mainHeartIcon.setAttribute('fill', 'none');
+  } else {
+    heartBox.style.display = 'block';
+    emptyHeart.style.display = 'none';
+    mainHeartIcon.setAttribute('fill', '#164e63');
+  }
+  document.querySelectorAll('[data-heart]').forEach(icon => {
+    const id = icon.getAttribute('data-heart');
+    if (wishlist.includes(id)) {
+      icon.setAttribute('fill', '#22D3EE');
+    } else {
+      icon.setAttribute('fill', 'none');
+    }
+  });
+}
+
+document.body.addEventListener('click', (e) => {
+  const heartIcon = e.target.closest('[data-heart]');
+  if (heartIcon) {
+    const productId = heartIcon.getAttribute('data-heart');
+    toggleWishlist(productId);
+  }
+
+  if (e.target.classList.contains('removeProduct')) {
+    const productId = e.target.dataset.id;
+    wishlistItems = wishlistItems.filter(id => id !== productId);
+    setWishlistItems(wishlistItems);
+    renderWishlistItems(data);
+  }
+});
 
 
 // Add to Wishlist logic End
@@ -429,6 +426,7 @@ function renderCartItems(data) {
     cartIcon.style.fill = 'none';
     cartQuantity.textContent = '0';
     updateCartIconColors();
+    updateWishlistUI()
     updateCartTotalAmount(data);
     return;
   }
@@ -785,8 +783,8 @@ function productDetailsFunction() {
                     </div>
                     <div class="product-details-data-heartbasket">
                     <button class="product-details-data-button" data-bagPro = ${product.id} data-basket = "basket">Add to Basket</button>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="currentColor" aria-hidden="true" class="h-6 w-6 text-cyan-400 cursor-pointer" data-heart= ${product.id}>
+                    <svg data-heart="${product.id}" style='cursor: pointer' xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" aria-hidden="true" class="h-6 w-6 text-cyan-400 cursor-pointer">
                     <path stroke-linecap="round" stroke-linejoin="round"
                     d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z">
                     </path>
@@ -888,6 +886,7 @@ function productDetailsFunction() {
 
                     </div>
                     `
+          updateWishlistUI();
 
           // Add to Basket button click 
           const addToBasketBtn = document.querySelector('[data-basket="basket"]');
@@ -896,13 +895,13 @@ function productDetailsFunction() {
           addToBasketBtn.addEventListener("click", () => {
             const productId = addToBasketBtn.getAttribute("data-bagPro");
             let cartItems = getCartItems();
-            let found = false; 
+            let found = false;
 
             for (let i = 0; i < cartItems.length; i++) {
               if (cartItems[i].id === productId) {
                 cartItems[i].quantity += 1;
                 found = true;
-                break; 
+                break;
               }
             }
 
@@ -1040,10 +1039,10 @@ function productDetailsFunction() {
 
   })
 
-  AddToWishlist();
   updateCartIconColors();
   renderCartItems(data);
   updateCartTotalAmount(data);
+
 }
 
 showTrendingProducts(featuredProducts, featuredProductsContainer);
@@ -2018,7 +2017,6 @@ clearBtn.addEventListener("click", function (e) {
   });
 });
 
-document.querySelectorAll("section").forEach(sec => console.log(sec));
 
 // Pay now click
 payBtn.addEventListener("click", function (e) {
@@ -2099,23 +2097,11 @@ goToHomePageBtn.addEventListener('click', e => {
 
 // Go To home button Logic 
 
-
-attachRemoveWishlistListeners();
 window.addEventListener('DOMContentLoaded', () => {
   updateCartIconColors();
   renderCartItems(data);
-
+  updateWishlistUI();
+  renderWishlistItems(data);
 });
 
-
-const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
-if (wishlist.length === 0) {
-  heartBox.style.display = 'none';
-  emptyHeart.style.display = 'flex';
-  heartIcon.setAttribute('fill', 'none');
-} else {
-  heartBox.style.display = 'block';
-  emptyHeart.style.display = 'none';
-  heartIcon.setAttribute('fill', '#164e63');
-}
 
